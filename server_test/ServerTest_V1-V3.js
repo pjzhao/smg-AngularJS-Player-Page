@@ -20,8 +20,6 @@ var loadXMLDoc = function(sVersion, sMethod, sAsp, sQuery){
 		xmlhttp.setRequestHeader('Content-Type','application/json');
 		xmlhttp.send();
 	}
-	return data;
-};
 
 /* Tests for Server Version 1 */
 module('Tests for Server Version 1');
@@ -55,7 +53,7 @@ test('login with wrong playerId test', function(){
 // Test 4: Sign up using email and password
 var sNewEmail = 'new@email.com';
 var sNewPlayerPwd = 'NewPlayerPwd';
-test('sign up test' function(sNewEmail, sNewPlayerPwd){
+test('sign up test', function(sNewEmail, sNewPlayerPwd){
 	sAsp = 'players';
 	sQuery = '?email=' + sNewEmail + '&password=' + sNewPlayerPwd;
     var sNewPlayerId = loadXMLDoc('1', 'POST', sAsp, sQuery).playerId;
@@ -171,7 +169,7 @@ test('edit profile test', function(){
 
 // Test 15: Delete player profile
 test('delete player profile test', function(){
-	sAsp = 'players/' + sPlayerid;
+	sAsp = 'players/' + sPlayerId;
 	sQuery = '?accessSignature=' + sAccessSignature;
 	equals(loadXMLDoc('1', 'DELETE', sAsp, sQuery).success, 'DELETED_PLAYER', 'Delete profile successfully');
 });
@@ -195,7 +193,7 @@ test('list most popular games test', function(){
 // Test 2: Login with facebook
 var sFacebookEmail = 'FaceBook@email.com';
 var sFacebookPwd = 'NewPlayerPwd';
-test('login with facebook test' function(sFacebookEmail, sFacebookPwd){
+test('login with facebook test', function(sFacebookEmail, sFacebookPwd){
 	sAsp = 'players';
 	sQuery = '?email=' + sFacebookEmail + '&password=' + sFacebookPwd;
 	ok(loadXMLDoc('2', 'GET', sAsp, sQuery).accessSignature,'Log in via Facebook successfully');
