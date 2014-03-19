@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>Profile</title>
+    <script src="js/angular.js"></script>
+    <script src="js/Profile.js" type="text/javascript"></script>
+    <script src="js/History.js" type="text/javascript"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ionic.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ionic.min.css" rel="stylesheet" type="text/css"/>  
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div ng-controller="ProfileCtrl">
+      <div class="row">
+      	<p>Player Information </p>
+        <a href="editProfile.html"><input type=button value="Edit"></input></a>
+      </div>
+      <div class="row">
+        <div class="col col-75">
+          <table class="table table-bordered">
+            <tr>
+                <th><span>Player Id</span></th>
+                <td> 
+                  <span>{{profile.playerId}}</span></td> 
+            </tr>
+            <tr>
+                <th><span>Nickname</span></th>
+                <td> 
+                  <span>{{profile.nickname}}</span></td>
+            </tr>
+            <tr>            
+                <th><span>Email</span></th> 
+                <td> 
+                  <span>{{profile.email}}</span></td>                                                            
+            </tr>    
+            <tr>            
+                <th><span>Picture URL</span></th> 
+                <td> 
+                  <span>{{profile.pictureUrl}}</span></td>                                                            
+            </tr>              
+          </table>
+        </div>
+        <div class="col col-offset-10">
+        </div>
+        <div class="col col-25">
+            <img src={{profile.pictureUrl}} class="profile-img"/>
+        </div>
+      </div>
+    </div>
+    <div ng-controller="HistoryCtrl">
+      <p> Game History </p>
+      <table class="table table-bordered">
+        <tr>
+        	<th><span>Game Id</span></th>
+        	<th><span>Win</span></th>
+        	<th><span>Lose</span></th>
+        	<th><span>Tie</span></th>                                    
+        	<th><span>Total</span></th>            
+        </tr>
+        <tr ng-repeat = "record in history">
+            <td> 
+              <span>{{record.gameId}}</span></td> 
+            <td> 
+              <span>{{record.winCount}}</span></td>
+            <td> 
+              <span>{{record.loseCount}}</span></td>
+            <td> 
+              <span>{{record.tieCount}}</span></td>      
+            <td>
+              <span>{{record.total}}</span></td> 
+        </tr>
+      </table>
+    </div>    
+  </body>
+</html>
