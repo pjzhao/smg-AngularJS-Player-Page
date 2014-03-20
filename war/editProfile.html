@@ -1,29 +1,33 @@
-<!DOCTYPE html>
-<html ng-app>
+<!doctype html>
+<html lang="en" ng-app="profileApp">
   <head>
-    <title>Edit Profile</title>
-    <script src="js/angular.min.js"></script>
-    <script src="js/Profile.js" type="text/javascript"></script>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="css/bootstrap-min.css" rel="stylesheet" type="text/css"/>  
-    <link href="css/ionic.css" rel="stylesheet" type="text/css"/>
-    <link href="css/ionic.min.css" rel="stylesheet" type="text/css"/>  
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>    
-
+    <meta charset="utf-8">
+    <title>Play History</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/ionic.css">
+    <link rel="stylesheet" href="css/ionic.min.css">
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
   </head>
   <body>
-     <div ng-controller="ProfileCtrl">
+     <div ng-controller="ProfileCtrl" class="container-fluid">
        <form ng-submit="edit()">
            <table>
               <tr>
-                  <td>Nickname:</td><td><input type="text" placeholder={{profile.nickname}}
-                  ng-model="profileNickname"  size="50" ></td>
+                  <td>Nickname:</td><td><input type="text" 
+                  ng-model="profileNickname" size="50" ></td>
               <tr>
-                  <td>Email :</td><td><input type="text" placeholder={{profile.email}}
-                  ng-model="profileEmail"  size="50" ></td>
+                  <td>Email :</td><td><input type="text" 
+                  ng-model="profileEmail" size="50" ></td>
               <tr>
-                  <td>Picture URL:</td><td><input type="text" placeholder={{profile.pictureUrl}}
-                  ng-model="profilePicUrl"  size="100" ></td>
+                  <td>Picture URL:</td><td><input type="text" 
+                  ng-model="profilePicUrl" size="100" ></td>
               </tr>
           </table>       
           <div> 
@@ -61,7 +65,7 @@
         <div class="col col-offset-10">
         </div>
         <div class="col col-25">
-            <img src={{profile.pictureUrl}} class="profile-img"/>
+            <img ng-src={{profile.pictureUrl}} class="profile-img"/>
         </div>
       </div>
     </div>

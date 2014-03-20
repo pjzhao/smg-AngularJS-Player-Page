@@ -1,0 +1,22 @@
+
+
+<h1>{{history.gameName}} Play History</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th><span>Match ID</span></th>
+        <th><span>Opponent ID(s)</span></th>
+        <th><span>Result</span></th>
+        <th><span>Winner ID(s)</span></th>                                              
+    </tr>
+    <tr ng-repeat = "match in history.matches">
+        <td> 
+          <span>{{match.matchId}}</span></td> 
+        <td> 
+          <span>{{match.playerIds[1]}}</span></td>
+        <td> 
+          <span>{{match.statusId | matchStatus}}</span></td>
+        <td> 
+          <span>{{match.winnerIds}}</span></td>      
+    </tr>
+</table>
