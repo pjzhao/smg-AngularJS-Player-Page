@@ -1,7 +1,7 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-describe('PhoneCat controllers', function() {
+describe('GameList controllers', function() {
 	beforeEach(module('gamelistApp'));
 	describe('GameListCtrl', function(){
     var scope, ctrl, $httpBackend;
@@ -14,7 +14,7 @@ describe('PhoneCat controllers', function() {
     }));
     it('should create "games" model with 2 games fetched from xhr', function() {
       expect(scope.games).toBeUndefined();
-      httpBackend.flush();
+      $httpBackend.flush();
       expect(scope.games).toEqual([{name: 'Chinese Checkers'}, {name: 'Mahjong'}]);
     });
     it('should set the default value of orderProp model', function() {
