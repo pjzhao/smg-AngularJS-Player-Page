@@ -2,25 +2,42 @@
 
 /* App Module */
 
-var profileApp = angular.module('profileApp', [
+var playerApp = angular.module('playerApp', [
   'ngRoute',
   'profileFilters',
   'profileControllers',
+  'gameControllers',
   'profileServices'
 ]);
 
-profileApp.config(['$routeProvider',
+playerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/historys', {
+      when('/profile', {
+        templateUrl: 'partials/view-profile.html',
+        controller: 'ProfileCtrl'
+      }).    
+      when('/editprofile', {
+        templateUrl: 'partials/edit-profile.html',
+        controller: 'ProfileCtrl'
+      }).       
+      when('/history', {
         templateUrl: 'partials/history-list.html',
         controller: 'HistoryListCtrl'
       }).
-      when('/historys/:gameId', {
+      when('/history/:gameId', {
         templateUrl: 'partials/history-detail.html',
         controller: 'HistoryDetailCtrl'
       }).
+      when('/choosegame', {
+        templateUrl: 'partials/game-list.html',
+        controller: 'GameListCtrl'
+      }).
+      when('/choosegame/:gameId', {
+        templateUrl: 'partials/game-detail.html',
+        controller: 'GameDetailCtrl'
+      }).      
       otherwise({
-        redirectTo: '/historys'
+        redirectTo: '/profile'
       });
   }]);

@@ -3,6 +3,7 @@
 /* Controllers */
 
 var profileControllers = angular.module('profileControllers', []);
+var gameControllers = angular.module('gameControllers', []);
 
 profileControllers.controller('HistoryListCtrl', ['$scope', 'History',
   function($scope, History) {
@@ -26,5 +27,21 @@ profileControllers.controller('ProfileCtrl', ['$scope', 'Profile',
 	$scope.profile.email = $scope.profileEmail;
 	$scope.profile.pictureUrl = $scope.profilePicUrl;
 	};
+  }]);
+
+gameControllers.controller('GameListCtrl', ['$scope', '$http',
+  function($scope, $http) {
+    $http.get('games/games.json').success(function(data) {
+      $scope.games = data;
+    });
+
+    $scope.orderProp = 'developerId';
+  }]);
+
+gameControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
+    $http.get('games/' + $routeParams.gameId + '.json').success(function(data) {
+      $scope.game = data;
+    });
   }]);
 

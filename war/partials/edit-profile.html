@@ -1,22 +1,6 @@
-<!doctype html>
-<html lang="en" ng-app="profileApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Play History</title>
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/ionic.css">
-    <link rel="stylesheet" href="css/ionic.min.css">
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular/angular-resource.js"></script>
-    <script src="lib/angular/angular-route.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-  </head>
-  <body>
-     <div ng-controller="ProfileCtrl" class="container-fluid">
+
+  <div class="container-fluid">
+    <div class="row-fluid">
        <form ng-submit="edit()">
            <table>
               <tr>
@@ -68,6 +52,8 @@
             <img ng-src={{profile.pictureUrl}} class="profile-img"/>
         </div>
       </div>
+      <div class="row">
+        <button type="button"><a href="#/profile">Back</a></button>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
