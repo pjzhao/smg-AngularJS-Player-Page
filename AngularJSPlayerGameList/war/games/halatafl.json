@@ -1,0 +1,10 @@
+{
+	"id": "halatafl",
+    "name": "Halatafl",
+    "description": "Introduction to Halatafl in halatafl.json",
+    "images": [
+        "img/games/halatafl-icon.jpg", 
+        "img/games/halatafl-1.jpg",  
+        "img/games/halatafl-2.jpg"
+    ]    
+}

@@ -1,0 +1,10 @@
+{
+	"id": "mastermind",
+    "name": "Mastermind",
+    "description": "Introduction to Mastermind in mastermind.json",
+    "images": [
+        "img/games/mastermind-icon.jpg", 
+        "img/games/mastermind-1.jpg",  
+        "img/games/mastermind-2.jpg"
+    ]    
+}

@@ -1,0 +1,10 @@
+{
+	"id": "scrabble",
+    "name": "Scrabble",
+    "description": "Introduction to Scrabble in scrabble.json",
+    "images": [
+        "img/games/scrabble-icon.jpg", 
+        "img/games/scrabble-1.jpg",  
+        "img/games/scrabble-2.jpg"
+    ]    
+}

@@ -1,0 +1,10 @@
+{
+	"id": "shoqi",
+    "name": "Shoqi",
+    "description": "Introduction to Shoqi in shoqi.json",
+    "images": [
+        "img/games/shoqi-icon.jpg", 
+        "img/games/shoqi-1.jpg",  
+        "img/games/shoqi-2.jpg"
+    ]    
+}

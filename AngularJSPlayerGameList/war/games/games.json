@@ -1,0 +1,252 @@
+[
+    {
+    	"id": "chinese-checkers", 
+        "developerId": 0,   
+        "name": "Chinese Checkers", 
+        "description": "Introduction to Chinese Checkers in games.json.",
+        "url": "http://www.chinesecheckers.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/chinese-checkers-icon.jpg"
+    },
+    {
+    	"id": "mahjong", 
+        "developerId": 1,   
+        "name": "Mahjong", 
+        "description": "Introduction to Mahjong in games.json.",
+        "url": "http://www.mahjong.com",
+        "width": 200,
+        "height": 200,
+        "pic": "img/games/mahjong-icon.jpg"
+    },
+    {
+    	"id": "shoqi", 
+        "developerId": 2,   
+        "name": "Shoqi", 
+        "description": "Introduction to Shoqi in games.json.",
+        "url": "http://www.shoqi.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/shoqi-icon.jpg"
+    },
+    {
+    	"id": "aeroplane-chess", 
+        "developerId": 3,   
+        "name": "Aeroplane Chess", 
+        "description": "Introduction to Aeroplane Chess in games.json.",
+        "url": "http://www.aeroplane-chess.com",
+        "width": 150,
+        "height": 150,
+        "pic": "img/games/aeroplane-chess-icon.jpg"
+    },
+    {
+    	"id": "janggi", 
+        "developerId": 4,   
+        "name": "Janggi", 
+        "description": "Introduction to Janggi in games.json.",
+        "url": "http://www.janggi.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/janggi-icon.jpg"
+    },
+    {
+    	"id": "mahjong-2", 
+        "developerId": 5,   
+        "name": "Mahjong 2", 
+        "description": "Introduction to Mahjong 2 in games.json.",
+        "url": "http://www.mahjong.com",
+        "width": 200,
+        "height": 200,
+        "pic": "img/games/mahjong-2-icon.jpg"
+    },
+    {
+    	"id": "halatafl", 
+        "developerId": 6,   
+        "name": "Halatafl", 
+        "description": "Introduction to Halatafl in games.json.",
+        "url": "http://www.halatafl.com",
+        "width": 80,
+        "height": 80,
+        "pic": "img/games/halatafl-icon.jpg"
+    },
+    {
+    	"id": "luzhanqi", 
+        "developerId": 7,   
+        "name": "Luzhanqi", 
+        "description": "Introduction to Luzhanqi in games.json.",
+        "url": "http://www.luzhanqi.com",
+        "width": 90,
+        "height": 90,
+        "pic": "img/games/luzhanqi-icon.jpg"
+    },
+    {
+    	"id": "ygame", 
+        "developerId": 8,   
+        "name": "Y game", 
+        "description": "Introduction to Y game in games.json.",
+        "url": "http://www.ygame.com",
+        "width": 60,
+        "height": 60,
+        "pic": "img/games/ygame-icon.jpg"
+    },
+    {
+    	"id": "poker", 
+        "developerId": 9,   
+        "name": "Texas hold'em", 
+        "description": "Introduction to Texas hold'em in games.json.",
+        "url": "http://www.poker.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/poker-icon.jpg"
+    },
+    {
+    	"id": "isola", 
+        "developerId": 10,   
+        "name": "Isola", 
+        "description": "Introduction to Isola in games.json.",
+        "url": "http://www.isola.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/isola-icon.jpg"
+    },
+    {
+    	"id": "ghosts", 
+        "developerId": 11,   
+        "name": "Ghosts", 
+        "description": "Introduction to Ghosts in games.json.",
+        "url": "http://www.ghosts.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/ghosts-icon.jpg"
+    },
+    {
+    	"id": "mastermind", 
+        "developerId": 12,   
+        "name": "Mastermind", 
+        "description": "Introduction to Mastermind in games.json.",
+        "url": "http://www.mastermind.com",
+        "width": 200,
+        "height": 200,
+        "pic": "img/games/mastermind-icon.jpg"
+    },
+    {
+    	"id": "99pointspoker", 
+        "developerId": 13,   
+        "name": "99 Points Poker", 
+        "description": "Introduction to 99 Points Poker in games.json.",
+        "url": "http://www.99pointspoker.com",
+        "width": 200,
+        "height": 200,
+        "pic": "img/games/99pointspoker-icon.jpg"
+    },
+    {
+    	"id": "settlers-of-catan", 
+        "developerId": 14,   
+        "name": "Settlers of Catan", 
+        "description": "Introduction to Settlers of Catan in games.json.",
+        "url": "http://www.settlers-of-catan.com",
+        "width": 200,
+        "height": 200,
+        "pic": "img/games/settlers-of-catan-icon.jpg"
+    },
+    {
+    	"id": "abalone", 
+        "developerId": 15,   
+        "name": "Abalone", 
+        "description": "Introduction to Abalone in games.json.",
+        "url": "http://www.abalone.com",
+        "width": 130,
+        "height": 130,
+        "pic": "img/games/abalone-icon.jpg"
+    },
+    {
+    	"id": "diplomacy", 
+        "developerId": 16,   
+        "name": "Diplomacy", 
+        "description": "Introduction to Diplomacy in games.json.",
+        "url": "http://www.diplomacy.com",
+        "width": 150,
+        "height": 150,
+        "pic": "img/games/diplomacy-icon.jpg"
+    },
+    {
+    	"id": "banqi", 
+        "developerId": 17,   
+        "name": "Banqi", 
+        "description": "Introduction to Banqi in games.json.",
+        "url": "http://www.banqi.com",
+        "width": 140,
+        "height": 140,
+        "pic": "img/games/banqi-icon.jpg"
+    },
+    {
+    	"id": "blokus", 
+        "developerId": 18,   
+        "name": "Blokus", 
+        "description": "Introduction to Blokus in games.json.",
+        "url": "http://www.blokus.com",
+        "width": 170,
+        "height": 170,
+        "pic": "img/games/blokus-icon.jpg"
+    },
+    {
+    	"id": "risk", 
+        "developerId": 19,   
+        "name": "Risk", 
+        "description": "Introduction to Risk in games.json.",
+        "url": "http://www.risk.com",
+        "width": 170,
+        "height": 170,
+        "pic": "img/games/risk-icon.jpg"
+    },
+    {
+    	"id": "lines-of-action", 
+        "developerId": 20,   
+        "name": "Lines of Action", 
+        "description": "Introduction to Lines of Action in games.json.",
+        "url": "http://www.lines-of-action.com",
+        "width": 180,
+        "height": 180,
+        "pic": "img/games/lines-of-action-icon.jpg"
+    },
+    {
+    	"id": "five-card-stud", 
+        "developerId": 21,   
+        "name": "Five Card Stud", 
+        "description": "Introduction to Five Card Stud in games.json.",
+        "url": "http://www.five-card-stud.com",
+        "width": 110,
+        "height": 110,
+        "pic": "img/games/five-card-stud-icon.jpg"
+    },
+    {
+    	"id": "scrabble", 
+        "developerId": 22,   
+        "name": "Scrabble", 
+        "description": "Introduction to Scrabble in games.json.",
+        "url": "http://www.scrabble.com",
+        "width": 180,
+        "height": 180,
+        "pic": "img/games/scrabble-icon.jpg"
+    },
+    {
+    	"id": "chinese-ten", 
+        "developerId": 23,   
+        "name": "Chinese Ten", 
+        "description": "Introduction to Chinese Ten in games.json.",
+        "url": "http://www.chinese-ten.com",
+        "width": 170,
+        "height": 170,
+        "pic": "img/games/chinese-ten-icon.jpg"
+    },
+    {
+    	"id": "cheat", 
+        "developerId": 24,   
+        "name": "Cheat", 
+        "description": "Introduction to Cheat in games.json.",
+        "url": "http://www.cheat.com",
+        "width": 100,
+        "height": 100,
+        "pic": "img/games/cheat-icon.jpg"
+    }       
+]
