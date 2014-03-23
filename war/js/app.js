@@ -5,8 +5,7 @@
 var playerApp = angular.module('playerApp', [
   'ngRoute',
   'profileFilters',
-  'profileControllers',
-  'gameControllers',
+  'playerControllers',
   'profileServices'
 ]);
 

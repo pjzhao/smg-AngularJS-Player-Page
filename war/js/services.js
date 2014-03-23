@@ -7,11 +7,15 @@ var profileServices = angular.module('profileServices', ['ngResource']);
 profileServices.factory('History', ['$resource',
   function($resource){
     return $resource('historys/:gameId.json', {}, {
-      query: {method:'GET', params:{gameId:'historys'}, isArray:true}
+      'query': {method:'GET', params:{gameId:'historys'}, isArray:true}
     });
   }]);
   
 profileServices.factory('Profile', ['$resource',
   function($resource){
-    return $resource('profiles/profile.json', {}, {});
+    //return $resource('profiles/profile.json', {}, {
+	return $resource('players/:playerId.json', null, {
+	  'save': {method:'PUT'},
+	  'delete': {method:'DELETE'}
+	});
   }]);

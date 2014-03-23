@@ -4,13 +4,27 @@
        <form ng-submit="edit()">
            <table>
               <tr>
-                  <td>Nickname:</td><td><input type="text" 
+                  <td>Password:</td><td><input type="text" 
+                  ng-model="profilePassword" size="50" ></td>
+              </tr>           
+              <tr>
+                  <td>First Name:</td><td><input type="text" placeholder={{profile.firstname}}
+                  ng-model="profileFirstname" size="50" ></td>
+              </tr>
+              <tr>
+                  <td>Last Name:</td><td><input type="text" placeholder={{profile.lastname}}
+                  ng-model="profileLastname" size="50" ></td>
+              </tr>                            
+              <tr>
+                  <td>Nickname:</td><td><input type="text" placeholder={{profile.nickname}}
                   ng-model="profileNickname" size="50" ></td>
+              </tr>
               <tr>
-                  <td>Email :</td><td><input type="text" 
+                  <td>Email :</td><td><input type="text" placeholder={{profile.email}}
                   ng-model="profileEmail" size="50" ></td>
+              </tr>
               <tr>
-                  <td>Picture URL:</td><td><input type="text" 
+                  <td>Picture URL:</td><td><input type="text" placeholder={{profile.pictureUrl}}
                   ng-model="profilePicUrl" size="100" ></td>
               </tr>
           </table>       
@@ -18,7 +32,7 @@
           	  <input class="btn-primary" type="submit" value="save">
           </div>
       </form>
-      <div class="row">
+     <!-- <div class="row">
       	<p>Player Information </p>
       </div>
       <div class="row">
@@ -51,7 +65,7 @@
         <div class="col col-25">
             <img ng-src={{profile.pictureUrl}} class="profile-img"/>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <button type="button"><a href="#/profile">Back</a></button>
       </div>

@@ -1,7 +1,7 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="row">
-      	<p>Player Information </p>
+      	<h3>My Information </h3>
       </div>
       <div class="row">
         <div class="col col-75">
@@ -11,6 +11,16 @@
                 <td> 
                   <span>{{profile.playerId}}</span></td> 
             </tr>
+            <tr>
+                <th><span>First Name</span></th>
+                <td> 
+                  <span>{{profile.firstname}}</span></td>
+            </tr>
+            <tr>
+                <th><span>Last Name</span></th>
+                <td> 
+                  <span>{{profile.lastname}}</span></td>
+            </tr>                        
             <tr>
                 <th><span>Nickname</span></th>
                 <td> 
@@ -38,5 +48,8 @@
       <div class="row">
         <a href="#/choosegame">Choose Game</a>
       </div> 
+      <div class="row">
+        <button type=button ng-click='delete()'>Delete My Account</button>
+      </div>       
     </div>     
   </div>   

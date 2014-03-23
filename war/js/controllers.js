@@ -2,34 +2,87 @@
 
 /* Controllers */
 
-var profileControllers = angular.module('profileControllers', []);
-var gameControllers = angular.module('gameControllers', []);
+var playerControllers = angular.module('playerControllers', []);
 
-profileControllers.controller('HistoryListCtrl', ['$scope', 'History',
+playerControllers.controller('HistoryListCtrl', ['$scope', 'History',
   function($scope, History) {
     //$scope.historys = History.query({gameId: 'historys'});
 	$scope.historys = History.query();
   }]);
 
-profileControllers.controller('HistoryDetailCtrl', ['$scope', '$routeParams', 'History',
+playerControllers.controller('HistoryDetailCtrl', ['$scope', '$routeParams', 'History',
   function($scope, $routeParams, History) {
     $scope.history = History.get({gameId: $routeParams.gameId});
   }]);
   
-profileControllers.controller('ProfileCtrl', ['$scope', 'Profile',
-  function($scope, Profile) {
-	$scope.profile = Profile.get();
-	$scope.profileNickname = $scope.profile.nickname;
-	$scope.profileEmail = $scope.profile.email;
-	$scope.profilePicUrl = $scope.profile.pictureUrl;
+playerControllers.controller('ProfileCtrl', ['$scope', 'Profile', '$window', '$routeParams',
+  function($scope, Profile, $window) {
+	//demo fake playerId = 1234
+	$scope.profile = Profile.get({playerId: '1234'});
+	//$scope.profile = Profile.get({playerId: $routeParams.playerId});
+	if ($scope.profilePassword == null) 
+		$scope.profilePassword = $scope.profile.password;	
+	if ($scope.profileFirstname == null) 
+		$scope.profileFirstname = $scope.profile.firstname;			
+	if ($scope.profileLastname == null) 
+		$scope.profileLastname = $scope.profile.lastname;		
+	if ($scope.profileNickname == null) 
+		$scope.profileNickname = $scope.profile.nickname;
+	if ($scope.profileEmail == null)
+		$scope.profileEmail = $scope.profile.email;
+	if ($scope.profilePicUrl == null)
+		$scope.profilePicUrl = $scope.profile.pictureUrl;
+
 	$scope.edit = function () {
-	$scope.profile.nickname = $scope.profileNickname;
-	$scope.profile.email = $scope.profileEmail;
-	$scope.profile.pictureUrl = $scope.profilePicUrl;
+		/*$scope.profile.nickname = $scope.profileNickname;
+		$scope.profile.email = $scope.profileEmail;
+		$scope.profile.pictureUrl = $scope.profilePicUrl;*/
+		
+	    if ($scope.profilePassword == null) 
+			$scope.profilePassword = $scope.profile.password;	
+	    if ($scope.profileFirstname == null) 
+			$scope.profileFirstname = $scope.profile.firstname;			
+	    if ($scope.profileLastname == null) 
+			$scope.profileLastname = $scope.profile.lastname;		
+	    if ($scope.profileNickname == null) 
+			$scope.profileNickname = $scope.profile.nickname;
+		if ($scope.profileEmail == null)
+			$scope.profileEmail = $scope.profile.email;
+		if ($scope.profilePicUrl == null)
+		    $scope.profilePicUrl = $scope.profile.pictureUrl;
+		var newProfile = {
+		  "playerId" : $scope.profile.playerId,
+		  "accessSignature" : $scope.profile.accessSignature,
+		  "password" : $scope.profilePassword,
+		  "firstname" : $scope.profileFirstname,
+		  "lastname" : $scope.profileLastname,
+		  "nickname" : $scope.profileNickname,
+		  "email" : $scope.profileEmail,
+		  "pictureUrl" : $scope.profilePicUrl
+		};
+    	var editResponse = Profile.save({playerId:$scope.profile.playerId}, newProfile);
+    	//if (editResponse.success == "UPDATED_PLAYER") {
+            $window.alert("Edit profile successfully!");
+		/*} else if (editResponse.error == "WRONG_ACCESS_SIGNATURE") {
+			$window.alert("Failed. Wrong access signature.");
+		} else if (editResponse.error == "WRONG_PLAYER_ID") {
+			$window.alert("Failed. Wrong player ID.");
+		} */
+	};
+	
+	$scope.delete = function() {
+		var deleteResponse = Profile.delete({playerId:$scope.profile.playerId, accessSignature:$scope.profile.accessSignature});
+    	//if (deleteResponse.success == "DELETED_PLAYER") {
+            $window.alert("Delete account successfully!");
+		/*} else if (deleteResponse.error == "WRONG_ACCESS_SIGNATURE") {
+			$window.alert("Failed. Wrong access signature.");
+		} else if (deleteResponse.error == "WRONG_PLAYER_ID") {
+			$window.alert("Failed. Wrong player ID.");
+		} */		
 	};
   }]);
 
-gameControllers.controller('GameListCtrl', ['$scope', '$http',
+playerControllers.controller('GameListCtrl', ['$scope', '$http',
   function($scope, $http) {
     $http.get('games/games.json').success(function(data) {
       $scope.games = data;
@@ -38,7 +91,7 @@ gameControllers.controller('GameListCtrl', ['$scope', '$http',
     $scope.orderProp = 'developerId';
   }]);
 
-gameControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http',
+playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     $http.get('games/' + $routeParams.gameId + '.json').success(function(data) {
       $scope.game = data;
