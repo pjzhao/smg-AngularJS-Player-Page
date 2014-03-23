@@ -2,7 +2,7 @@
 
 /* jasmine specs for controllers go here */
 describe('GameList controllers', function() {
-	beforeEach(module('gamelistApp'));
+	beforeEach(module('playerApp'));
 	describe('GameListCtrl', function(){
     var scope, ctrl, $httpBackend;
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {

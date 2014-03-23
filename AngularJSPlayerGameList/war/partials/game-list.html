@@ -2,19 +2,21 @@
   <div class="row-fluid">
     <div class="span3">
       <!--Sidebar content-->
-      Search: <input ng-model="query"><br>
+      Search: <input ng-model="query">
       Sort by:
       <select ng-model="orderProp">
         <option value="name">Name</option>
         <option value="developerId">Developer ID</option>
       </select>
+      <button type="button"><a href="#/profile">My Profile</a></button>
+      <button type="button"><a href="#/history">My History</a></button>
     </div>
     <div class="span8">
       <!--Body content-->
       <ul class="phones">
         <li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="#/games/{{game.id}}" class="thumb"><img ng-src="{{game.pic}}"></a>
-          <a href="#/games/{{game.id}}">{{game.name}}</a>
+          <a href="#/choosegame/{{game.id}}" class="thumb"><img ng-src="{{game.pic}}"></a>
+          <a href="#/choosegame/{{game.id}}">{{game.name}}</a>
           <p>{{game.description}}</p>
           <p>{{game.url}}</p>
           <p>Width: {{game.width}}, Height: {{game.height}}, Developed by: {{game.developerId}}</p>
