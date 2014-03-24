@@ -9,18 +9,18 @@
         <option value="developerId">Developer ID</option>
       </select>
       <div class="row">
-        <a href="#/profile">My Profile</a>
+        <a href="/profile">My Profile</a>
       </div>
       <div class="row">
-        <a href="#/history">My History</a>
+        <a href="/history">My History</a>
       </div>
     </div>
     <div class="span8">
       <!--Body content-->
       <ul class="games">
         <li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="#/choosegame/{{game.id}}" class="thumb"><img ng-src="{{game.pic}}"></a>
-          <a href="#/choosegame/{{game.id}}">{{game.name}}</a>
+          <a href="/choosegame/{{game.id}}" class="thumb"><img ng-src="{{game.pic}}"></a>
+          <a href="/choosegame/{{game.id}}">{{game.name}}</a>
           <p>{{game.description}}</p>
           <p>{{game.url}}</p>
           <p>Width: {{game.width}}, Height: {{game.height}}, Developed by: {{game.developerId}}</p>
