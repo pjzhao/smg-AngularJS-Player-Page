@@ -204,7 +204,7 @@ describe('Player info controllers', function() {
     });
   });
 
-  describe('ProfileCtrl', function(){
+  /*describe('ProfileCtrl', function(){
     var scope, $httpBackend, ctrl,
     P1234 = function() {
       return {
@@ -224,5 +224,5 @@ describe('Player info controllers', function() {
       $httpBackend.flush();
       expect(scope.profile).toEqualData(P1234());
     });
-  });  
+  }); */ 
 });
