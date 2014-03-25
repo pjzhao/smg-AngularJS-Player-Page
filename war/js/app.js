@@ -8,10 +8,10 @@ var playerApp = angular.module("playerApp", [
   "playerControllers",
   "profileServices"
 ]);
-//var server = "http://smg-server.appspot.com/";
+//var server = "http://1.smg-server.appspot.com/";
 
-playerApp.config(["$routeProvider", "$locationProvider",
-  function($routeProvider, $locationProvider) {
+playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
+  function($routeProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
     
     $routeProvider.
@@ -19,6 +19,10 @@ playerApp.config(["$routeProvider", "$locationProvider",
         templateUrl: "/partials/login.html",
         controller: "ProfileCtrl"
       }).        
+      when("/signup", {
+        templateUrl: "/partials/signup.html",
+        controller: "SignUpCtrl"
+      }).       
       when("/profile", {
         templateUrl: "/partials/view-profile.html",
         controller: "ProfileCtrl"
@@ -46,4 +50,6 @@ playerApp.config(["$routeProvider", "$locationProvider",
       otherwise({
         redirectTo: "/login"
       });
+      $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }]);
