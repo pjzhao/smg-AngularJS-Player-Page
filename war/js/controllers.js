@@ -78,9 +78,8 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 	};
 
 	$scope.etResponse = function() {
-		// Wait for Lisa's confirmation about the response message -- Pinji
-    	//if ($scope.editResponse.success == "UPDATED_PLAYER") {
-    	if ($scope.editResponse.ACCESSSIGNATURE != null) {
+
+    	if ($scope.editResponse.success == "UPDATED_PLAYER") {
             $window.alert("Edit profile successfully!");
             $location.path("/profile");
             //The profile should receive from the server when the API supports all the attributes -- Pinji
