@@ -1,0 +1,10 @@
+{
+	"id": "luzhanqi",
+    "name": "Luzhanqi",
+    "description": "Introduction to Luzhanqi in luzhanqi.json",
+    "images": [
+        "img/games/luzhanqi-icon.jpg", 
+        "img/games/luzhanqi-1.jpg",  
+        "img/games/luzhanqi-2.jpg"
+    ]    
+}

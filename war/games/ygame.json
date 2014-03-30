@@ -1,0 +1,10 @@
+{
+	"id": "ygame",
+    "name": "Y game",
+    "description": "Introduction to Y game in ygame.json",
+    "images": [
+        "../img/games/ygame-icon.jpg", 
+        "../img/games/ygame-1.jpg",  
+        "../img/games/ygame-2.jpg"
+    ]    
+}

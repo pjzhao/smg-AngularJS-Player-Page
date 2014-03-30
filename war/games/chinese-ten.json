@@ -1,0 +1,10 @@
+{
+	"id": "chinese-ten",
+    "name": "Chinese Ten",
+    "description": "Introduction to Chinese Ten in chinese-ten.json",
+    "images": [
+        "../img/games/chinese-ten-icon.jpg", 
+        "../img/games/chinese-ten-1.jpg",  
+        "../img/games/chinese-ten-2.jpg"
+    ]    
+}

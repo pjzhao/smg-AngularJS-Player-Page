@@ -1,0 +1,36 @@
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+       <form ng-submit="edit()">
+           <table>
+              <tr>
+                  <td>Password:</td><td><input type="text" 
+                  ng-model="profilePassword" size="50" ></td>
+              </tr>           
+              <tr>
+                  <td>First Name:</td><td><input type="text" placeholder={{profile.firstname}}
+                  ng-model="profileFirstname" size="50" ></td>
+              </tr>
+              <tr>
+                  <td>Last Name:</td><td><input type="text" placeholder={{profile.lastname}}
+                  ng-model="profileLastname" size="50" ></td>
+              </tr>                            
+              <tr>
+                  <td>Nickname:</td><td><input type="text" placeholder={{profile.nickname}}
+                  ng-model="profileNickname" size="50" ></td>
+              </tr>
+              <tr>
+                  <td>Email :</td><td><input type="text" placeholder={{profile.email}}
+                  ng-model="profileEmail" size="50" ></td>
+              </tr>
+              <tr>
+                  <td>Picture URL:</td><td><input type="text" placeholder={{profile.pictureUrl}}
+                  ng-model="profilePicUrl" size="100" ></td>
+              </tr>
+          </table>       
+          <div> 
+          	  <input type="submit" value="save">
+          </div>
+      </form>
+    </div>
+  </div>

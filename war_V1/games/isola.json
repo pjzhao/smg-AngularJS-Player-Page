@@ -1,0 +1,10 @@
+{
+	"id": "isola",
+    "name": "Isola",
+    "description": "Introduction to Isola in isola.json",
+    "images": [
+        "../img/games/isola-icon.jpg", 
+        "../img/games/isola-1.jpg",  
+        "../img/games/isola-2.jpg"
+    ]    
+}

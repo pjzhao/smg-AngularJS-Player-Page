@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>Profile List</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/Profile.js" type="text/javascript"></script>
+    <script src="js/ProfileList.js" type="text/javascript"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/> 
+    <link href="css/ionic.css" rel="stylesheet" type="text/css"/>   
+    <link href="css/ionic.min.css" rel="stylesheet" type="text/css"/>  
+    <link href="css/style.css" rel="stylesheet" type="text/css"/> 
+  </head>
+  <body>
+     <div ng-controller="ProfileListCtrl">
+       <table class="table table-bordered">
+         <tr>
+             <th>Player ID</th>
+             <th>Nickname</th>
+             <th>Picture URL</th>
+             <th>Email</th>
+             <th>Operation</th>
+         </tr>
+         <tr ng-repeat="Profile in profilelist">
+             <td> 
+             <span>{{Profile.playerId}}</span></td> 
+             <td> 
+             <span>{{Profile.nickname}}</span></td>
+             <td> 
+             <span>{{Profile.pictureUrl}}</span></td>
+             <td> 
+             <span><a href="mailto:{{Profile.email}}">{{Profile.email}}</a></span></td>    
+             <td><button type="button" ng-click="delete($index)">Delete</button></td>   
+         </tr>
+       </table>
+    </div>
+  </body>
+</html>

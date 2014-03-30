@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <h1>{{targetPlayerId}} Play History</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th><span>Date</span></th>
+            <th><span>Result</span></th>
+            <th><span>Token</span></th>
+            <th><span>Score</span></th>    
+            <th><span>Opponent Id</span></th>                                          
+        </tr>
+        <tr ng-repeat = "history in histories">
+            <td> 
+              <span>{{history.date}}</span></td> 
+            <td> 
+              <span>{{history.isWinner | matchStatus}}</span></td>
+            <td> 
+              <span>{{history.tokenChange}}</span></td>
+            <td> 
+              <span>{{history.scoreChange}}</span></td>      
+            <td>
+              <span>{{history.opponentId}}</span>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+      <button type="button"><a href="/login">Back</a></button>
+      <button type="button"><a href="/choosegame/{{history.gameId}}">Play Again</a></button>
+    </div>
+  </div>
+</div>
