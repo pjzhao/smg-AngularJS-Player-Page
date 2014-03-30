@@ -4,15 +4,59 @@
 
 var playerControllers = angular.module('playerControllers', []);
 
-playerControllers.controller('HistoryListCtrl', ['$scope', 'History',
-  function($scope, History) {
-    //$scope.historys = History.query({gameId: 'historys'});
-	$scope.historys = History.query();
+playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window','$http',
+  function ($scope, $rootScope, Profile, $window, $routeParams, $http) {
+      $scope.inquireHistory = function () {
+          //$http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
+          $http.get('/historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
+              .success(function (data) {
+                  $rootScope.historyProfile = data;
+              }).then(function () {
+                  $scope.inquireHistoryResponse();
+              });
+      };
+
+      $scope.inquireHistoryResponse = function () {
+          //if $rootScope.historyProfile.error exists
+          if ($rootScope.historyProfile.error) {
+              $window.alert($rootScope.historyProfile.error)
+          } else if ($rootScope.historyProfile.token) {
+              $rootScope.historyProfile.playerId = $scope.targetPlayerId;
+              $rootScope.historyProfile.gameId = $scope.targetGameId;
+              $window.alert("Your token number is: " + $rootScope.historyProfile.token + "; Your high score is: " + $rootScope.historyProfile.highscore + ".")
+          } else {
+              $rootScope.historyProfile.playerId = $scope.targetPlayerId;
+              $rootScope.historyProfile.gameId = $scope.targetGameId;
+              $window.alert("This player's high score is: " + $rootScope.historyProfile.highscore)
+          }
+      };
+
   }]);
 
-playerControllers.controller('HistoryDetailCtrl', ['$scope', '$routeParams', 'History',
-  function($scope, $routeParams, History) {
-    $scope.history = History.get({gameId: $routeParams.gameId});
+playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http',
+  function ($scope, $rootScope, $window,$location, $http) {
+      $scope.inquireHistoryDetail = function () {
+          //$http.get('http://2.smg-server.appspot.com/history?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
+          $http.get('/historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
+              .success(function (data) {
+                  $rootScope.historyDetailProfile = data;
+              })
+              .then(function () {
+                  $scope.inquireHistoryDetailResponse();
+              });
+      };
+
+      $scope.inquireHistoryDetailResponse = function () {
+          // if historyDetailProfile.error exists
+          if ($rootScope.historyDetailProfile.error) {
+              $window.alert($rootScope.historyDetailProfile.error)
+          }
+          // this is only when playerId=targetId
+          else {
+              $scope.histories = $rootScope.historyDetailProfile.history;
+          }
+      };
+
   }]);
   
 playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', '$window', '$routeParams', '$location', '$http',
@@ -22,7 +66,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 		//$scope.profile = Profile.get({playerId: $routeParams.playerId});
         //$rootScope.profile = Profile.get({playerId: $scope.logPlayerId, password: $scope.logPassword});
         
-	    $http.get('http://1.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
+	    $http.get('http://2.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
 	    	.success(function(data) {
 	      		$rootScope.profile = data;
 	    	})
@@ -39,7 +83,25 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 		} else if ($scope.profile.accessSignature != null) {
 			$rootScope.profile.playerId = $scope.logPlayerId;
 			$rootScope.profile.password = $scope.logPassword;
-            $location.path("/profile") 
+			$http.get('http://2.smg-server.appspot.com/playerInfo?playerId=' + $scope.profile.playerId + '&targetId=' + $scope.profile.playerId
+				+ '&accessSignature=' + $scope.profile.accessSignature)
+	    	.success(function(data) {
+	    		$rootScope.profile.email = data.email;
+	    		$rootScope.profile.firstname = data.firstname;
+	    		$rootScope.profile.lastname = data.lastname;
+	      		$rootScope.profile.nickname = data.nickname;
+	    	})
+	    	.then(function() {
+	    		$scope.loadProfile();
+			});
+		};
+	};
+
+	$scope.loadProfile = function () {
+		if ($scope.profile.error == "WRONG_ACCESS_SIGNATURE") {
+			$window.alert("Failed. Wrong access signature.")
+		} else if ($scope.profile.nickname != null) {
+			$location.path("/profile") 
 		};
 	};
 
@@ -68,7 +130,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 		};
 		$scope.newProfileStr = angular.toJson($scope.newProfile);
     	//Profile.save({playerId:$scope.profile.playerId}, newProfileStr)
-    	$http.put('http://1.smg-server.appspot.com/players/' + $scope.profile.playerId, $scope.newProfileStr)
+    	$http.put('http://2.smg-server.appspot.com/players/' + $scope.profile.playerId, $scope.newProfileStr)
 	    	.success(function(data) {
 	    		$scope.editResponse = data;
 	    	})
@@ -78,9 +140,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 	};
 
 	$scope.etResponse = function() {
-		// Wait for Lisa's confirmation about the response message -- Pinji
-    	//if ($scope.editResponse.success == "UPDATED_PLAYER") {
-    	if ($scope.editResponse.ACCESSSIGNATURE != null) {
+    	if ($scope.editResponse.success == "UPDATED_PLAYER") {
             $window.alert("Edit profile successfully!");
             $location.path("/profile");
             //The profile should receive from the server when the API supports all the attributes -- Pinji
@@ -94,7 +154,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 	
 	$scope.delete = function() {
 		//var deleteResponse = Profile.delete({playerId:$scope.profile.playerId, accessSignature:$scope.profile.accessSignature});
-		$http.delete('http://1.smg-server.appspot.com/players/' + $scope.profile.playerId + '?accessSignature=' + $scope.profile.accessSignature)
+		$http.delete('http://2.smg-server.appspot.com/players/' + $scope.profile.playerId + '?accessSignature=' + $scope.profile.accessSignature)
 	    	.success(function(data) {
 	      		$scope.deleteResponse = data;
 	    	})
@@ -160,7 +220,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
 
 		$http({
 		    method: 'POST',
-		    url: 'http://1.smg-server.appspot.com/players',
+		    url: 'http://2.smg-server.appspot.com/players',
 		    data: $scope.createProfileStr,
 		    headers: {'Content-Type': 'application/json'}
 		})

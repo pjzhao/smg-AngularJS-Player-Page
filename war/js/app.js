@@ -30,7 +30,11 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
         controller: "ProfileCtrl"
-      }).       
+      }).
+      when("/inquiry", {
+          templateUrl: "/partials/inquiry.html",
+          controller: "HistoryListCtrl"
+      }).
       when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
@@ -46,7 +50,7 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
       when("/choosegame/:gameId", {
         templateUrl: "/partials/game-detail.html",
         controller: "GameDetailCtrl"
-      }).      
+      }).
       otherwise({
         redirectTo: "/login"
       });
