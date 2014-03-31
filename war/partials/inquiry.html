@@ -1,25 +1,21 @@
-﻿<div class="container-fluid">
+
+<div class="container-fluid">
     <div class="row-fluid">
-        <h3>Inquire History</h3>
-        <form ng-submit="inquireHistory()">
-            <table>
-                <tr>
-                    <td>Inquiry Player ID:</td>
-                    <td>
-                        <input type="text" ng-model="targetPlayerId" size="50">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Inquiry Game Id:</td>
-                    <td>
-                        <input type="text" ng-model="targetGameId" size="50">
-                    </td>
-                </tr>
-            </table>
-            <div>
-                <input type="submit" value="Inquiry">
-            </div>
+    	<h3><i class="fa fa-info-circle"></i>Inquiry</h3>
+        <form>
+        	<div class="input-group margin-bottom-sm">
+        		<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+        		<input class="form-control" type="text" placeholder="Player Id" ng-model="targetPlayerId" size="50">
+        	</div>
+        	<div class="input-group">
+        		<span class="input-group-addon"><i class="fa fa-gamepad fa-fw"></i></span>
+        		<input class="form-control" type="text" placeholder="Game Id" ng-model="targetGameId" size="50">
+        	</div>
         </form>
-        <div class="row"><a href="/login"></a>Go Back to Log in!</div>
+        <hr>
+        <div class="row">
+        	<button type=button ng-click='inquireInfo()'>Game Info.</button>
+        	<button type=button ng-click='inquireHistoryDetail()'>History Detail</button>
+        </div>
     </div>
 </div>

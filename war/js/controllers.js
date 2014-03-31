@@ -4,11 +4,12 @@
 
 var playerControllers = angular.module('playerControllers', []);
 
-playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window','$http',
-  function ($scope, $rootScope, Profile, $window, $routeParams, $http) {
+/* playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window','$http',
+  function ($scope, $rootScope, $window, $http) {
       $scope.inquireHistory = function () {
-          //$http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
-          $http.get('/historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
+          $http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='
+          	+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
+          //$http.get('/historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
               .success(function (data) {
                   $rootScope.historyProfile = data;
               }).then(function () {
@@ -31,13 +32,40 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
           }
       };
 
-  }]);
+  }]); */
 
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http',
-  function ($scope, $rootScope, $window,$location, $http) {
+  function ($scope, $rootScope, $window, $location, $http) {
+  	  // inquire info/token/score
+		$scope.inquireInfo = function () {
+	        $http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId + '&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
+	            .success(function (data) {
+	                $rootScope.infoProfile = data;
+	            })
+	            .then(function () {
+	                $scope.inquireInfoResponse();
+	            });
+	    };
+
+	    $scope.inquireInfoResponse = function () {
+	        //if $rootScope.historyProfile.error exists
+	        if ($rootScope.infoProfile.error) {
+	            $window.alert($rootScope.infoProfile.error)
+	        } else if ($rootScope.infoProfile.token) {
+	            $rootScope.infoProfile.playerId = $scope.targetPlayerId;
+	            $rootScope.infoProfile.gameId = $scope.targetGameId;
+	            $window.alert("Your token number is: " + $rootScope.infoProfile.token + "; Your high score is: " + $rootScope.infoProfile.highscore + ".")
+	        } else {
+	            $rootScope.infoProfile.playerId = $scope.targetPlayerId;
+	            $rootScope.infoProfile.gameId = $scope.targetGameId;
+	            $window.alert("This player's high score is: " + $rootScope.infoProfile.highscore)
+	        }
+	    };
+		
+	
       $scope.inquireHistoryDetail = function () {
-          //$http.get('http://2.smg-server.appspot.com/history?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
-          $http.get('/historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
+            $http.get('http://2.smg-server.appspot.com/history?playerId=' + $rootScope.logPlayerId + '&gameId=' + $scope.targetGameId+'&targetId='+$scope.targetPlayerId+'&accessSignature='+$rootScope.accessSignature)
+          //$http.get('../historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
               .success(function (data) {
                   $rootScope.historyDetailProfile = data;
               })
@@ -53,7 +81,10 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           }
           // this is only when playerId=targetId
           else {
-              $scope.histories = $rootScope.historyDetailProfile.history;
+                $rootScope.playerId = $scope.targetPlayerId;
+        	    $rootScope.gameId = $scope.targetGameId;
+                $rootScope.histories = $rootScope.historyDetailProfile.history;
+                $location.path('/history:gameId')
           }
       };
 
@@ -189,21 +220,51 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
 	$scope.init();  */
   }]);
 
-playerControllers.controller('GameListCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $http.get('/games/games.json').success(function(data) {
+playerControllers.controller('GameListCtrl', ['$scope', '$rootScope', '$http',
+  function($scope, $rootScope, $http) {
+  	$http.get('http://2.smg-server.appspot.com/gameinfo/all')
+        .success(function (data) {
+          $rootScope.games = data;
+        });
+    /*$http.get('/games/games.json').success(function(data) {
       $scope.games = data;
-    });
+    }); */
 
-    $scope.orderProp = 'developerId';
+    $scope.orderProp = 'gameName';
   }]);
 
-playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http',
+
+ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http', '$location', '$rootScope', 'Games', '$window',
+   function($scope, $routeParams, $http, $location, $rootScope, Games, $window) {
+     $scope.getGameDetail = function() {
+     	//only one httpRequest is not enough for game info 
+     	//some merge will be needed, please refer to the login() in profileCtrl -- Pinji
+       $http.get('http://2.smg-server.appspot.com/gameinfo/stats?gameId=' + $rootScope.games.gameId)
+       .success(function(data) {
+         $scope.game = data;
+       })
+       .then(function() {
+         $scope.gameDetailResponse();
+       });
+     };
+     $scope.gameDetailResponse = function() {
+       if($scope.error == "WRONG_GAME_ID") {
+         $window.alert("Failed. WRONG_GAME_ID");
+       } else {
+         $location.path("/choosegame/:gameId");
+       }
+     }
+     /*$scope.play = function() {
+ 
+     }*/
+   }]);
+ 
+/* playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     $http.get('/games/' + $routeParams.gameId + '.json').success(function(data) {
       $scope.game = data;
     });
-  }]);
+  }]); */
 
 playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location',
   function($scope, $rootScope, $routeParams, $http, $window, $location) {
@@ -245,4 +306,42 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
             $location.path("/profile") 
 		};
     };
+  }]);
+
+  playerControllers.controller('RateCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location',
+    function($scope, $rootScope, $routeParams, $http, $window, $location) {
+      $scope.rate = function () {
+        $rootScope.createRate = {
+          "rate" : $scope.rate
+        };
+        $rootScope.createRateStr = angular.toJson($scope.createRate);
+        $http({
+          method: 'POST',
+          url: 'http://1.smg-server.appspot.com/gameinfo/rating?gameId' + $scope.gameId + 
+            '&playerId=' + $scope.playerId + '&accessSignature=' + $scope.accessSignature,
+          data: $scope.createRateStr,
+          headers: {'Content-Type': 'application/json'}
+         })
+         .success(function(data) {
+           $rootScope.rateResponse = data;
+         })
+        .then(function() {
+          $scope.rtResponse(); 
+         });
+      };
+      $scope.rtResponse = function () {
+        if ($scope.rateResponse.error == "WRONG_RATING") {
+          $window.alert("Failed. The rating is incorrectly formatted.")
+        } else if ($scope.rateResponse.error == "WRONG_GAME_ID") {
+          $window.alert("Failed. The gameId is wrong.")
+        } else if ($scope.rateResponse.error == "WRONG_ACCESS_INFO") {
+          $window.alert("Failed. The player access info is wrong.")
+        } else if ($scope.signupResponse.accessSignature != null) {
+          $window.alert("Thank you for the rate for " + $scope.rateResponse.gameId);
+          $rootScope.rate = $rootScope.createRate;
+          $rootScope.rate.gameId = $scope.rateResponse.gameId;
+          $rootScope.rate.playerId = $scope.rateResponse.playerId;
+          $rootScope.rate.accessSignature = $scope.rateResponse.accessSignature;
+        };
+      };
   }]);

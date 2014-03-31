@@ -33,13 +33,20 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
       }).
       when("/inquiry", {
           templateUrl: "/partials/inquiry.html",
-          controller: "HistoryListCtrl"
+          //controller: "HistoryListCtrl"
+          controller: "HistoryDetailCtrl"
       }).
-      when("/history", {
+      /*when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).
-      when("/history/:gameId", {
+      }).*/
+      // if server support history list
+      /*when("/history", {
+        templateUrl: "/partials/history-list.html",
+        controller: "HistoryDetailCtrl"
+      }).*/
+      //when("/history/:gameId", {
+        when("/history:gameId", {
         templateUrl: "/partials/history-detail.html",
         controller: "HistoryDetailCtrl"
       }).

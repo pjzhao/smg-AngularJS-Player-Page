@@ -1,6 +1,7 @@
+
 <div class="container-fluid">
   <div class="row-fluid">
-    <h1>{{targetPlayerId}} Play History</h1>
+    <h1>{{playerId}}'s Play History</h1>
 
     <table class="table table-bordered">
         <tr>
@@ -25,8 +26,8 @@
         </tr>
     </table>
     <div class="row">
-      <button type="button"><a href="/login">Back</a></button>
-      <button type="button"><a href="/choosegame/{{history.gameId}}">Play Again</a></button>
+      	<a href="/profile"><button type="button">Back</button></a>
+      	<a href="/choosegame"><button type="button">Play Again</button></a>
     </div>
   </div>
 </div>
