@@ -19,7 +19,7 @@ describe('Game List controllers', function() {
       expect(scope.games).toEqual([{name: 'Chinese Checkers'}]);
     });
     it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('developerId');
+      expect(scope.orderProp).toBe('name');
     });
   });
   describe('GameListCtrl', function(){
@@ -37,7 +37,7 @@ describe('Game List controllers', function() {
       expect(scope.games).toEqual([{name: 'Chinese Checkers'}, {name: 'Mahjong'}]);
     });
     it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('developerId');
+      expect(scope.orderProp).toBe('name');
     });
   });
   describe('GameListCtrl', function(){
@@ -55,7 +55,7 @@ describe('Game List controllers', function() {
       expect(scope.games).toEqual([{name: 'Chinese Checkers'}, {name: 'Mahjong'}, {name: 'Shoqi'}]);
     });
     it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('developerId');
+      expect(scope.orderProp).toBe('name');
     });
   });
   /* GameDetailCtrl test */

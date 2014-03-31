@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span3">
-      <!--Sidebar content-->
       Search: <input ng-model="query"><br>
       Sort by:
       <select ng-model="orderProp">
-        <option value="name">Name</option>
-        <option value="developerId">Developer ID</option>
+        <option value="gameName">Name</option>
+        <option value="Developer">Developer</option>
+        <option value="postDate">Post Date</option>
         <option value="rate">Rate</option>
       </select>
       <div class="row">
@@ -17,14 +17,11 @@
       </div>
     </div>
     <div class="span8">
-      <!--Body content-->
       <ul class="games">
         <li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="/choosegame/{{game.id}}" class="thumb"><img ng-src="{{game.pic}}"></a>
-          <a href="/choosegame/{{game.id}}">{{game.name}}</a>
-          <p>{{game.description}}</p>
-          <p>{{game.url}}</p>
-          <p>Width: {{game.width}}, Height: {{game.height}}, Developed by: {{game.developerId}}, Rate: {{game.rate}}</p>
+          <a href="/choosegame/{{game.gameName}}">{{game.gameName}}</a>
+          <p>Description: {{game.description}}, Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p>
+          <p>Developed by: {{game.Developer[0].firstName}}, Post on: {{game.postDate}}, Version: {{game.version}}, Rate: {{game.rate}}</p>
         </li>
       </ul>
     </div>

@@ -1,6 +1,7 @@
 <div class="container-fluid">
 	<div class="row-fluid">
-		<h1>{{game.name}}</h1>		
+		<h1>{{game.name}}</h1>
+		<!--button type=button ng-click='getGameDetail()'>Get game detail</button>-->
 		<br><br>
 		<div class="span2">
 			<ul class="games">
@@ -38,9 +39,10 @@
 			        </tr>
     			</table><br>
 				<p><span>Mode choose: </span><br>
-				<button ng-click='play()'>Play AI</button>
-				<button ng-click='play()'>Pass and Play</button>
-				<button ng-click='play()'>Auto Matched</button>
+				<button ng-click="">Play AI</button>
+				<button ng-click="">Pass and Play</button>
+				<button ng-click=""><a href="domainUrl/gameId={{games.gameId}}&playerId={{profile.playerId}}&accessSignature={{profile.accessSignature}}">
+					Auto Matched</button>
 				<button ng-click=""><a href="/choosegame">Return</a></button>
 				<button ng-click=""><a href="/history/{{game.id}}">History</a></button></p><br>
 				<p>
