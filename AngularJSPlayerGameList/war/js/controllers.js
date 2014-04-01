@@ -231,16 +231,52 @@ playerControllers.controller('GameListCtrl', ['$scope', '$rootScope', '$http',
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', 
   function($scope, $routeParams, $http, $window, $rootScope) {
-    $http.get('http://2.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
-    .success(function(data) {
-      $scope.game = data;
-    }).then(function(game) {
-      if ($scope.game.error == "NO_MATCH_RECORDS") {
-        $window.alert("NO_MATCH_RECORDS, No body played yet!");
-      } else if ($scope.game.error == "WRONG_GAME_ID") {
-        $window.alert("WRONG_GAME_ID, No such game!");
-      }
-    });
+
+    $scope.gameStats = function () {
+      $http.get('http://2.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
+      .success(function(data) {
+        $scope.game = data;
+      }).then(function(game) {
+        if ($scope.game.error == "NO_MATCH_RECORDS") {
+          $window.alert("NO_MATCH_RECORDS, No body played yet!");
+        } else if ($scope.game.error == "WRONG_GAME_ID") {
+          $window.alert("WRONG_GAME_ID, No such game!");
+        }
+      });
+    }
+
+    $scope.rate = function () {
+      $rootScope.createRate = {
+        "rate" : $scope.rate
+      };
+      $rootScope.createRateStr = angular.toJson($scope.createRate);
+      $http({
+        method: 'POST',
+        url: 'http://2.smg-server.appspot.com/gameinfo/rating?gameId=' + $rootScope.currentGameId + 
+        '&playerId=' + $rootScope.profile.playerId + '&accessSignature=' + $rootScope.profile.accessSignature,
+        data: $scope.createRateStr,
+        headers: {'Content-Type': 'application/json'}
+      })
+      .success(function(data) {
+        $rootScope.rateResponse = data;
+      })
+      .then(function() {
+        $scope.rtResponse(); 
+      });
+    };
+
+    $scope.rtResponse = function () {
+      if ($scope.rateResponse.error == "WRONG_RATING") {
+        $window.alert("Failed. The rating is incorrectly formatted.")
+      } else if ($scope.rateResponse.error == "WRONG_GAME_ID") {
+        $window.alert("Failed. The gameId is wrong.")
+      } else if ($scope.rateResponse.error == "WRONG_ACCESS_INFO") {
+        $window.alert("Failed. The player access info is wrong.")
+      } else if ($scope.rateResponse.accessSignature != null) {
+        $window.alert("Thank you for the rate for " + $scope.rateResponse.gameId);
+      };
+    };
+    
   }]);
 
 playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope',
@@ -248,6 +284,7 @@ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http
     $http.get('http://2.smg-server.appspot.com/games/' + $routeParams.gameId)
     .success(function(data) {
       $rootScope.gamedetail = data;
+      $rootScope.currentGameId = $routeParams.gameId;
     }).then(function(gamedetail) {
       if ($rootScope.gamedetail.error == "WRONG_GAME_ID") {
         $window.alert("WRONG_GAME_ID, No such game!");
@@ -296,7 +333,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
     };
     };
   }]);
-
+/*
   playerControllers.controller('RateCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location',
     function($scope, $rootScope, $routeParams, $http, $window, $location) {
       $scope.rate = function () {
@@ -334,3 +371,4 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
         };
       };
   }]);
+  */
