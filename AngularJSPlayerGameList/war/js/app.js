@@ -30,12 +30,23 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
         controller: "ProfileCtrl"
-      }).       
-      when("/history", {
+      }).
+      when("/inquiry", {
+          templateUrl: "/partials/inquiry.html",
+          //controller: "HistoryListCtrl"
+          controller: "HistoryDetailCtrl"
+      }).
+      /*when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).
-      when("/history/:gameId", {
+      }).*/
+      // if server support history list
+      /*when("/history", {
+        templateUrl: "/partials/history-list.html",
+        controller: "HistoryDetailCtrl"
+      }).*/
+      //when("/history/:gameId", {
+        when("/history:gameId", {
         templateUrl: "/partials/history-detail.html",
         controller: "HistoryDetailCtrl"
       }).
@@ -43,10 +54,14 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
         templateUrl: "/partials/game-list.html",
         controller: "GameListCtrl"
       }).
-      when("/choosegame/:gameId", {
+      when("/choosegamestats/:gameId", {
+        templateUrl: "/partials/game-stats.html",
+        controller: "GameStatsCtrl"
+      }).
+      when("/choosegamedetail/:gameId", {
         templateUrl: "/partials/game-detail.html",
         controller: "GameDetailCtrl"
-      }).      
+      }).
       otherwise({
         redirectTo: "/login"
       });

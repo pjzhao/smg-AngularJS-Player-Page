@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span3">
+      <!--Sidebar content-->
       Search: <input ng-model="query"><br>
       Sort by:
       <select ng-model="orderProp">
@@ -15,13 +16,25 @@
       <div class="row">
         <a href="/history">My History</a>
       </div>
+      <div class="row">
+        <a href="/inquiry">Go to inquiry page</a>
+      </div>
     </div>
     <div class="span8">
+      Instruction: click on icon to see stats, click on name/id to see details.
+      <!--Body content-->
       <ul class="games">
         <li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="/choosegame/{{game.gameName}}">{{game.gameName}}</a>
+          <a href="/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon}}"></a>
+          <p><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
+          <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
+          <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p><br>
+          <p><img ng-src="{{game.screenshots[0]}}" class="thumb"></p>
+          <!-- the link destination will be changed to gameId when server runs healthy -- Pinji
+          <a href="/choosegame/{{game.gameId}}">{{game.gameName}}</a> -->
+          <!--<a href="/choosegame/{{game.gameName}}">{{game.gameName}}</a>
           <p>Description: {{game.description}}, Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p>
-          <p>Developed by: {{game.Developer[0].firstName}}, Post on: {{game.postDate}}, Version: {{game.version}}, Rate: {{game.rate}}</p>
+          <p>Developed by: {{game.Developer[0].firstName}}, Post on: {{game.postDate}}, Version: {{game.version}}, Rate: {{game.rate}}</p> -->
         </li>
       </ul>
     </div>
