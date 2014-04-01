@@ -4,7 +4,7 @@
 		<hr>
 		<div class="span8">
 			<ul class="games">
-				<p>Developed by: {{gamedetail.developerId}}</p><br>
+				<p>Developed by: {{gamedetail.developerId[0]}}</p><br>
 				<p>Height: {{gamedetail.height}}, Width: {{gamedetail.width}}</p><br>
 				<p>Posted on: {{gamedetail.postDate}}</p><br>
 				<p>Description: {{gamedetail.description}}</p><br>
@@ -17,7 +17,7 @@
 			<button ng-click=""><a href="http://2.smg-angularjs-container.appspot.com?gameId={{currentGameId}}&playerId={{profile.playerId}}&accessSignature={{profile.accessSignature}}">
 				Auto Matched</a></button>
 			<button ng-click=""><a href="/choosegame">Return</a></button>
-			<button ng-click=""><a href="/history/{{currentGameId}}">History</a></button>
+			<button ng-click=""><a href="/history:{{currentGameId}}">History</a></button>
 			<button ng-click=""><a href="/choosegamestats/{{currentGameId}}">Game Stats</a></button></p>
 	    </div>    
 	</div>

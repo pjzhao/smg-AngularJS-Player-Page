@@ -3,7 +3,7 @@
   <div class="row-fluid">
     <h1>{{gamedetail.gameName}} Play History</h1>
     <div class="row">
-      Tokens: {{infoProfile.token}}    Hignest Score: {{infoProfile.score}}    Win: {{infoProfile.win}}    Lose: {{infoProfile.lost}}    Draw: {{infoProfile.draw}}
+      Tokens: {{infoProfile.token}}    Score: {{infoProfile.score}}    Win: {{infoProfile.win}}    Lose: {{infoProfile.lost}}    Draw: {{infoProfile.draw}}
     </div>
 
     <table class="table table-bordered">
@@ -18,13 +18,13 @@
             <td> 
               <span>{{history.date}}</span></td> 
             <td> 
-              <span>{{history.isWinner | matchStatus}}</span></td>
+              <span>{{history.result}}</span></td>
             <td> 
               <span>{{history.tokenChange}}</span></td>
             <td> 
-              <span>{{history.scoreChange}}</span></td>      
+              <span>{{history.score}}</span></td>      
             <td>
-              <span>{{history.opponentId}}</span>
+              <span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span>
             </td>
         </tr>
     </table>

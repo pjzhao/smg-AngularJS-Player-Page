@@ -39,16 +39,10 @@
             <img ng-src={{profile.pictureUrl}} class="profile-img"/>
         </div>
       </div>
+      <hr />
       <div class="row">
-        <a href="/editprofile">Edit</a>
-      </div>      
-      <!--<div class="row">
-        <a href="/history">My History</a>
-      </div> -->
-      <div class="row">
-        <a href="/choosegame">Choose Game</a>
-      </div> 
-      <div class="row">
+      	<a href="/editprofile"><button type="button">Edit</button></a>
+      	<a href="/choosegame"><button type="button">Choose Game</button></a>
         <button type=button ng-click='delete()'>Delete My Account</button>
         <button type=button ng-click='logout()'>Log Out</button>
       </div>       
