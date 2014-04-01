@@ -1,7 +1,10 @@
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <h1>{{playerId}}'s Play History</h1>
+    <h1>{{gamedetail.gameName}} Play History</h1>
+    <div class="row">
+      Tokens: {{infoProfile.token}}    Hignest Score: {{infoProfile.score}}    Win: {{infoProfile.win}}    Lose: {{infoProfile.lost}}    Draw: {{infoProfile.draw}}
+    </div>
 
     <table class="table table-bordered">
         <tr>
@@ -26,8 +29,8 @@
         </tr>
     </table>
     <div class="row">
-      	<a href="/profile"><button type="button">Back</button></a>
-      	<a href="/choosegame"><button type="button">Play Again</button></a>
+      	<!--<a href="/profile"><button type="button">Back</button></a> -->
+      	<a href="/choosegamedetail/{{currentGameId}}"><button type="button">Play Again</button></a>
     </div>
   </div>
 </div>
