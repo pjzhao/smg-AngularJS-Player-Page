@@ -1,0 +1,10 @@
+{
+	"id": "lines-of-action",
+    "name": "Lines of Action",
+    "description": "Introduction to Lines of Action in lines-of-action.json",
+    "images": [
+        "img/games/lines-of-action-icon.jpg", 
+        "img/games/lines-of-action-1.jpg",  
+        "img/games/lines-of-action-2.jpg"
+    ]    
+}

@@ -1,0 +1,47 @@
+{
+	"highScore": { 
+       "playerId": "1234", 
+       "score": 100000
+    },
+    "rating": 4.2,
+    "currentGames": [  
+	{
+		"players": [
+		{
+			"firstName": "Bob",
+			"nickname": "Ninja"
+		},
+		{
+			"firstName": "Jane",
+			"nickname": "Ninja2"
+		}
+		]
+	}
+  	],
+  	"finishedGames": [
+  	{
+  		"players": [
+  		{
+  			"firstName": "Bob",
+  			"nickname": "Ninja",
+  			"score": 43543,
+  			"tokens": 2394384
+  		},
+  		{
+  			"firstName": "Jane",
+  			"nickname": "Ninja2",
+  			"score": 9845,
+  			"tokens": 39843
+  		}
+  		]
+  	}
+  	],
+	"id": "345678",
+    "name": "Aeroplane Chess",
+    "description": "Introduction to Aeroplane Chess in aeroplane-chess.json",
+    "images": [
+        "../img/games/aeroplane-chess-icon.jpg", 
+        "../img/games/aeroplane-chess-1.jpg",  
+        "../img/games/aeroplane-chess-2.jpg"
+    ]    
+}

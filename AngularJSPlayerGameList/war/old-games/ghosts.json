@@ -1,0 +1,10 @@
+{
+	"id": "ghosts",
+    "name": "Ghosts",
+    "description": "Introduction to Ghosts in ghosts.json",
+    "images": [
+        "img/games/ghosts-icon.jpg", 
+        "img/games/ghosts-1.jpg",  
+        "img/games/ghosts-2.jpg"
+    ]    
+}

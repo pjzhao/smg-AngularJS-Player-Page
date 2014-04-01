@@ -1,0 +1,47 @@
+{
+	"highScore": { 
+       "playerId": "1234", 
+       "score": 100000
+    },
+    "rating": 4.5,
+    "currentGames": [  
+	{
+		"players": [
+		{
+			"firstName": "Bob",
+			"nickname": "Ninja"
+		},
+		{
+			"firstName": "Jane",
+			"nickname": "Ninja2"
+		}
+		]
+	}
+  	],
+  	"finishedGames": [
+  	{
+  		"players": [
+  		{
+  			"firstName": "Bob",
+  			"nickname": "Ninja",
+  			"score": 43543,
+  			"tokens": 2394384
+  		},
+  		{
+  			"firstName": "Jane",
+  			"nickname": "Ninja2",
+  			"score": 9845,
+  			"tokens": 39843
+  		}
+  		]
+  	}
+  	],
+	"id": "234567",
+    "name": "Cheat",
+    "description": "Introduction to Cheat in cheat.json",
+    "images": [
+        "../img/games/cheat-icon.jpg", 
+        "../img/games/cheat-1.jpg",  
+        "../img/games/cheat-2.jpg"
+    ]    
+}

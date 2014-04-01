@@ -1,0 +1,10 @@
+{
+	"id": "blokus",
+    "name": "Blokus",
+    "description": "Introduction to Blokus in blokus.json",
+    "images": [
+        "img/games/blokus-icon.jpg", 
+        "img/games/blokus-1.jpg",  
+        "img/games/blokus-2.jpg"
+    ]    
+}

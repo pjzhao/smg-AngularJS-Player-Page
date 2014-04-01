@@ -1,0 +1,54 @@
+<div class="container-fluid">
+	<div class="row-fluid">		
+		<h1>{{game.name}}</h1><br>
+		<form ng-submit="gameStats()">          
+			<div> 
+				<input type="submit" value="Get Game Stats">
+			</div>
+		</form>
+		<hr>
+		<form ng-submit="rate()">
+			<table>
+				<tr>
+					<td><input type="text"  ng-model="rating" size="10" ></td>
+					<td><input type="submit" value="Rate"></td>
+				</tr>
+			</table>
+		</form>
+	    <div class="span8">
+			<ul class="games">
+				<p>{{game.description}}</p><br>
+				<p>Highest score achieved by: {{game.highScore.playerId}}</p><br>
+				<p>Highest score is: {{game.highScore.score}}</p><br>	
+				<p>Rating of the game: {{game.rating}}</p><br>
+				Current games:<br>
+				<table class="table table-bordered">					
+			        <tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+			        </tr>
+				</table><br>
+				Finished games:<br>
+				<table class="table table-bordered">
+			        <tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+						<td> 
+			              <span>{{currentgameplayer.score}}</span></td>  
+						<td> 
+			              <span>{{currentgameplayer.tokens}}</span></td>  
+			        </tr>
+    			</table><br>
+    			<div class="games">
+        			<button ng-click=""><a href="/choosegamedetail/{{currentGameId}}">Game Detail</a></button>
+      			</div>  				
+			</ul>
+	    </div>
+	</div>
+</div>
+
+

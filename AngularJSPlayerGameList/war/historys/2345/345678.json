@@ -1,0 +1,39 @@
+{
+    "history":[
+        {
+            "date": "2014-2-13",
+            "isWinner": 0,
+            "tokenChange": 113,
+            "scoreChange": 24,
+            "opponentId": "2325"
+        }, 
+        {
+            "date": "2014-1-15", 
+            "isWinner": 1,
+            "tokenChange": 153,
+            "scoreChange": 115,
+            "opponentId": "9959"
+        }, 
+        {
+            "date": "2014-2-15",
+            "isWinner": 1,
+            "tokenChange": 125,
+            "scoreChange": 235,
+            "opponentId": "0052"
+        },
+        {
+            "date": "2013-2-5",
+            "isWinner": 2,
+            "tokenChange": 153,
+            "scoreChange": 25,
+            "opponentId": "1235"
+        }, 
+        {
+            "date": "2014-1-12",
+            "isWinner": 2,
+            "tokenChange": 121,
+            "scoreChange": 212,
+            "opponentId": "0145"
+        }
+    ]
+}
