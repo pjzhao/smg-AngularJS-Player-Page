@@ -13,3 +13,11 @@ angular.module('profileFilters', []).filter('matchStatus', function() {
 	}
   };
 });
+
+angular.module('imageFilter', []).filter('imageUrl', function(){
+	return function(input){
+		if(input == null){
+			return "../img/images.jpg"
+		}
+	};
+});
