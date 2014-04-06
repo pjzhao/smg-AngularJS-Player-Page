@@ -4,17 +4,17 @@
 		<hr>
 		<div class="span8">
 			<ul class="games">
-				<p>Developed by: {{gamedetail.developerId}}</p><br>
+				<p>Developed by: {{gamedetail.developerId[0]}}</p><br>
 				<p>Height: {{gamedetail.height}}, Width: {{gamedetail.width}}</p><br>
 				<p>Posted on: {{gamedetail.postDate}}</p><br>
 				<p>Description: {{gamedetail.description}}</p><br>
 				<p>Url: {{gamedetail.url}}</p><br>
 			</ul>
 			<hr>
-			<p><span>Mode choose: </span><br>
+			<!-- <p><span>Mode choose: </span><br> -->
 			<button ng-click="">Play AI</button>
 			<button ng-click="">Pass and Play</button>
-			<button ng-click=""><a href="http://2.smg-angularjs-container.appspot.com?gameId={{currentGameId}}&playerId={{profile.playerId}}&accessSignature={{profile.accessSignature}}">
+			<button ng-click=""><a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{currentGameId}}?playerId={{profile.playerId}}&accessSignature={{profile.accessSignature}}" target="_blank">
 				Auto Matched</a></button>
 			<button ng-click=""><a href="/choosegame">Return</a></button>
 			<button ng-click=""><a href="/history/{{currentGameId}}">History</a></button>
@@ -22,5 +22,4 @@
 	    </div>    
 	</div>
 </div>
-
 

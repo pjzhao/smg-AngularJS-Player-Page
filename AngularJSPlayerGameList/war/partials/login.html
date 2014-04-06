@@ -1,14 +1,14 @@
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row-fluid">
       <h3>Welcome Back - Player Log In</h3>
       <form ng-submit="login()">
           <div class="input-group margin-bottom-sm">
               <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-              <input class="form-control" type="text" placeholder="Player Id" ng-model="logPlayerId" size="50">
+              <input class="form-control" type="text" placeholder="Player Id" ng-model="logPlayerId" size="50" ng-required="true">
           </div>
           <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-              <input class="form-control" type="password" placeholder="Password" ng-model="logPassword" size="50">
+              <input class="form-control" type="password" placeholder="Password" ng-model="logPassword" size="50" ng-required="true">
           </div>  
           <hr> 
           <div> 
@@ -16,7 +16,9 @@
           </div>
       </form>
       <div class="row"><a href="/signup">I'm new here</a></div><br>
-      <div class="row">Test PlayerId: 6283985978130432</div>
+      <div class="row">Test PlayerId: 4862414080180224</div>
+      <div class="row">Test Password: password</div>
+      <div class="row">Test PlayerId: 6539433453027328</div>
       <div class="row">Test Password: password</div>
     </div>
   </div>  

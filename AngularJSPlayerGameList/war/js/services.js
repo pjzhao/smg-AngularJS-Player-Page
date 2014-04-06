@@ -14,10 +14,10 @@ profileServices.factory('History', ['$resource',
   
 profileServices.factory('Profile', ['$resource',
   function($resource){
-    return $resource(server + '/players/:playerId', null, {
+  	return $resource(server + '/players/:playerId', null, {
       'create': {method:'POST'},
       'get': {method:'GET', params:{password: '@password'}},
-      'save': {method:'PUT'},
-      'delete': {method:'DELETE'}
-    });
+  	  'save': {method:'PUT'},
+  	  'delete': {method:'DELETE'}
+  	});
   }]);

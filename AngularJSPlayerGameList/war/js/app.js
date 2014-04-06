@@ -3,6 +3,7 @@
 /* App Module */
 
 var playerApp = angular.module("playerApp", [
+  "ngCookies",
   "ngRoute",
   "profileFilters",
   "playerControllers",
@@ -45,8 +46,8 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
         templateUrl: "/partials/history-list.html",
         controller: "HistoryDetailCtrl"
       }).*/
-      //when("/history/:gameId", {
-        when("/history:gameId", {
+      when("/history/:gameId", {
+      //  when("/history:gameId", {
         templateUrl: "/partials/history-detail.html",
         controller: "HistoryDetailCtrl"
       }).
