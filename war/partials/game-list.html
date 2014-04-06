@@ -17,7 +17,7 @@
       			</select>
       </li>
   		<br>
-  		<li><a href="/profile"><button type="button" class="narrow">My Profile</button></a></li>
+  		<li><a href="#/profile/{{profile.playerId}}?password={{profile.password}}"><button type="button" class="narrow">My Profile</button></a></li>
 		</ul>
 	</div>
 	<!-- Keep all page content in the page-content inset div-->
@@ -29,8 +29,8 @@
           		<h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
           		<p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
         		<p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
-          <a href="/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon}}"></a>
-          <p><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
+          <a href="#/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon}}"></a>
+          <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
           <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
           <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p><br>
           <!--<p><img ng-src="{{game.screenshots[0]}}" class="thumb"></p> -->

@@ -3,6 +3,7 @@
 /* App Module */
 
 var playerApp = angular.module("playerApp", [
+  "ngCookies",
   "ngRoute",
   "profileFilters",
   "playerControllers",
@@ -10,26 +11,26 @@ var playerApp = angular.module("playerApp", [
 ]);
 //var server = "http://1.smg-server.appspot.com/";
 
-playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
-  function($routeProvider, $locationProvider, $httpProvider) {
-    $locationProvider.html5Mode(true);
+playerApp.config(["$routeProvider", "$httpProvider",
+  function($routeProvider, $httpProvider) {
+   //$locationProvider.html5Mode(true);
     
     $routeProvider.
       when("/login", {
-        templateUrl: "/partials/login.html",
-        controller: "ProfileCtrl"
+        templateUrl: "/partials/login.html"
+        //controller: "ProfileCtrl"
       }).        
       when("/signup", {
         templateUrl: "/partials/signup.html",
         controller: "SignUpCtrl"
       }).       
-      when("/profile", {
+      when("/profile/:userId", {
         templateUrl: "/partials/view-profile.html",
         controller: "ProfileCtrl"
       }).    
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
-        controller: "ProfileCtrl"
+        controller: "EditCtrl"
       }).
       when("/inquiry", {
           templateUrl: "/partials/inquiry.html",
@@ -39,11 +40,6 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
       /*when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).*/
-      // if server support history list
-      /*when("/history", {
-        templateUrl: "/partials/history-list.html",
-        controller: "HistoryDetailCtrl"
       }).*/
       when("/history/:gameId", {
       //  when("/history:gameId", {
