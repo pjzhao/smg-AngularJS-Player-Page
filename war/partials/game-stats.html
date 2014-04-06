@@ -1,0 +1,50 @@
+<div class="container-fluid">
+	<div class="row-fluid">		
+		<h1>{{gamedetail.gameName}}</h1><br>
+	    <div class="span8">
+			<ul class="games">
+				<p>{{game.description}}</p><br>
+				<p>Highest score achieved by: {{game.highScore.playerId}}</p><br>
+				<p>Highest score is: {{game.highScore.score}}</p><br>	
+				<p>Rating of the game: {{game.rating}}</p><br>
+				Current games:<br>
+				<table class="table table-bordered">					
+			        <tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+			        </tr>
+				</table><br>
+				Finished games:<br>
+				<table class="table table-bordered">
+			        <tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+						<td> 
+			              <span>{{currentgameplayer.score}}</span></td>  
+						<td> 
+			              <span>{{currentgameplayer.tokens}}</span></td>  
+			        </tr>
+    			</table><br>
+    			<div class="games">
+        			<button ng-click=""><a href="/choosegamedetail/{{currentGameId}}">Game Detail</a></button>
+      			</div>  	
+      			<br>
+      			<form ng-submit="rate()">
+					<table>
+						<tr>
+							<td><input type="number" min="1" max="5" step="0.1" ng-model="rating" size="10" ></td> 
+							<td><input type="submit" value="Rate the game"></td>
+							<td>(1.0 ~ 5.0, e.g. 3.8, 4.5)</td>
+						</tr>
+					</table>
+				</form>			
+			</ul>
+	    </div>
+	</div>
+</div>
+
+

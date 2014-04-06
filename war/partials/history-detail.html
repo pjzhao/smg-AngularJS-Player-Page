@@ -1,7 +1,16 @@
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <h1>{{playerId}}'s Play History</h1>
+
+    <h1>{{gamedetail.gameName}} Play History</h1>
+    <div class="row">
+      <div class="col col-offset-10"></div>
+      <div class="col col-10">Tokens: {{infoProfile.token}}</div>    
+      <div class="col col-10">Score: {{infoProfile.score}}</div>   
+      <div class="col col-10">Win: {{infoProfile.win}}</div>
+      <div class="col col-10">Lose: {{infoProfile.lost}}</div>    
+      <div class="col col-10">Draw: {{infoProfile.draw}} </div>
+    </div>
 
     <table class="table table-bordered">
         <tr>
@@ -15,19 +24,18 @@
             <td> 
               <span>{{history.date}}</span></td> 
             <td> 
-              <span>{{history.isWinner | matchStatus}}</span></td>
+              <span>{{history.result}}</span></td>
             <td> 
               <span>{{history.tokenChange}}</span></td>
             <td> 
-              <span>{{history.scoreChange}}</span></td>      
+              <span>{{history.score}}</span></td>      
             <td>
-              <span>{{history.opponentId}}</span>
+              <a href="/opponent/{{opponentId}}"><span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span></a>
             </td>
         </tr>
     </table>
     <div class="row">
-      	<a href="/profile"><button type="button">Back</button></a>
-      	<a href="/choosegame"><button type="button">Play Again</button></a>
+      	<a href="/choosegamedetail/{{currentGameId}}"><button type="button">Play Again</button></a>
     </div>
   </div>
 </div>

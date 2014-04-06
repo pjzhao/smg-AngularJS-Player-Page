@@ -157,7 +157,7 @@ body {
 
 .games li {
   clear: both;
-  height: 100px;
+  height: 110px;
   padding-top: 15px;
 }
 
@@ -281,4 +281,13 @@ body {
 }
 .fade-show-setup.fade-show-start {
     opacity:1;
+}
+
+.narrow {
+    height: 30px;
+    line-height: 20px;
+}
+
+.sortSelect {
+    width: 145px;
 }
