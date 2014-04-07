@@ -267,43 +267,6 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
         $window.alert("Thank you for the rate for " + $scope.gamedetail.gameName);
       };
     };
-    /*
-    $scope.rate = function () {
-      $rootScope.createRate = {
-        "rating" : $scope.rating
-      };
-      $rootScope.createRateStr = angular.toJson($scope.createRate);
-
-      $http({
-        method: 'POST',
-        url: 'http://3.smg-server.appspot.com/gameinfo/rating?gameId=' + $rootScope.currentGameId + 
-        '&playerId=' + $rootScope.profile.playerId + '&accessSignature=' + $rootScope.profile.accessSignature,
-        data: $rootScope.createRateStr,
-        headers: {'Content-Type': 'application/json'}
-      })
-      .success(function(data) {
-        $rootScope.rateResponse = data;
-      })
-      .then(function() {
-        $scope.rtResponse(); 
-      });
-    };
-
-    $scope.rtResponse = function () {
-      if ($scope.rateResponse.error == "WRONG_RATING") {
-        $window.alert("Failed. The rating is incorrectly formatted.");
-        $scope.rateResponse.error = ""
-      } else if ($scope.rateResponse.error == "WRONG_GAME_ID") {
-        $window.alert("Failed. The gameId is wrong.");
-        $scope.rateResponse.error = ""
-      } else if ($scope.rateResponse.error == "WRONG_ACCESS_INFO") {
-        $window.alert("Failed. The player access info is wrong.");
-        $scope.rateResponse.error = ""
-      } else if ($scope.rateResponse.rating != null) {
-        $window.alert("Thank you for the rate for " + $scope.gamedetail.gameName);
-      };
-    };
-    */
 }]);
 
 playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http', '$window', '$cookieStore',
