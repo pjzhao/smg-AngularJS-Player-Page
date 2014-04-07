@@ -5,7 +5,7 @@
     <form class="form-signin" name="registerForm" ng-submit="edit()">
     <div class="input-group email">
       <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-      <input type="email" class="form-control email" placeholder="E-Mail" name="email" ng-model="suEmail" ng-required="false">
+      <input type="email" class="form-control email" placeholder="E-Mail" name="email" ng-model="profileEmail" ng-required="false">
       <div class="errors" ng-class="{ active:registerForm.email.$invalid && registerForm.email.$dirty}">
         <div class="error ng-hide" ng-show="registerForm.email.$error.email">
           <p>E-Mail seems invalid! </p>
@@ -14,7 +14,7 @@
         </div>
       <div class="input-group password">
           <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-            <input type="text" class="form-control password" placeholder="Password" name="password" ng-model="suPassword" ng-minlength="4" ng-maxlength="16" ng-required="false">
+            <input type="text" class="form-control password" placeholder="Password" name="password" ng-model="profilePassword" ng-minlength="4" ng-maxlength="16" ng-required="false">
             <div class="errors" ng-class="{active: registerForm.password.$invalid && registerForm.password.$dirty}">
               <div class="error ng-hide" ng-show="registerForm.password.$error.minlength">
                   <p>Password is too short! Minimal nickname length is 4.</p>
@@ -26,15 +26,15 @@
       </div>
         <div class="input-group first-name">
           <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-          <input type="text" class="form-control first-name" placeholder="First Name" name="first-name" ng-model="suFirstname" size="50">
+          <input type="text" class="form-control first-name" placeholder="First Name" name="first-name" ng-model="profileFirstname" size="50">
         </div>
         <div class="input-group last-name">
           <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-          <input type="text" class="form-control last-name" placeholder="Last Name" name="last-name" ng-model="suLastname" size="50">
+          <input type="text" class="form-control last-name" placeholder="Last Name" name="last-name" ng-model="profileLastname" size="50">
         </div>
         <div class="input-group nickName">
           <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-            <input type="text" class="form-control" placeholder="Nick Name" name="nickname" ng-model="suNickname" autofocus="true" ng-minlength="4" ng-maxlength="32" ng-required="false">
+            <input type="text" class="form-control" placeholder="Nick Name" name="nickname" ng-model="profileNickname" autofocus="true" ng-minlength="4" ng-maxlength="32" ng-required="false">
             <div class="errors" ng-class="{active: registerForm.nickname.$invalid && registerForm.nickname.$dirty}">
               <div class="error ng-hide" ng-show="registerForm.nickname.$error.minlength">
                   <p>Nick-name is too short! Minimal nickname length is 4.</p>

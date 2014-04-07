@@ -11,9 +11,8 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
     $scope.profile = $cookieStore.get('profileTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
-    //$scope.inquireInfo = function () {
       $http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
-        '&targetId=' + $scope.playerId + '&accessSignature=' + $scope.profile.accessSignature)
+        '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
           .success(function (data) {
               //$rootScope.infoProfile = data;
               $scope.infoProfile = data;
@@ -22,31 +21,16 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           .then(function () {
               $scope.inquireInfoResponse();
           });
-      //};
 
       $scope.inquireInfoResponse = function () {
-          //if $rootScope.historyProfile.error exists
           if ($cookieStore.get('infoProfileTag').error) {
-              $window.alert($rootScope.infoProfile.error);
+              $window.alert($cookieStore.get('infoProfileTag').error);
               $cookieStore.get('infoProfileTag').error = ""
-          /*} else if ($rootScope.infoProfile.token) {
-              $rootScope.infoProfile.playerId = $scope.targetPlayerId;
-              $rootScope.infoProfile.gameId = $scope.targetGameId;
-              $window.alert("Your token number is: " + $rootScope.infoProfile.token + "; Your high score is: " + $rootScope.infoProfile.highscore + ".")
-          } else {
-              $rootScope.infoProfile.playerId = $scope.targetPlayerId;
-              $rootScope.infoProfile.gameId = $scope.targetGameId;
-              $window.alert("This player's high score is: " + $rootScope.infoProfile.highscore) */
           }
       };
 
-
-      //$scope.inquireHistoryDetail = function () {
-      /*$http.get('http://2.smg-server.appspot.com/history?playerId=' + $rootScope.profile.playerId + '&gameId=' + $scope.targetGameId +
-        '&targetId=' + $rootScope.profile.playerId + '&accessSignature=' + $rootScope.profile.accessSignature) */
       $http.get('http://2.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
-        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $scope.profile.accessSignature)
-      //$http.get('../historys/' + $scope.targetPlayerId + '/' + $scope.targetGameId + ".json")
+        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
         .success(function (data) {
             //$rootScope.historyDetailProfile = data;
             $scope.historyDetailProfile = data;
@@ -55,63 +39,64 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
         .then(function () {
             $scope.inquireHistoryDetailResponse();
         });
-      //};
 
       $scope.inquireHistoryDetailResponse = function () {
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
               $window.alert($cookieStore.get('historyDetailProfileTag').error);
               $cookieStore.put('historyDetailProfileTag', "");
-              //$rootScope.historyDetailProfile = ""
           }
-          // this is only when playerId=targetId
           else {
-                //$rootScope.playerId = $scope.targetPlayerId;
-                //$rootScope.gameId = $scope.targetGameId;
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
-                //$rootScope.histories = $rootScope.historyDetailProfile.history;
-                //$location.path('/history:gameId')
           }
       };
 
-  }]);
+}]);
   
-playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', '$window', '$routeParams', '$location', '$http', '$cookieStore',
-  function($scope, $rootScope, Profile, $window, $routeParams, $location, $http, $cookieStore) {
+playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
+  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
 
-    $scope.login = function () {
-    //$scope.profile = Profile.get({playerId: $routeParams.playerId});
-        //$rootScope.profile = Profile.get({playerId: $scope.logPlayerId, password: $scope.logPassword});
-        
-      $http.get('http://2.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
-        .success(function(data) {
-            $rootScope.profile = data;
-            $cookieStore.put('profileTag', data);
-        })
-        .then(function() {
-          $scope.loginResponse();
-      });
-  };
+    $scope.params = $routeParams;
+    $http.get('http://2.smg-server.appspot.com/players/' + $routeParams.userId + '?password=' + $routeParams.password)
+    .success(function(data) {
+      //$rootScope.profile = data;
+      $cookieStore.put('profileTag', data);
+    })
+    .then(function() {
+      $scope.loginResponse();
+    });
 
   $scope.loginResponse = function () {
-    if ($scope.profile.error == "WRONG_PASSWORD") {
+    if ($cookieStore.get('profileTag').error == "WRONG_PASSWORD") {
       $window.alert("Failed. Wrong password.");
-      $rootScope.profile.error = ""
-    } else if ($scope.profile.error == "WRONG_PLAYER_ID") {
+      $cookieStore.get('profileTag').error = "";
+      //$rootScope.profile.error = "";
+    } else if ($cookieStore.get('profileTag').error == "WRONG_PLAYER_ID") {
       $window.alert("Failed. Wrong player ID.");
-      $rootScope.profile.error = ""
-    } else if ($scope.profile.accessSignature != null) {
-      $rootScope.profile.playerId = $scope.logPlayerId;
-      $cookieStore.put('playerIdTag', $scope.logPlayerId);
-      $rootScope.profile.password = $scope.logPassword;
-      $cookieStore.put('passwordTag', $scope.logPassword);
-      $http.get('http://2.smg-server.appspot.com/playerInfo?playerId=' + $scope.profile.playerId + '&targetId=' + $scope.profile.playerId
-        + '&accessSignature=' + $scope.profile.accessSignature)
+      $cookieStore.get('profileTag').error = "";
+      //$rootScope.profile.error = ""
+    } else if ($cookieStore.get('profileTag').accessSignature != null) {
+      //$rootScope.profile.playerId = $routeParams.userId;
+      $cookieStore.put('playerIdTag', $routeParams.userId);
+      $scope.playerId = $cookieStore.get('playerIdTag');
+      //$rootScope.profile.password = $routeParams.password;
+      $cookieStore.put('passwordTag', $routeParams.password);
+      $scope.password = $cookieStore.get('passwordTag');
+      $http.get('http://2.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId
+        + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
         .success(function(data) {
-          $rootScope.profile.email = data.email;
-          $rootScope.profile.firstname = data.firstname;
-          $rootScope.profile.lastname = data.lastname;
-          $rootScope.profile.nickname = data.nickname;
+          $cookieStore.put('emailTag', data.email);
+          $cookieStore.put('firstnameTag', data.firstname);
+          $cookieStore.put('lastnameTag', data.lastname);
+          $cookieStore.put('nicknameTag', data.nickname);
+          $scope.email = $cookieStore.get('emailTag');
+          $scope.firstname = $cookieStore.get('firstnameTag');
+          $scope.lastname = $cookieStore.get('lastnameTag');
+          $scope.nickname = $cookieStore.get('nicknameTag');
+          //$rootScope.profile.email = data.email;
+          //$rootScope.profile.firstname = data.firstname;
+          //$rootScope.profile.lastname = data.lastname;
+          //$rootScope.profile.nickname = data.nickname;
         })
         .then(function() {
           $scope.loadProfile();
@@ -119,67 +104,19 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
     };
   };
 
+  //$scope.playerId = $cookieStore.get('playerIdTag');
+  //$scope.password = $cookieStore.get('passwordTag');
+
   $scope.loadProfile = function () {
-    if ($scope.profile.error == "WRONG_ACCESS_SIGNATURE") {
+    if ($cookieStore.get('profileTag').error == "WRONG_ACCESS_SIGNATURE") {
       $window.alert("Failed. Wrong access signature.");
-      $rootScope.profile.error = ""
-    } else if ($scope.profile.nickname != null) {
-      $location.path("/profile") 
+      $cookieStore.get('profileTag').error = "";
+      //$rootScope.profile.error = ""
     };
-  };
-
-  $scope.edit = function () {
-      if ($scope.profilePassword == null) 
-      $scope.profilePassword = $scope.profile.password; 
-      if ($scope.profileFirstname == null) 
-      $scope.profileFirstname = $scope.profile.firstname;     
-      if ($scope.profileLastname == null) 
-      $scope.profileLastname = $scope.profile.lastname;   
-      if ($scope.profileNickname == null) 
-      $scope.profileNickname = $scope.profile.nickname;
-    if ($scope.profileEmail == null)
-      $scope.profileEmail = $scope.profile.email;
-    if ($scope.profilePicUrl == null)
-        $scope.profilePicUrl = $scope.profile.pictureUrl;
-    $scope.newProfile = {
-      "playerId" : $scope.profile.playerId,
-      "accessSignature" : $scope.profile.accessSignature,
-      "password" : $scope.profilePassword,
-      "firstname" : $scope.profileFirstname,
-      "lastname" : $scope.profileLastname,
-      "nickname" : $scope.profileNickname,
-      "email" : $scope.profileEmail,
-      "pictureUrl" : $scope.profilePicUrl
-    };
-    $scope.newProfileStr = angular.toJson($scope.newProfile);
-      //Profile.save({playerId:$scope.profile.playerId}, newProfileStr)
-      $http.put('http://2.smg-server.appspot.com/players/' + $scope.profile.playerId, $scope.newProfileStr)
-        .success(function(data) {
-          $scope.editResponse = data;
-        })
-        .then(function() {
-          $scope.etResponse();
-        });
-  };
-
-  $scope.etResponse = function() {
-      if ($scope.editResponse.success == "UPDATED_PLAYER") {
-            $window.alert("Edit profile successfully!");
-            $location.path("/profile");
-            //The profile should receive from the server when the API supports all the attributes -- Pinji
-            $rootScope.profile = $scope.newProfile;
-    } else if ($scope.editResponse.error == "WRONG_ACCESS_SIGNATURE") {
-      $window.alert("Failed. Wrong access signature.");
-      $scope.editResponse.error = ""
-    } else if ($scope.editResponse.error == "WRONG_PLAYER_ID") {
-      $window.alert("Failed. Wrong player ID.");
-      $scope.editResponse.error = ""
-    } 
   };
 
   $scope.delete = function() {
-    //var deleteResponse = Profile.delete({playerId:$scope.profile.playerId, accessSignature:$scope.profile.accessSignature});
-    $http.delete('http://2.smg-server.appspot.com/players/' + $scope.profile.playerId + '?accessSignature=' + $scope.profile.accessSignature)
+    $http.delete('http://2.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('profileTag').accessSignature)
         .success(function(data) {
             $scope.deleteResponse = data;
         })
@@ -191,7 +128,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
   $scope.dltResponse = function() {
       if ($scope.deleteResponse.success == "DELETED_PLAYER") {
             $window.alert("Delete account successfully!");
-            $location.path("/login");
+            $location.url("/login");
     } else if ($scope.deleteResponse.error == "WRONG_ACCESS_SIGNATURE") {
       $window.alert("Failed. Wrong access signature.");
       $scope.deleteResponse.error = ""
@@ -202,33 +139,83 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', 
   };
 
   $scope.logout = function() {
-    $rootScope = {};
-    $location.path("/login");
+    $scope = {};
+    $location.url("/login");
   };
+}]);
 
-  /* $scope.init = function() {
-    if ((!($location.path() == "/login" || $location.path() == "/signup")) && angular.isUndefined($scope.profile.accessSignature)) {
-      $rootScope.loginFail = true;
-      $location.path("/login");
-      $rootScope.$apply();
-    }
+playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
+  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
+    $scope.playerId = $cookieStore.get('playerIdTag'); 
+    $scope.password = $cookieStore.get('passwordTag');   
+    if ($scope.profileFirstname == null)
+      $scope.profileFirstname = $cookieStore.get('firstnameTag');
+      //$scope.profileFirstname = $scope.profile.firstname;
+    if ($scope.profileLastname == null)
+      $scope.profileLastname = $cookieStore.get('lastnameTag');
+      //$scope.profileLastname = $scope.profile.lastname;   
+    if ($scope.profileNickname == null)
+      $scope.profileNickname = $cookieStore.get('nicknameTag');
+      //$scope.profileNickname = $scope.profile.nickname;
+    if ($scope.profileEmail == null)
+      $scope.profileEmail = $cookieStore.get('emailTag');
+      //$scope.profileEmail = $scope.profile.email;
+    if ($scope.profilePicUrl == null)
+      //$scope.profilePicUrl = $scope.profile.pictureUrl;
+    $scope.edit = function () {
+      if ($scope.profilePassword == null) 
+        $scope.profilePassword = $cookieStore.get('passwordTag');
+        //$scope.profilePassword = $scope.profile.password; 
+      $scope.newProfile = {
+        "playerId" : $scope.playerId,
+        //"accessSignature" : $scope.profile.accessSignature,
+        "accessSignature" : $cookieStore.get('profileTag').accessSignature,
+        "password" : $scope.profilePassword,
+        "firstname" : $scope.profileFirstname,
+        "lastname" : $scope.profileLastname,
+        "nickname" : $scope.profileNickname,
+        "email" : $scope.profileEmail,
+        "pictureUrl" : $scope.profilePicUrl
+      };
+      $scope.newProfileStr = angular.toJson($scope.newProfile);
+        $http.put('http://2.smg-server.appspot.com/players/' + $scope.playerId, $scope.newProfileStr)
+        .success(function(data) {
+          $scope.editResponse = data;
+        })
+        .then(function() {
+          $scope.etResponse();
+        });
+      };
+
+  $scope.etResponse = function() {
+    if ($scope.editResponse.success == "UPDATED_PLAYER") {
+      $window.alert("Edit profile successfully!");
+      $location.url("/profile/" + $scope.playerId + '?password=' + $scope.password);
+    } else if ($scope.editResponse.error == "WRONG_ACCESS_SIGNATURE") {
+      $window.alert("Failed. Wrong access signature.");
+      $scope.editResponse.error = ""
+    } else if ($scope.editResponse.error == "WRONG_PLAYER_ID") {
+      $window.alert("Failed. Wrong player ID.");
+      $scope.editResponse.error = ""
+    } 
   };
-  $scope.init();  */
-  }]);
+}]);
 
-playerControllers.controller('GameListCtrl', ['$scope', '$http',
-  function($scope, $http) {
+playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
+  function($scope, $http, $cookieStore) {
+    $scope.playerId = $cookieStore.get('playerIdTag');
+    $scope.password = $cookieStore.get('passwordTag');
     $http.get('http://2.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
         });
     $scope.orderProp = 'gameName';
-  }]);
+}]);
 
-playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', 
-  function($scope, $routeParams, $http, $window, $rootScope) {
+playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', '$cookieStore',
+  function($scope, $routeParams, $http, $window, $rootScope, $cookieStore) {
     $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
-    //$scope.gameStats = function () {
+    $scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
     $http.get('http://2.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
     .success(function(data) {
       $scope.game = data;
@@ -241,7 +228,6 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
         $scope.game.error = ""
       }
     });
-    //}
 
     $scope.rate = function () {
       $rootScope.createRate = {
@@ -281,10 +267,13 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
       };
     };
     
-  }]);
+}]);
 
 playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http', '$window', '$cookieStore',
   function($scope, $routeParams, $http, $window, $cookieStore) {
+    $scope.gameId = $cookieStore.get('currentGameIdTag');
+    $scope.playerId = $cookieStore.get('playerIdTag');
+    $scope.accessSignature = $cookieStore.get('profileTag').accessSignature;
     $http.get('http://2.smg-server.appspot.com/games/' + $routeParams.gameId)
     .success(function(data) {
       $scope.gamedetail = data;
@@ -297,8 +286,8 @@ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http
         $scope.gamedetail.error = ""
       }
     });
-  }]);
-
+}]);
+/*
 playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location',
   function($scope, $rootScope, $routeParams, $http, $window, $location) {
   $scope.signup = function () {
@@ -314,7 +303,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
 
     $http({
         method: 'POST',
-        url: 'http://2.smg-server.appspot.com/players',
+        url: 'http://3.smg-server.appspot.com/players',
         data: $scope.createProfileStr,
         headers: {'Content-Type': 'application/json'}
     })
@@ -338,7 +327,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
       $rootScope.profile = $rootScope.createProfile;
       $rootScope.profile.playerId = $scope.signupResponse.playerId;
       $rootScope.profile.accessSignature = $scope.signupResponse.accessSignature;
-            $location.path("/profile") 
+            $location.url("/profile/" + $rootScope.profile.playerId + '?password=' + $rootScope.profile.password) 
     };
     };
-  }]);
+}]); */

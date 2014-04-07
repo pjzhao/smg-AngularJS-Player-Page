@@ -1,4 +1,4 @@
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row-fluid">
       <div class="row">
         <h3>My Information </h3>
@@ -9,27 +9,27 @@
             <tr>
                 <th><span>Player Id</span></th>
                 <td> 
-                  <span>{{profile.playerId}}</span></td> 
+                  <span>{{playerId}}</span></td> 
             </tr>
             <tr>
                 <th><span>First Name</span></th>
                 <td> 
-                  <span>{{profile.firstname}}</span></td>
+                  <span>{{firstname}}</span></td>
             </tr>
             <tr>
                 <th><span>Last Name</span></th>
                 <td> 
-                  <span>{{profile.lastname}}</span></td>
+                  <span>{{lastname}}</span></td>
             </tr>                        
             <tr>
                 <th><span>Nickname</span></th>
                 <td> 
-                  <span>{{profile.nickname}}</span></td>
+                  <span>{{nickname}}</span></td>
             </tr>
             <tr>            
                 <th><span>Email</span></th> 
                 <td> 
-                  <span>{{profile.email}}</span></td>                                                            
+                  <span>{{email}}</span></td>                                                            
             </tr>                                
           </table>
         </div>
@@ -41,8 +41,8 @@
       </div>
       <hr />
       <div class="row">
-        <a href="/editprofile"><button type="button">Edit</button></a>
-        <a href="/choosegame"><button type="button">Choose Game</button></a>
+        <a href="#/editprofile"><button type="button">Edit</button></a>
+        <a href="#/choosegame"><button type="button">Choose Game</button></a>
         <button type=button ng-click='delete()'>Delete My Account</button>
         <button type=button ng-click='logout()'>Log Out</button>
       </div>       
