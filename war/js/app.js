@@ -53,6 +53,10 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
         templateUrl: "/partials/game-detail.html",
         controller: "GameDetailCtrl"
       }).
+      when("/opponent/:opponentId", {
+          templateUrl: "/partials/opponent.html",
+          controller: "OpponentCtrl"
+        }).
       otherwise({
         redirectTo: "/login"
       });

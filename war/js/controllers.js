@@ -5,7 +5,7 @@
 var playerControllers = angular.module('playerControllers', []);
 
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http',
-  function ($scope, $rootScope, $window, $location, $http) {
+    function ($scope, $rootScope, $window, $location, $http) {
 	$http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.profile.playerId + '&gameId=' + $rootScope.currentGameId + 
 			'&targetId=' + $rootScope.profile.playerId + '&accessSignature=' + $rootScope.profile.accessSignature)
 			.success(function (data) {
@@ -45,7 +45,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
 }]);
   
 playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', 'Profile', '$window', '$routeParams', '$location', '$http',
-                                             function($scope, $rootScope, Profile, $window, $routeParams, $location, $http) {
+    function($scope, $rootScope, Profile, $window, $routeParams, $location, $http) {
 
 	$scope.login = function () {
 		$http.get('http://2.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
@@ -178,7 +178,7 @@ playerControllers.controller('GameListCtrl', ['$scope', '$rootScope', '$http',
 }]);
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', 
-                                               function($scope, $routeParams, $http, $window, $rootScope) {
+    function($scope, $routeParams, $http, $window, $rootScope) {
 
 	$http.get('http://2.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
 	.success(function(data) {
@@ -288,3 +288,59 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
 		};
 	};
 }]);
+
+opponentControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$routeParams',
+    function ($scope, $rootScope, $window, $location, $http, $routeParams) {
+
+        $http.get('http://2.smg-server.appspot.com/playerInfo?playerId=' + $scope.profile.playerId + '&targetId=' + $routeParams.opponentId + '&accessSignature=' + $scope.profile.accessSignature)
+        .success(function (data) {
+            $rootScope.opponentInfo = data;
+        })
+        .then(function () {
+            $scope.loadInfo();
+        });
+
+        $loadInfo = function () {
+            if ($rootScope.opponentInfo.error) {
+                $window.alert($rootScope.opponentInfo.error);
+                $rootScope.opponentInfo.error = ""
+            }
+        };
+
+        $http.get('http://2.smg-server.appspot.com/playerGame?playerId=' + $rootScope.profile.playerId + '&gameId=' + $rootScope.currentGameId +
+                '&targetId=' + $routeParams.opponentId + '&accessSignature=' + $rootScope.profile.accessSignature)
+        .success(function (data) {
+            $rootScope.opponentGameInfo = data;
+        })
+        .then(function () {
+            $rootScope.oppInquireResponse();
+        });
+
+        $scope.oppInquireResponse = function () {
+            if ($rootScope.opponentGameInfo.error) {
+                $window.alert($rootScope.opponentGameInfo.error);
+                $rootScope.opponentGameInfo.error = ""
+            }
+        };
+
+        $http.get('http://2.smg-server.appspot.com/history?playerId=' + $rootScope.profile.playerId + '&targetId=' + $routeParams.opponentId +
+        '&gameId=' + $rootScope.currentGameId + '&accessSignature=' + $rootScope.profile.accessSignature)
+        .success(function (data) {
+            $rootScope.oppHistoryProfile = data;
+        })
+        .then(function () {
+            $scope.oppInquireHistoryResponse();
+        });
+
+        $scope.oppInquireHistoryResponse = function () {
+            // if historyDetailProfile.error exists
+            if ($rootScope.oppHistoryProfile.error) {
+                $window.alert($rootScope.historyDetailProfile.error);
+                $rootScope.oppHistoryProfile = ""
+            }
+            // this is only when playerId=targetId
+            else {
+                $rootScope.oppHistories = $rootScope.oppHistoryProfile.history;
+            }
+        };
+    F}]);
