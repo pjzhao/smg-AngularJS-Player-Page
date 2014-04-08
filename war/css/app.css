@@ -291,3 +291,11 @@ body {
 .sortSelect {
     width: 145px;
 }
+
+.hide {
+    display: none;
+}
+
+.id-group {
+    margin-right: 5px;
+}

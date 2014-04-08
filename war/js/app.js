@@ -3,6 +3,7 @@
 /* App Module */
 
 var playerApp = angular.module("playerApp", [
+  "ngCookies",
   "ngRoute",
   "profileFilters",
   "playerControllers",
@@ -10,40 +11,38 @@ var playerApp = angular.module("playerApp", [
 ]);
 //var server = "http://1.smg-server.appspot.com/";
 
-playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
-  function($routeProvider, $locationProvider, $httpProvider) {
-    $locationProvider.html5Mode(true);
+playerApp.config(["$routeProvider", "$httpProvider",
+  function($routeProvider, $httpProvider) {
+   //$locationProvider.html5Mode(true);
     
     $routeProvider.
       when("/login", {
-        templateUrl: "/partials/login.html",
-        controller: "ProfileCtrl"
+        templateUrl: "/partials/login.html"
+        //controller: "ProfileCtrl"
       }).        
       when("/signup", {
         templateUrl: "/partials/signup.html",
         controller: "SignUpCtrl"
       }).       
-      when("/profile", {
+      when("/profile/:userId", {
         templateUrl: "/partials/view-profile.html",
         controller: "ProfileCtrl"
       }).    
+      when("/user/:userId", {
+        templateUrl: "/partials/view-profile.html",
+        controller: "UserCtrl"
+      }).  
+      when("/opponent/:opponentId", {
+         templateUrl: "/partials/opponent.html",
+         controller: "OpponentCtrl"
+     }).
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
-        controller: "ProfileCtrl"
-      }).
-      when("/inquiry", {
-          templateUrl: "/partials/inquiry.html",
-          //controller: "HistoryListCtrl"
-          controller: "HistoryDetailCtrl"
+        controller: "EditCtrl"
       }).
       /*when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).*/
-      // if server support history list
-      /*when("/history", {
-        templateUrl: "/partials/history-list.html",
-        controller: "HistoryDetailCtrl"
       }).*/
       when("/history/:gameId", {
       //  when("/history:gameId", {
@@ -62,8 +61,12 @@ playerApp.config(["$routeProvider", "$locationProvider", "$httpProvider",
         templateUrl: "/partials/game-detail.html",
         controller: "GameDetailCtrl"
       }).
+      when("/analysis", {
+        templateUrl: "/partials/history-analysis.html",
+        controller: "AnalysisCtrl"
+      }).
       otherwise({
-        redirectTo: "/login"
+        redirectTo: "/choosegame"
       });
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];

@@ -1,43 +1,40 @@
 <title>Game List</title>
 <div id="wrapper">
 
-	<!-- Sidebar -->
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li>Search
-			<input ng-model="query" class="narrow"><br></li>
-			<br>
-			<li>Sort by
-			
-      			<select ng-model="orderProp" class="sortSelect narrow">
-          		<option value="gameName">Name</option>
-          		<option value="Developer">Developer</option>
-          		<option value="postDate">Post Date</option>
-          		<!--<option value="rate">Rate</option> -->
-      			</select>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li>Search
+      <input ng-model="query" class="narrow"><br></li>
+      <br>
+      <li>Sort by
+
+            <select ng-model="orderProp" class="sortSelect narrow">
+              <option value="gameName">Name</option>
+              <option value="Developer">Developer</option>
+              <option value="postDate">Post Date</option>
+              <!--<option value="rate">Rate</option> -->
+            </select>
       </li>
-  		<br>
-  		<li><a href="/profile"><button type="button" class="narrow">My Profile</button></a></li>
-		</ul>
-	</div>
-	<!-- Keep all page content in the page-content inset div-->
-	<div id="page-content-wrapper">
-		<ul class="games">
-			<li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
-         		<!--<img ng-src="{{game.icon[0]}}">
-          		<a href="/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.screenshots[0]}}"></a>
-          		<h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
-          		<p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
-        		<p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
-          <a href="/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon}}"></a>
-          <p><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
+      <br>
+      <li><a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><button type="button" class="narrow">My Profile</button></a></li>
+    </ul>
+  </div>
+  <!-- Keep all page content in the page-content inset div-->
+  <div id="page-content-wrapper">
+    <ul class="games">
+      <li ng-repeat="game in games | filter:query | orderBy:orderProp" class="thumbnail">
+            <!--<img ng-src="{{game.icon[0]}}">
+              <a href="/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.screenshots[0]}}"></a>
+              <h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
+              <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
+            <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
+          <a href="#/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" ></a>
+          <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
           <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
           <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p><br>
           <!--<p><img ng-src="{{game.screenshots[0]}}" class="thumb"></p> -->
       </li>
     </ul>
-	</div>
+  </div>
 </div>
-
-
-
