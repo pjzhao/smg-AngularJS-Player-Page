@@ -24,6 +24,13 @@
                	</div>
            	</div>
     	</div>
+        <div class="input-group pw">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input type="password" class="form-control pw" placeholder="Re-enter your password" name="pw" ng-model="pw" pw-check="suPassword">
+            <div class="msg-block" ng-show="registerForm.pw.$error">
+                <span class="msg-error" ng-show="registerForm.pw.$error.pwmatch">Passwords don't match.</span>
+            </div>
+        </div>
         <div class="input-group first-name">
        		<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
      			<input type="text" class="form-control first-name" placeholder="First Name" name="first-name" ng-model="suFirstname" size="50">

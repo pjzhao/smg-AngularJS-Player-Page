@@ -1,0 +1,85 @@
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="row">
+            <h1>Opponent's info. page </h1>
+        </div>
+        <div class="row">
+            <div class="col col-75">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><span>Player Id</span></th>
+                        <td>
+                            <span>{{oppProfile.playerId}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>First Name</span></th>
+                        <td>
+                            <span>{{oppProfile.firstname}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Last Name</span></th>
+                        <td>
+                            <span>{{oppProfile.lastname}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Nickname</span></th>
+                        <td>
+                            <span>{{oppProfile.nickname}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Email</span></th>
+                        <td>
+                            <span>{{oppProfile.email}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col col-offset-10">
+            </div>
+            <div class="col col-25">
+                <img ng-src={{oppProfile.pictureUrl}} class="profile-img" />
+            </div>
+        </div>
+        <hr />
+        <h3>{{gamedetail.gameName}} Play History</h3>
+        <div class="row">
+            <div class="col col-offset-10"></div>
+            <div class="col col-10">Tokens: {{oppInfoProfile.token}}</div>
+            <div class="col col-10">Score: {{oppInfoProfile.score}}</div>
+            <div class="col col-10">Win: {{oppInfoProfile.win}}</div>
+            <div class="col col-10">Lose: {{oppInfoProfile.lost}}</div>
+            <div class="col col-10">Draw: {{oppInfoProfile.draw}} </div>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th><span>Date</span></th>
+                <th><span>Result</span></th>
+                <th><span>Token</span></th>
+                <th><span>Score</span></th>
+                <th><span>Opponent Id</span></th>
+            </tr>
+            <tr ng-repeat="oppHistory in oppHistories">
+                <td>
+                    <span>{{oppHistory.date}}</span>
+                </td>
+                <td>
+                    <span>{{oppHistory.result}}</span>
+                </td>
+                <td>
+                    <span>{{oppHistory.tokenChange}}</span>
+                </td>
+                <td>
+                    <span>{{oppHistory.score}}</span>
+                </td>
+                <td>
+                    <span ng-repeat="opponentId in oppHistory.opponentIds">{{opponentId}}  </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

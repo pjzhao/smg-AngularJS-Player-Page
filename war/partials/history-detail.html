@@ -30,7 +30,7 @@
             <td> 
               <span>{{history.score}}</span></td>      
             <td>
-              <span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span>
+                <a href="/opponent/{{opponentId}}"><span ng-repeat="opponentId in history.opponentIds">{{opponentId}}  </span></a>
             </td>
         </tr>
     </table>
