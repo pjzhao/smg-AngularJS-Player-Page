@@ -32,6 +32,10 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/view-profile.html",
         controller: "UserCtrl"
       }).  
+      when("/opponent/:opponentId", {
+         templateUrl: "/partials/opponent.html",
+         controller: "OpponentCtrl"
+     }).
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
         controller: "EditCtrl"

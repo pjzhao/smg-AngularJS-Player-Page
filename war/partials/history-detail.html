@@ -6,10 +6,11 @@
     <div class="row">
       <div class="col col-offset-10"></div>
       <div class="col col-10">Tokens: {{infoProfile.token}}</div>    
-      <div class="col col-10">Score: {{infoProfile.score}}</div>   
+      <div class="col col-10">Rank: {{infoProfile.rank}}</div>
       <div class="col col-10">Win: {{infoProfile.win}}</div>
       <div class="col col-10">Lose: {{infoProfile.lost}}</div>    
       <div class="col col-10">Draw: {{infoProfile.draw}} </div>
+      <div class="col col-20">Highest Score: {{infoProfile.score}}</div> 
     </div>
 
     <table class="table table-bordered">
@@ -30,7 +31,7 @@
             <td> 
               <span>{{history.score}}</span></td>      
             <td>
-              <span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span>
+              <span class="id-group" ng-repeat = "opponentId in history.opponentIds"><a ng-href="#/opponent/{{opponentId}}">{{opponentId}}</a></span>
             </td>
         </tr>
     </table>

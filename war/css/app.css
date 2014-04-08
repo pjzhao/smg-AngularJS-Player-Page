@@ -295,3 +295,7 @@ body {
 .hide {
     display: none;
 }
+
+.id-group {
+    margin-right: 5px;
+}
