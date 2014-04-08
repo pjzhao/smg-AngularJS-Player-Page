@@ -291,3 +291,7 @@ body {
 .sortSelect {
     width: 145px;
 }
+
+.hide {
+    display: none;
+}
