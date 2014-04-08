@@ -8,17 +8,17 @@
 				<p>Height: {{gamedetail.height}}, Width: {{gamedetail.width}}</p><br>
 				<p>Posted on: {{gamedetail.postDate}}</p><br>
 				<p>Description: {{gamedetail.description}}</p><br>
-				<p>Url: {{gamedetail.url}}</p><br>
+				<p><a ng-href="{{gamedetail.url}}" target="_blank">Url: {{gamedetail.url}}</a></p><br>
 			</ul>
 			<hr>
 			<!-- <p><span>Mode choose: </span><br> -->
 			<button ng-click="">Play AI</button>
 			<button ng-click="">Pass and Play</button>
-			<button ng-click=""><a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{currentGameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">
+			<button ng-click=""><a ng-href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{currentGameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">
 				Auto Matched</a></button>
-			<button ng-click=""><a href="#/choosegame">Return</a></button>
-			<button ng-click=""><a href="#/history/{{currentGameId}}">History</a></button>
-			<button ng-click=""><a href="#/choosegamestats/{{currentGameId}}">Game Stats</a></button></p>
+			<a ng-href="#/choosegame"><button ng-click="">Return</button></a>
+			<a ng-href="#/history/{{currentGameId}}"><button ng-click="">History</button></a>
+			<a ng-href="#/choosegamestats/{{currentGameId}}"><button ng-click="">Game Stats</button></a>
 	    </div>    
 	</div>
 </div>

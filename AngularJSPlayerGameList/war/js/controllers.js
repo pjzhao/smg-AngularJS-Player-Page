@@ -231,15 +231,19 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     });
     $scope.rate = function () {
       $scope.createRate = {
+        "gameId" : $scope.currentGameId,
+        "playerId" : $scope.playerId,
+        "accessSignature" : $cookieStore.get('profileTag').accessSignature,
         "rating" : $scope.rating
       };
       $scope.createRateStr = angular.toJson($scope.createRate);
 
       $http({
         method: 'POST',
-        url: 'http://3.smg-server.appspot.com/gameinfo/rating?gameId=' + $scope.currentGameId + 
-        '&playerId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature,
-        data: $rootScope.createRateStr,
+        /*url: 'http://3.smg-server.appspot.com/gameinfo/rating?gameId=' + $scope.currentGameId + 
+        '&playerId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature,*/
+        url: 'http://smg-server.appspot.com/gameinfo/rating',
+        data: $scope.createRateStr,
         headers: {'Content-Type': 'application/json'}
       })
       .success(function(data) {

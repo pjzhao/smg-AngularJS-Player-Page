@@ -29,7 +29,7 @@
               <h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
               <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
             <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
-          <a href="#/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon}}"></a>
+          <a href="#/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" ></a>
           <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
           <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
           <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p><br>
