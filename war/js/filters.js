@@ -14,10 +14,10 @@ angular.module('profileFilters', []).filter('matchStatus', function() {
   };
 });
 
-angular.module('imageFilter', []).filter('imageUrl', function(){
+angular.module('profileFilters', []).filter('gameIcon', function(){
 	return function(input){
 		if(input == null){
-			return "../img/images.jpg"
+			return "../img/default_game_icon.jpg"
 		}
 	};
 });
