@@ -30,11 +30,12 @@
             <td> 
               <span>{{history.score}}</span></td>      
             <td>
-              <a href="/opponent/{{opponentId}}"><span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span></a>
+              <span ng-repeat = "opponentId in history.opponentIds">{{opponentId}}  </span>
             </td>
         </tr>
     </table>
     <div class="row">
+      	<!--<a href="/profile"><button type="button">Back</button></a> -->
       	<a href="/choosegamedetail/{{currentGameId}}"><button type="button">Play Again</button></a>
     </div>
   </div>
