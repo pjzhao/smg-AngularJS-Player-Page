@@ -14,7 +14,7 @@
         </div>
       <div class="input-group password">
           <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-            <input type="text" class="form-control password" placeholder="Password" name="password" ng-model="profilePassword" ng-minlength="4" ng-maxlength="16" ng-required="false">
+            <input type="text" class="form-control password" placeholder="Password" name="password" ng-model="profilePassword" ng-minlength="4" ng-maxlength="16" ng-required="true">
             <div class="errors" ng-class="{active: registerForm.password.$invalid && registerForm.password.$dirty}">
               <div class="error ng-hide" ng-show="registerForm.password.$error.minlength">
                   <p>Password is too short! Minimal nickname length is 4.</p>

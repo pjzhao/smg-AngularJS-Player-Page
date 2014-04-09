@@ -11,8 +11,10 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
     $scope.profile = $cookieStore.get('profileTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
-      $http.get('http://3.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
-        '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
+      //Use fake JSON data for testing - Pinji
+      /*$http.get('http://3.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+        '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+          $http.get('../analysis/token.json')
           .success(function (data) {
               //$rootScope.infoProfile = data;
               $scope.infoProfile = data;
@@ -25,12 +27,14 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireInfoResponse = function () {
           if ($cookieStore.get('infoProfileTag').error) {
               $window.alert($cookieStore.get('infoProfileTag').error);
-              $cookieStore.get('infoProfileTag').error = ""
+              $cookieStore.put('infoProfileTag', "");
           }
       };
 
-      $http.get('http://3.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
-        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
+      //Use fake JSON data for testing - Pinji
+      /*$http.get('http://3.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+        $http.get('../analysis/history.json')
         .success(function (data) {
             //$rootScope.historyDetailProfile = data;
             $scope.historyDetailProfile = data;
@@ -48,106 +52,91 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           }
           else {
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
+                $scope.histories =  $cookieStore.get('historiesTag');
           }
       };
 
 }]);
+
+
+playerControllers.controller('UserCtrl', ['$scope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
+  function($scope, $window, $routeParams, $location, $http, $cookieStore) {
+    $scope.readOnly = true;
+    $scope.params = $routeParams;
+    $scope.myId = $cookieStore.get('playerIdTag');
+    $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $scope.myId + '&targetId=' + $routeParams.userId
+      + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+    .success(function(data) {
+      $scope = data;
+      $scope.playerId = $routeParams.userId;
+    })
+    .then(function() {
+      if ($scope.error) {
+        $window.alert($scope.error);
+      };
+    });
+}]);
+
   
 playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
   function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
 
     $scope.params = $routeParams;
-    $http.get('http://3.smg-server.appspot.com/players/' + $routeParams.userId + '?password=' + $routeParams.password)
-    .success(function(data) {
-      //$rootScope.profile = data;
-      $cookieStore.put('profileTag', data);
-    })
-    .then(function() {
-      $scope.loginResponse();
-    });
 
-  $scope.loginResponse = function () {
-    if ($cookieStore.get('profileTag').error == "WRONG_PASSWORD") {
-      $window.alert("Failed. Wrong password.");
-      $cookieStore.get('profileTag').error = "";
-      //$rootScope.profile.error = "";
-    } else if ($cookieStore.get('profileTag').error == "WRONG_PLAYER_ID") {
-      $window.alert("Failed. Wrong player ID.");
-      $cookieStore.get('profileTag').error = "";
-      //$rootScope.profile.error = ""
-    } else if ($cookieStore.get('profileTag').accessSignature != null) {
-      //$rootScope.profile.playerId = $routeParams.userId;
-      $cookieStore.put('playerIdTag', $routeParams.userId);
-      $scope.playerId = $cookieStore.get('playerIdTag');
-      //$rootScope.profile.password = $routeParams.password;
-      $cookieStore.put('passwordTag', $routeParams.password);
-      $scope.password = $cookieStore.get('passwordTag');
-      $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId
-        + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature)
-        .success(function(data) {
-          $cookieStore.put('emailTag', data.email);
-          $cookieStore.put('firstnameTag', data.firstname);
-          $cookieStore.put('lastnameTag', data.lastname);
-          $cookieStore.put('nicknameTag', data.nickname);
-          $scope.email = $cookieStore.get('emailTag');
-          $scope.firstname = $cookieStore.get('firstnameTag');
-          $scope.lastname = $cookieStore.get('lastnameTag');
-          $scope.nickname = $cookieStore.get('nicknameTag');
-          //$rootScope.profile.email = data.email;
-          //$rootScope.profile.firstname = data.firstname;
-          //$rootScope.profile.lastname = data.lastname;
-          //$rootScope.profile.nickname = data.nickname;
-        })
-        .then(function() {
-          $scope.loadProfile();
+    $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $routeParams.userId + '&targetId=' + $routeParams.userId
+      + '&accessSignature=' + $routeParams.accessSignature)
+      .success(function(data) {
+        
+        $scope.playerId = $routeParams.userId;
+        $scope.email = data.email;
+        $scope.firstname = data.firstname;
+        $scope.lastname = data.lastname;
+        $scope.nickname = data.nickname;
+        if (!angular.isUndefined(data.error)) {
+          $scope.error = data.error;
+        };
+        $cookieStore.put('playerIdTag', $routeParams.userId);
+        $cookieStore.put('emailTag', data.email);
+        $cookieStore.put('firstnameTag', data.firstname);
+        $cookieStore.put('lastnameTag', data.lastname);
+        $cookieStore.put('nicknameTag', data.nickname);
+        $cookieStore.put('accessSignatureTag', $routeParams.accessSignature);
+      })
+      .then(function() {
+        if ($scope.error) {
+          $window.alert("Failed." + $scope.error);
+          $scope.error = "";
+        };
       });
+
+    $scope.delete = function() {
+      $http.delete('http://3.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('accessSignatureTag'))
+          .success(function(data) {
+              $scope.deleteResponse = data;
+          })
+          .then(function() {
+            $scope.dltResponse();
+        });
     };
-  };
 
-  //$scope.playerId = $cookieStore.get('playerIdTag');
-  //$scope.password = $cookieStore.get('passwordTag');
-
-  $scope.loadProfile = function () {
-    if ($cookieStore.get('profileTag').error == "WRONG_ACCESS_SIGNATURE") {
-      $window.alert("Failed. Wrong access signature.");
-      $cookieStore.get('profileTag').error = "";
-      //$rootScope.profile.error = ""
+    $scope.dltResponse = function() {
+        if ($scope.deleteResponse.success == "DELETED_PLAYER") {
+              $window.alert("Delete account successfully!");
+              $location.url("/login");
+      } else if ($scope.deleteResponse.error == "WRONG_ACCESS_SIGNATURE") {
+        $window.alert("Failed. Wrong access signature.");
+        $scope.deleteResponse.error = ""
+      } else if ($scope.deleteResponse.error == "WRONG_PLAYER_ID") {
+        $window.alert("Failed. Wrong player ID.");
+        $scope.deleteResponse.error = ""
+      }   
     };
-  };
 
-  $scope.delete = function() {
-    $http.delete('http://3.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('profileTag').accessSignature)
-        .success(function(data) {
-            $scope.deleteResponse = data;
-        })
-        .then(function() {
-          $scope.dltResponse();
-      });
-  };
-
-  $scope.dltResponse = function() {
-      if ($scope.deleteResponse.success == "DELETED_PLAYER") {
-            $window.alert("Delete account successfully!");
-            $location.url("/login");
-    } else if ($scope.deleteResponse.error == "WRONG_ACCESS_SIGNATURE") {
-      $window.alert("Failed. Wrong access signature.");
-      $scope.deleteResponse.error = ""
-    } else if ($scope.deleteResponse.error == "WRONG_PLAYER_ID") {
-      $window.alert("Failed. Wrong player ID.");
-      $scope.deleteResponse.error = ""
-    }   
-  };
-
-  $scope.logout = function() {
-    $scope = {};
-    $location.url("/login");
-  };
 }]);
 
 playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
   function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
-    $scope.playerId = $cookieStore.get('playerIdTag'); 
-    $scope.password = $cookieStore.get('passwordTag');   
+    $scope.playerId = $cookieStore.get('playerIdTag');   
     if ($scope.profileFirstname == null)
       $scope.profileFirstname = $cookieStore.get('firstnameTag');
       //$scope.profileFirstname = $scope.profile.firstname;
@@ -163,13 +152,10 @@ playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$r
     if ($scope.profilePicUrl == null)
       //$scope.profilePicUrl = $scope.profile.pictureUrl;
     $scope.edit = function () {
-      if ($scope.profilePassword == null) 
-        $scope.profilePassword = $cookieStore.get('passwordTag');
-        //$scope.profilePassword = $scope.profile.password; 
       $scope.newProfile = {
         "playerId" : $scope.playerId,
         //"accessSignature" : $scope.profile.accessSignature,
-        "accessSignature" : $cookieStore.get('profileTag').accessSignature,
+        "accessSignature" : $cookieStore.get('accessSignatureTag'),
         "password" : $scope.profilePassword,
         "firstname" : $scope.profileFirstname,
         "lastname" : $scope.profileLastname,
@@ -190,7 +176,7 @@ playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$r
   $scope.etResponse = function() {
     if ($scope.editResponse.success == "UPDATED_PLAYER") {
       $window.alert("Edit profile successfully!");
-      $location.url("/profile/" + $scope.playerId + '?password=' + $scope.password);
+      $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $cookieStore.get('accessSignatureTag'));
     } else if ($scope.editResponse.error == "WRONG_ACCESS_SIGNATURE") {
       $window.alert("Failed. Wrong access signature.");
       $scope.editResponse.error = ""
@@ -203,8 +189,8 @@ playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$r
 
 playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
   function($scope, $http, $cookieStore) {
+    $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    $scope.password = $cookieStore.get('passwordTag');
     $http.get('http://3.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
@@ -233,15 +219,13 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
       $scope.createRate = {
         "gameId" : $scope.currentGameId,
         "playerId" : $scope.playerId,
-        "accessSignature" : $cookieStore.get('profileTag').accessSignature,
+        "accessSignature" : $cookieStore.get('accessSignatureTag'),
         "rating" : $scope.rating
       };
       $scope.createRateStr = angular.toJson($scope.createRate);
 
       $http({
         method: 'POST',
-        /*url: 'http://3.smg-server.appspot.com/gameinfo/rating?gameId=' + $scope.currentGameId + 
-        '&playerId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('profileTag').accessSignature,*/
         url: 'http://smg-server.appspot.com/gameinfo/rating',
         data: $scope.createRateStr,
         headers: {'Content-Type': 'application/json'}
@@ -277,7 +261,7 @@ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http
   function($scope, $routeParams, $http, $window, $cookieStore) {
     $scope.gameId = $cookieStore.get('currentGameIdTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    $scope.accessSignature = $cookieStore.get('profileTag').accessSignature;
+    $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $http.get('http://3.smg-server.appspot.com/games/' + $routeParams.gameId)
     .success(function(data) {
       $scope.gamedetail = data;
@@ -335,3 +319,97 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
     };
     };
 }]); */
+
+playerControllers.controller('AnalysisCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore',
+  function ($scope, $rootScope, $window, $location, $http, $cookieStore) {
+
+    $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
+    $scope.currentGameId  = $cookieStore.get('currentGameIdTag'); 
+    $http.get('../analysis/history.json')
+        .success(function (data) {
+          $scope.history = data.history;
+        })
+        .then(function () {
+          $scope.history[0].token = $scope.history[0].tokenChange;
+          $scope.tokenMax = $scope.history[0].token;
+          $scope.scoreMax = $scope.history[0].score;
+          $scope.scoreMin = $scope.history[0].score;
+          for (var i=1; i<10; i++) {
+            $scope.history[i].token = $scope.history[i-1].token + $scope.history[i].tokenChange;
+            if ($scope.history[i].token > $scope.tokenMax) {
+              $scope.tokenMax = $scope.history[i].token;
+            };
+            if ($scope.history[i].score > $scope.scoreMax) {
+              $scope.scoreMax = $scope.history[i].score;
+            } else if ($scope.history[i].score < $scope.scoreMin) {
+              $scope.scoreMin = $scope.history[i].score;
+            };
+          };
+          $scope.tokenGap = $scope.tokenMax / 10;
+          $scope.scoreMin = $scope.scoreMin - 10;
+          $scope.scoreGap = ($scope.scoreMax - $scope.scoreMin) / 10;
+        });
+
+}]);
+
+playerControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$routeParams', '$cookieStore',
+    function ($scope, $rootScope, $window, $location, $http, $routeParams, $cookieStore) {
+  
+  $scope.playerId = $cookieStore.get('playerIdTag');
+  $scope.accessSignature = $cookieStore.get('accessSignatureTag');   
+  $scope.currentGameId  = $cookieStore.get('currentGameIdTag');       
+  $scope.gamedetail = $cookieStore.get('gamedetailTag');                                     
+  $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId
+      + '&accessSignature=' + $scope.accessSignature)
+  .success(function(data) {
+    $scope.oppProfile = data;
+    $scope.oppProfile.playerId = $routeParams.opponentId;
+  })
+  .then(function() {
+    $scope.oppResponse();
+  });
+  
+  $scope.oppResponse = function() {
+    if(oppProfile.error){
+      $window.alert(oppProfile.error);
+      $rootScope.oppProfile = ""
+    }
+  }
+  
+  $http.get('http://3.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+      '&targetId=' + $routeParams.opponentId + '&accessSignature=' + $scope.accessSignature)
+      .success(function (data) {
+        $scope.oppInfoProfile = data;
+      })
+      .then(function () {
+        $scope.oppInquireInfoResponse();
+      });
+  
+  $scope.oppInquireInfoResponse = function () {
+    if ($scope.infoProfile.error) {
+      $window.alert($scope.infoProfile.error);
+      $scope.infoProfile.error = ""
+    }
+  };
+  
+  $http.get('http://3.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId + 
+      '&gameId=' + $scope.currentGameId + '&accessSignature=' + $scope.accessSignature)
+      .success(function (data) {
+        $scope.oppHistoryDetail = data;
+      })
+      .then(function () {
+        $scope.oppInquireHistoryResponse();
+      });
+  
+  $scope.oppInquireHistoryResponse = function () {
+    // if historyDetailProfile.error exists
+    if ($scope.oppHistoryDetail.error) {
+      $window.alert($scope.oppHistoryDetail.error);
+      $scope.historyDetailProfile = ""
+    }
+    // this is only when playerId=targetId
+    else {
+      $scope.oppHistories = $scope.oppHistoryDetail.history;
+    }
+  };
+}]);

@@ -4,6 +4,7 @@
 
 var playerApp = angular.module("playerApp", [
   "ngCookies",
+  "ngAnimate",
   "ngRoute",
   "profileFilters",
   "playerControllers",
@@ -28,14 +29,17 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/view-profile.html",
         controller: "ProfileCtrl"
       }).    
+      when("/user/:userId", {
+        templateUrl: "/partials/view-profile.html",
+        controller: "UserCtrl"
+      }).  
+      when("/opponent/:opponentId", {
+         templateUrl: "/partials/opponent.html",
+         controller: "OpponentCtrl"
+     }).
       when("/editprofile", {
         templateUrl: "/partials/edit-profile.html",
         controller: "EditCtrl"
-      }).
-      when("/inquiry", {
-          templateUrl: "/partials/inquiry.html",
-          //controller: "HistoryListCtrl"
-          controller: "HistoryDetailCtrl"
       }).
       /*when("/history", {
         templateUrl: "/partials/history-list.html",
@@ -58,8 +62,12 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/game-detail.html",
         controller: "GameDetailCtrl"
       }).
+      when("/analysis", {
+        templateUrl: "/partials/history-analysis.html",
+        controller: "AnalysisCtrl"
+      }).
       otherwise({
-        redirectTo: "/login"
+        redirectTo: "/choosegame"
       });
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];

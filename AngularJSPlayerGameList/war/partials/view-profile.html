@@ -1,50 +1,40 @@
 <div class="container-fluid">
     <div class="row-fluid">
-      <div class="row">
-        <h3>My Information </h3>
-      </div>
-      <div class="row">
-        <div class="col col-75">
-          <table class="table table-bordered">
-            <tr>
-                <th><span>Player Id</span></th>
-                <td> 
-                  <span>{{playerId}}</span></td> 
-            </tr>
-            <tr>
-                <th><span>First Name</span></th>
-                <td> 
-                  <span>{{firstname}}</span></td>
-            </tr>
-            <tr>
-                <th><span>Last Name</span></th>
-                <td> 
-                  <span>{{lastname}}</span></td>
-            </tr>                        
-            <tr>
-                <th><span>Nickname</span></th>
-                <td> 
-                  <span>{{nickname}}</span></td>
-            </tr>
-            <tr>            
-                <th><span>Email</span></th> 
-                <td> 
-                  <span>{{email}}</span></td>                                                            
-            </tr>                                
-          </table>
-        </div>
-        <div class="col col-offset-10">
-        </div>
-        <div class="col col-25">
-            <img ng-src={{profile.pictureUrl}} class="profile-img"/>
-        </div>
-      </div>
+
+        <h1 ng-hide="{{readOnly}}">My Information </h3>
+
+        <table class="table table-bordered">
+          <tr>
+              <th><span>Player Id</span></th>
+              <td> 
+                <span>{{playerId}}</span></td> 
+          </tr>
+          <tr>
+              <th><span>First Name</span></th>
+              <td> 
+                <span>{{firstname}}</span></td>
+          </tr>
+          <tr>
+              <th><span>Last Name</span></th>
+              <td> 
+                <span>{{lastname}}</span></td>
+          </tr>                        
+          <tr>
+              <th><span>Nickname</span></th>
+              <td> 
+                <span>{{nickname}}</span></td>
+          </tr>
+          <tr>            
+              <th><span>Email</span></th> 
+              <td> 
+                <span>{{email}}</span></td>                                                            
+          </tr>                                
+        </table>
+
       <hr />
-      <div class="row">
-        <a href="#/editprofile"><button type="button">Edit</button></a>
+      <div class="row" ng-hide="{{readOnly}}">
         <a href="#/choosegame"><button type="button">Choose Game</button></a>
         <button type=button ng-click='delete()'>Delete My Account</button>
-        <button type=button ng-click='logout()'>Log Out</button>
       </div>       
     </div>     
-  </div>   
+  </div> 

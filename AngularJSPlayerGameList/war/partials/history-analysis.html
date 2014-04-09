@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+      <!--<div class="row">
+        <select ng-model="tokenShow">
+          <option value=true>token</option>
+          <option value=false>score</option>
+        </select>
+      </div>  -->
+      <h1>My Recent Performance in Game {{gamedetail.gameName}}</h1>
+      <hr/>
+      <div class="row">
+        <div class="col-lg-8">
+          <div id="line-chart">
+            <svg width="760" height="520" class="svg-line">
+              <g transform="translate(80,40)">
+                <g class="y-axis" ng-repeat = "item in [0,1,2,3,4,5,6,7,8,9,10]">
+                  <g class="tick major" transform="translate(0,{{400-40*item}})" style="opacity: 1;">
+                    <line x2="-6" y2="0"></line>
+                    <line x2="-633" y2="0"></line>
+                    <text x="-9" y="0" dy=".32em" style="text-anchor: end;">{{(tokenGap*item) | number:0}}</text>
+                    <text x="630" y="0" dy=".32em" style="text-anchor: end;">{{(scoreGap*item + scoreMin) | number:0}}</text>
+                  </g>
+                  
+                  <path class="domain" d="M-3,0H0V400H-3"></path>
+                  <path class="domain" d="M600,0H603V400H600"></path>
+                  <text transform="translate(-56,200) rotate(-90)" style="text-anchor: middle; font-size: 16px; color: #9b59b6;">token</text>
+                  <circle class="red-cicles" r="6" transform="translate(-61,240)" fill="#9b59b6" stroke="white" stroke-width="1px"></circle>
+                  <text transform="translate(680,200) rotate(-90)" style="text-anchor: middle; font-size: 16px; color: #1abc9c;">score</text>
+                  <circle class="blue-cicles" r="6" transform="translate(675,240)" fill="#1abc9c" stroke="white" stroke-width="1px"></circle>
+                </g>
+
+
+                <g class="x-axis" transform="translate(0,400)" ng-repeat = "item in [0,1,2,3,4,5,6,7,8,9,10]">
+                  <g class="tick major" transform="translate({{55*item}},0)" style="opacity: 1;">
+                    <line y2="6" x2="0"></line>
+                    <text y="9" x="0" dy=".71em" style="text-anchor: middle;">{{item}}</text>
+                  </g>
+
+                  <path class="domain" d="M0,3V0H600V3"></path>
+                  <text transform=" translate(280,40)" style="text-anchor: middle; font-size: 16px;">latest 10 matches</text>
+                </g>
+                 <path ng-repeat="item in [0,1,2,3,4,5,6,7,8]" id="red-path" d="M {{55*(item+1)}} {{400-(history[item].token/tokenGap)*40}} L {{55*(item+2)}} {{400-(history[item+1].token/tokenGap)*40}}" stroke="#2c3e50" stroke-width="1.5" fill="none" />
+                 <path ng-repeat="item in [0,1,2,3,4,5,6,7,8]" id="blue-path" d="M {{55*(item+1)}} {{400-((history[item].score-scoreMin)/scoreGap)*40}} L {{55*(item+2)}} {{400-((history[item+1].score-scoreMin)/scoreGap)*40}}" stroke="#2c3e50" stroke-width="1.5" fill="none" />
+                <!-- <path class="line" d="M192.49999999999997,200L357.5,79.99999999999999" stroke="#9b59b6" stroke-width="1.5px"></path>
+                <path class="trend-line" d="M0,36L357.5,180" stroke="#999" stroke-width="1.5px" stroke-dasharray="4, 3"></path>
+                <path class="line" d="M0,100L165,-20.00000000000003" stroke="#1abc9c" stroke-width="1.5px"></path> -->
+                <g class="g-red-circles" ng-repeat="item in history">
+                  <circle class="red-cicles" r="6" cx="{{55*($index+1)}}" cy="{{400-(item.token/tokenGap)*40}}" fill="#9b59b6" stroke="#2c3e50" stroke-width="1px"></circle>
+                </g>
+                <g class="g-blue-circles" ng-repeat="item in history">
+                  <circle class="blue-cicles" r="6" cx="{{55*($index+1)}}" cy="{{400-((item.score-scoreMin)/scoreGap)*40}}" fill="#1abc9c" stroke="#2c3e50" stroke-width="1px"></circle>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <a ng-href="#/history/{{currentGameId}}"><button type=button>Back</button></a>
+      </div>
+    </div>     
+</div> 
