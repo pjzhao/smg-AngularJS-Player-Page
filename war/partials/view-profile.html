@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <h1 ng-hide="{{readOnly}}">My Information </h3>
+
+        <table class="table table-bordered">
+          <tr>
+              <th><span>Player Id</span></th>
+              <td> 
+                <span>{{playerId}}</span></td> 
+          </tr>
+          <tr>
+              <th><span>First Name</span></th>
+              <td> 
+                <span>{{firstname}}</span></td>
+          </tr>
+          <tr>
+              <th><span>Last Name</span></th>
+              <td> 
+                <span>{{lastname}}</span></td>
+          </tr>                        
+          <tr>
+              <th><span>Nickname</span></th>
+              <td> 
+                <span>{{nickname}}</span></td>
+          </tr>
+          <tr>            
+              <th><span>Email</span></th> 
+              <td> 
+                <span>{{email}}</span></td>                                                            
+          </tr>                                
+        </table>
+
+      <hr />
+      <div class="row" ng-hide="{{readOnly}}">
+        <a href="#/choosegame"><button type="button">Choose Game</button></a>
+        <button type=button ng-click='delete()'>Delete My Account</button>
+      </div>       
+    </div>     
+  </div>   

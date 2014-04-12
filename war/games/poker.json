@@ -1,0 +1,10 @@
+{
+	"id": "poker",
+    "name": "Texas hold'em",
+    "description": "Introduction to Texas hold'em in poker.json",
+    "images": [
+        "../img/games/poker-icon.jpg", 
+        "../img/games/poker-1.jpg",  
+        "../img/games/poker-2.jpg"
+    ]    
+}
