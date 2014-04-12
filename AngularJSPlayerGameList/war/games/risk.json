@@ -1,0 +1,10 @@
+{
+	"id": "risk",
+    "name": "Risk",
+    "description": "Introduction to Risk in risk.json",
+    "images": [
+        "../img/games/risk-icon.jpg", 
+        "../img/games/risk-1.jpg",  
+        "../img/games/risk-2.jpg"
+    ]    
+}

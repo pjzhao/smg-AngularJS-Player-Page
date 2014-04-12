@@ -4,7 +4,6 @@
 
 var playerApp = angular.module("playerApp", [
   "ngCookies",
-  "ngAnimate",
   "ngRoute",
   "profileFilters",
   "playerControllers",
@@ -17,9 +16,10 @@ playerApp.config(["$routeProvider", "$httpProvider",
    //$locationProvider.html5Mode(true);
     
     $routeProvider.
+      //Login and Signup are only for test and debug -- Pinji
       when("/login", {
-        templateUrl: "/partials/login.html"
-        //controller: "ProfileCtrl"
+        templateUrl: "/partials/login.html",
+        controller: "LoginCtrl"
       }).        
       when("/signup", {
         templateUrl: "/partials/signup.html",

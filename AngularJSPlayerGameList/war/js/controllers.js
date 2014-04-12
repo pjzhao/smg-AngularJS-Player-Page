@@ -275,19 +275,19 @@ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http
       }
     });
 }]);
-/*
-playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location',
-  function($scope, $rootScope, $routeParams, $http, $window, $location) {
+
+//Only for test and debug -- Pinji
+playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location', '$cookieStore',
+  function($scope, $rootScope, $routeParams, $http, $window, $location, $cookieStore) {
   $scope.signup = function () {
-    $rootScope.createProfile = {
+    $scope.createProfile = {
       "email" : $scope.suEmail,
       "password" : $scope.suPassword,
       "firstname" : $scope.suFirstname,
       "lastname" : $scope.suLastname,
-      "nickname" : $scope.suNickname,
-      "pictureUrl" : $scope.suPicUrl
+      "nickname" : $scope.suNickname
     };
-    $rootScope.createProfileStr = angular.toJson($scope.createProfile);
+    $scope.createProfileStr = angular.toJson($scope.createProfile);
 
     $http({
         method: 'POST',
@@ -296,7 +296,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
         headers: {'Content-Type': 'application/json'}
     })
     .success(function(data) {
-      $rootScope.signupResponse = data;
+      $scope.signupResponse = data;
     })
     .then(function() {
       $scope.suResponse(); 
@@ -304,21 +304,22 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
     };
 
     $scope.suResponse = function () {
-    if ($scope.signupResponse.error == "EMAIL_EXISTS") {
-      $window.alert("Failed. The email already exists.");
-      $scope.signupResponse.error = ""
-    } else if ($scope.signupResponse.error == "PASSWORD_TOO_SHORT") {
-      $window.alert("Failed. The password is too short. Please use at least 6 characters.")
-      $scope.signupResponse.error = ""
-    } else if ($scope.signupResponse.accessSignature != null) {
-      $window.alert("Welcome, new player! Please remember your player ID:" + $scope.signupResponse.playerId);
-      $rootScope.profile = $rootScope.createProfile;
-      $rootScope.profile.playerId = $scope.signupResponse.playerId;
-      $rootScope.profile.accessSignature = $scope.signupResponse.accessSignature;
-            $location.url("/profile/" + $rootScope.profile.playerId + '?password=' + $rootScope.profile.password) 
+      if ($scope.signupResponse.error == "EMAIL_EXISTS") {
+        $window.alert("Failed. The email already exists.");
+        $scope.signupResponse.error = ""
+      } else if ($scope.signupResponse.error == "PASSWORD_TOO_SHORT") {
+        $window.alert("Failed. The password is too short. Please use at least 6 characters.")
+        $scope.signupResponse.error = ""
+      } else if ($scope.signupResponse.accessSignature != null) {
+        $window.alert("Welcome, new player! Please remember your player ID:" + $scope.signupResponse.playerId);
+        $cookieStore.put('accessSignatureTag', $scope.signupResponse.accessSignature);
+        $scope.accessSignature = $cookieStore.get('accessSignatureTag');
+        $cookieStore.put('playerIdTag', $scope.signupResponse.playerId);
+        $scope.playerId = $cookieStore.get('playerIdTag');
+        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature) 
+      };
     };
-    };
-}]); */
+}]); 
 
 playerControllers.controller('AnalysisCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore',
   function ($scope, $rootScope, $window, $location, $http, $cookieStore) {
@@ -412,4 +413,40 @@ playerControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window',
       $scope.oppHistories = $scope.oppHistoryDetail.history;
     }
   };
+}]);
+
+//Only for test and debug -- Pinji
+playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
+  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
+    $scope.login = function() {
+      $cookieStore.put('playerIdTag', $scope.logPlayerId);
+      $cookieStore.put('passwordTag', $scope.logPassword);
+      $http.get('http://3.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
+      .success(function(data) {
+        $scope.profile = data;
+        //$rootScope.profile = data;
+      })
+      .then(function() {
+        $scope.loginResponse();
+      });
+    };
+
+    $scope.loginResponse = function () {
+      if ($scope.profile.error == "WRONG_PASSWORD") {
+        $window.alert("Failed. Wrong password.");
+        $scope.profile.error = "";
+        //$rootScope.profile.error = "";
+      } else if ($scope.profile.error == "WRONG_PLAYER_ID") {
+        $window.alert("Failed. Wrong player ID.");
+        $scope.profile.error = "";
+        //$rootScope.profile.error = ""
+      } else if ($scope.profile.accessSignature != null) {
+        //$rootScope.profile.playerId = $routeParams.userId;
+        $cookieStore.put('accessSignatureTag', $scope.profile.accessSignature);
+        $scope.accessSignature = $cookieStore.get('accessSignatureTag');
+        $scope.playerId = $cookieStore.get('playerIdTag');
+        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
+      }
+    };
+
 }]);

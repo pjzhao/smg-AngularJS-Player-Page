@@ -21,3 +21,5 @@ angular.module('profileFilters', []).filter('gameIcon', function(){
 		}
 	};
 });
+
+
