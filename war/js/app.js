@@ -4,6 +4,7 @@
 
 var playerApp = angular.module("playerApp", [
   "ngCookies",
+  "ngAnimate",
   "ngRoute",
   "profileFilters",
   "playerControllers",

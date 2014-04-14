@@ -1,4 +1,131 @@
 /* app css stylesheet */
+
+/* customized css */
+
+body .history-detail-page {
+  font-family: Glyphicons Halflings;
+}
+
+.profile-img {
+  max-width: 25%;
+}
+
+.history-detail-page .head {
+  padding-bottom: 15px;
+}
+
+.history-detail-page .head h1 {
+  border-bottom: 0px;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.badge-row {
+  height: 60px;
+}
+
+.head .badge-container {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.head .badge-container img.badge-img {
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+.green {
+  color: green;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.blue {
+}
+
+.history-detail-page .glyphicon {
+  margin-right: 10px;
+}
+
+.token-summary {
+  font-size: 14px;
+}
+
+.match-tr:hover {
+  background-color: whitesmoke;
+}
+
+.history-detail-page .table-bordered > tbody > tr > th{
+  border: 0px;
+  font-size: 14px;
+}
+
+.history-detail-page .table-bordered > tbody > tr > td{
+  border: 0px;
+}
+
+.history-detail-page th {
+  text-align: center;
+}
+
+.match-table {
+  text-align: center;
+}
+
+.token-word {
+  position: relative;
+  top: -50px;
+  z-index: 2;
+  background: whitesmoke;
+  border-radius: 5px;
+  height: 50px;
+  line-height: 50px;
+  opacity: 0.8;
+  font-weight: bold;
+}
+
+.tab-button {
+  font-size: 14px;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: whitesmoke;
+}
+
+.col-15 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 15%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 15%;
+  -ms-flex: 0 0 15%;
+  flex: 0 0 15%;
+  max-width: 150px; 
+}
+
+.col-50m {
+  margin-left: 20px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 50%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 50%;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; 
+}
+
+.hide {
+  display: none;
+}
+
+.id-group {
+  margin-right: 5px;
+}
+
 /* ionic css */
 .row {
   display: -webkit-box;
@@ -217,110 +344,14 @@ h1 {
   border-bottom: 1px solid gray;
 }
 
-/* customized css */
-
-body .history-detail-page {
-  font-family: Glyphicons Halflings;
-}
-
-.profile-img {
-  max-width: 25%;
-}
-
-.history-detail-page .head {
-  padding-bottom: 15px;
-}
-
-.history-detail-page .head h1 {
-  border-bottom: 0px;
-  margin-top: 5px;
-  margin-left: 20px;
-}
-
-.badge-row {
-  height: 60px;
-}
-
-.head .badge-container {
-  padding-top: 10px;
-  padding-left: 5px;
-}
-
-.head .badge-container img.badge-img {
-  max-height: 50px;
-  margin-right: 10px;
-}
-
-.green {
-  color: green;
-  font-weight: bold;
-}
-
-.red {
-  color: red;
-  font-weight: bold;
-}
-
-.blue {
-}
-
-.history-detail-page .glyphicon {
-  margin-right: 10px;
-}
-
-.token-summary {
-  font-size: 14px;
-}
-
-.match-tr:hover {
-  background-color: whitesmoke;
-}
-
-.history-detail-page .table-bordered > tbody > tr > th{
-  border: 0px;
-  font-size: 14px;
-}
-
-.history-detail-page .table-bordered > tbody > tr > td{
-  border: 0px;
-}
-
-.history-detail-page th {
-  text-align: center;
-}
-
-.match-table {
-  text-align: center;
-}
-
-.token-word {
-  position: relative;
-  top: -50px;
-  z-index: 2;
-  background: whitesmoke;
-  border-radius: 5px;
-  height: 50px;
-  line-height: 50px;
-  opacity: 0.8;
-  font-weight: bold;
-}
-
-.tab-button {
-  font-size: 14px;
-  text-align: center;
-}
-
-.tab-button:hover {
-  background-color: whitesmoke;
-}
-
+ 
 /* Guo, Wen css */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none;
 }
 
 body {
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 #cover {
