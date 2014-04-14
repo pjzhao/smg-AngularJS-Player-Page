@@ -191,11 +191,16 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
   function($scope, $http, $cookieStore) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    $http.get('http://3.smg-server.appspot.com/gameinfo/all')
+    /*$http.get('http://3.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
-        });
+        });*/
+    $http.get('/games/games.json').success(function(data) {
+      $scope.games = data;
+    });
     $scope.orderProp = 'gameName';
+    $scope.orderNew = '-postDate';
+    $scope.orderHot = '-rating';
 }]);
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', '$cookieStore',
