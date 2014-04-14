@@ -430,3 +430,26 @@ playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$
 		}
 	};
 }]);
+
+//Hisroty & Recommendation
+playerControllers.controller('HisoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', 
+    function ($scope, $rootScope, $window, $location, $http, $routeParams, $cookieStore){	
+    // '/playerAllGame?playerId=...&targetId=...&accessSignature=...'
+    $scope.playerId = $cookieStore.get('playerIdTag');
+	$scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
+	$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + "&targetId=" + $scope.playerId + '&accessSignature=' + $scope.accessSignature)
+	//$http.get('../historys/histories.json')
+	.success(function(data){
+		$scope.historySummary = data;
+	})
+	.then(function(){
+		$scope.historySummaryResponse();
+	});
+	
+	$scope.historySummaryResponse = function(){
+		if($scope.historySummary.error){
+			$window.alert($scope.historySummary.error);
+			$scope.historySummary.error = ''
+		}
+	};
+}]);

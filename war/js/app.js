@@ -41,12 +41,11 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/edit-profile.html",
         controller: "EditCtrl"
       }).
-      /*when("/history", {
+      when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).*/
+      }).
       when("/history/:gameId", {
-      //  when("/history:gameId", {
         templateUrl: "/partials/history-detail.html",
         controller: "HistoryDetailCtrl"
       }).

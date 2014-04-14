@@ -6,22 +6,26 @@
         	<th><span>Win</span></th>
         	<th><span>Lose</span></th>
         	<th><span>Tie</span></th>                                    
-        	<th><span>Total</span></th>            
+        	<th><span>Rank</span></th>
+        	<th><span>Score</span></th>
+        	<th><span>Token</span></th>          
         </tr>
-        <tr ng-repeat = "history in historys">
+        <tr ng-repeat = "(key, history) in historySummary">
             <td> 
-              <span>
-                <a href="/history/{{history.gameId}}">{{history.gameName}}</a>
-              </span>
+              <span>{{key}}</span>
             </td> 
             <td> 
-              <span>{{history.winCount}}</span></td>
+              <span>{{history.win}}</span></td>
             <td> 
-              <span>{{history.loseCount}}</span></td>
+              <span>{{history.lost}}</span></td>
             <td> 
-              <span>{{history.tieCount}}</span></td>      
+              <span>{{history.draw}}</span></td>      
             <td>
-              <span>{{history.winCount + history.loseCount + history.tieCount}}</span></td> 
+              <span>{{history.RANK}}</span></td> 
+            <td>
+              <span>{{history.score}}</span></td>
+            <td>
+              <span>{{history.token}}</span></td>
         </tr>
       </table>
       <div class="row">
