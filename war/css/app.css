@@ -218,8 +218,100 @@ h1 {
 }
 
 /* customized css */
+
+body {
+  font-family: Glyphicons Halflings;
+}
+
 .profile-img {
   max-width: 25%;
+}
+
+.head {
+  padding-bottom: 15px;
+}
+
+.head h1 {
+  border-bottom: 0px;
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.badge-row {
+  height: 60px;
+}
+
+.head .badge-container {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.head .badge-container img.badge-img {
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+.green {
+  color: green;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.blue {
+}
+
+.glyphicon {
+  margin-right: 10px;
+}
+
+.token-summary {
+  font-size: 14px;
+}
+
+.match-tr:hover {
+  background-color: whitesmoke;
+}
+
+.table-bordered > tbody > tr > th{
+  border: 0px;
+  font-size: 14px;
+}
+
+.table-bordered > tbody > tr > td{
+  border: 0px;
+}
+
+th {
+  text-align: center;
+}
+
+.match-table {
+  text-align: center;
+}
+
+.token-word {
+  position: relative;
+  top: -50px;
+  z-index: 2;
+  background: whitesmoke;
+  border-radius: 5px;
+  height: 50px;
+  line-height: 50px;
+  opacity: 0.8;
+  font-weight: bold;
+}
+
+.tab-button {
+  font-size: 14px;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: whitesmoke;
 }
 
 /* Guo, Wen css */
