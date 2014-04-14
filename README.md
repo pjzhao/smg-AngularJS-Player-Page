@@ -8,4 +8,8 @@ https://docs.google.com/document/d/1o52lKUXrkyv4g7gLwpbJu7R0icprAh3cTOe_fyUsv-M/
 
 Test page:
 
+Help page:
+
+http://1.helppageview.appspot.com/help.html
+
 
