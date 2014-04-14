@@ -219,7 +219,7 @@ h1 {
 
 /* customized css */
 
-body {
+body .history-detail-page {
   font-family: Glyphicons Halflings;
 }
 
@@ -227,11 +227,11 @@ body {
   max-width: 25%;
 }
 
-.head {
+.history-detail-page .head {
   padding-bottom: 15px;
 }
 
-.head h1 {
+.history-detail-page .head h1 {
   border-bottom: 0px;
   margin-top: 5px;
   margin-left: 20px;
@@ -264,7 +264,7 @@ body {
 .blue {
 }
 
-.glyphicon {
+.history-detail-page .glyphicon {
   margin-right: 10px;
 }
 
@@ -276,16 +276,16 @@ body {
   background-color: whitesmoke;
 }
 
-.table-bordered > tbody > tr > th{
+.history-detail-page .table-bordered > tbody > tr > th{
   border: 0px;
   font-size: 14px;
 }
 
-.table-bordered > tbody > tr > td{
+.history-detail-page .table-bordered > tbody > tr > td{
   border: 0px;
 }
 
-th {
+.history-detail-page th {
   text-align: center;
 }
 
