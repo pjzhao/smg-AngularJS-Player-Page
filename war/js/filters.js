@@ -78,3 +78,28 @@ angular.module('profileFilters').filter('resultColor', function() {
   	};
 }); 
 
+angular.module('profileFilters').filter('ratingFilter', function(){
+	return function(input){
+		if(input <= "1" && input >= "0"){
+			return "../img/star/1.jpg";
+		} else if(input <= "2" && input > "1"){
+			return "../img/star/2.jpg";
+		} else if(input <= "3" && input > "2"){
+			return "../img/star/3.jpg";
+		} else if(input <= "4" && input > "3"){
+			return "../img/star/4.jpg";
+		} else {
+			return "../img/star/5.jpg";
+		}
+	};
+});
+
+/*
+angular.module('profileFilters').filter('sliceFilter', function() {
+  return function(arr, start, end) {
+    return arr.slice(start, end);
+  };
+});
+*/
+
+
