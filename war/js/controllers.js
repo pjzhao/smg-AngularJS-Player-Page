@@ -12,7 +12,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
       //Use fake JSON data for testing - Pinji
-      /*$http.get('http://3.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+      /*$http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
         '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
           $http.get('../analysis/token.json')
           .success(function (data) {
@@ -32,7 +32,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       };
 
       //Use fake JSON data for testing - Pinji
-      /*$http.get('http://3.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+      /*$http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
         '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
         $http.get('../analysis/history.json')
         .success(function (data) {
@@ -64,7 +64,7 @@ playerControllers.controller('UserCtrl', ['$scope', '$window', '$routeParams', '
     $scope.readOnly = true;
     $scope.params = $routeParams;
     $scope.myId = $cookieStore.get('playerIdTag');
-    $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $scope.myId + '&targetId=' + $routeParams.userId
+    $http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.myId + '&targetId=' + $routeParams.userId
       + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
     .success(function(data) {
       $scope = data;
@@ -83,7 +83,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
 
     $scope.params = $routeParams;
 
-    $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $routeParams.userId + '&targetId=' + $routeParams.userId
+    $http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $routeParams.userId + '&targetId=' + $routeParams.userId
       + '&accessSignature=' + $routeParams.accessSignature)
       .success(function(data) {
         
@@ -110,7 +110,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
       });
 
     $scope.delete = function() {
-      $http.delete('http://3.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      $http.delete('http://4.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('accessSignatureTag'))
           .success(function(data) {
               $scope.deleteResponse = data;
           })
@@ -164,7 +164,7 @@ playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$r
         "pictureUrl" : $scope.profilePicUrl
       };
       $scope.newProfileStr = angular.toJson($scope.newProfile);
-        $http.put('http://3.smg-server.appspot.com/players/' + $scope.playerId, $scope.newProfileStr)
+        $http.put('http://4.smg-server.appspot.com/players/' + $scope.playerId, $scope.newProfileStr)
         .success(function(data) {
           $scope.editResponse = data;
         })
@@ -191,7 +191,7 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
   function($scope, $http, $cookieStore) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    /*$http.get('http://3.smg-server.appspot.com/gameinfo/all')
+    /*$http.get('http://4.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
         });*/
@@ -208,7 +208,7 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
     $scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag');
-    $http.get('http://3.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
+    $http.get('http://4.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
     .success(function(data) {
       $scope.game = data;
     }).then(function(game) {
@@ -267,7 +267,7 @@ playerControllers.controller('GameDetailCtrl', ['$scope', '$routeParams', '$http
     $scope.gameId = $cookieStore.get('currentGameIdTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
-    $http.get('http://3.smg-server.appspot.com/games/' + $routeParams.gameId)
+    $http.get('http://4.smg-server.appspot.com/games/' + $routeParams.gameId)
     .success(function(data) {
       $scope.gamedetail = data;
       $cookieStore.put('gamedetailTag', $scope.gamedetail);
@@ -296,7 +296,7 @@ playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParam
 
     $http({
         method: 'POST',
-        url: 'http://3.smg-server.appspot.com/players',
+        url: 'http://4.smg-server.appspot.com/players',
         data: $scope.createProfileStr,
         headers: {'Content-Type': 'application/json'}
     })
@@ -365,7 +365,7 @@ playerControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window',
   $scope.accessSignature = $cookieStore.get('accessSignatureTag');   
   $scope.currentGameId  = $cookieStore.get('currentGameIdTag');       
   $scope.gamedetail = $cookieStore.get('gamedetailTag');                                     
-  $http.get('http://3.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId
+  $http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId
       + '&accessSignature=' + $scope.accessSignature)
   .success(function(data) {
     $scope.oppProfile = data;
@@ -382,7 +382,7 @@ playerControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window',
     }
   }
   
-  $http.get('http://3.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+  $http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
       '&targetId=' + $routeParams.opponentId + '&accessSignature=' + $scope.accessSignature)
       .success(function (data) {
         $scope.oppInfoProfile = data;
@@ -398,7 +398,7 @@ playerControllers.controller('OpponentCtrl', ['$scope', '$rootScope', '$window',
     }
   };
   
-  $http.get('http://3.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId + 
+  $http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $routeParams.opponentId + 
       '&gameId=' + $scope.currentGameId + '&accessSignature=' + $scope.accessSignature)
       .success(function (data) {
         $scope.oppHistoryDetail = data;
@@ -426,7 +426,7 @@ playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$
     $scope.login = function() {
       $cookieStore.put('playerIdTag', $scope.logPlayerId);
       $cookieStore.put('passwordTag', $scope.logPassword);
-      $http.get('http://3.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
+      $http.get('http://4.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
       .success(function(data) {
         $scope.profile = data;
         //$rootScope.profile = data;

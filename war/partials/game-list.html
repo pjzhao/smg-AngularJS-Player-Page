@@ -28,7 +28,7 @@
     <font size=3>Newest Games:</font><br>
     <li class="row game-recommend-row">
       <span ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 5" class="game-recommend-img">
-       <a href="#/choosegamestats/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
        <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
       </span>
     </li>
@@ -37,7 +37,7 @@
     <font size=3>Hottest Games:</font><br>
     <li class="row game-recommend-row">    
       <span ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 5" class="game-recommend-img">
-       <a href="#/choosegamestats/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
        <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
       </span>
     </li>
@@ -52,7 +52,7 @@
                 <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
               <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
           <div class="thumbnail">
-            <p><a href="#/choosegamestats/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" vspace="20"></a><br>
+            <p><a href="#/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" vspace="20"></a><br>
             <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
             <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Post on: {{game.postDate}}</p>
             <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p>

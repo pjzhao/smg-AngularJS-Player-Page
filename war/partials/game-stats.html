@@ -2,14 +2,14 @@
 	<div class="row-fluid">		
 		<h5>{{gamedetail.gameName}}</h5>
 		<hr>
-	    <div class="span8">
-			<ul class="games">
+	    <div>
+			<ul>
 				<p>{{game.description}}</p><br>
 				<p>Highest score achieved by: {{game.highScore.playerId}}</p><br>
 				<p>Highest score is: {{game.highScore.score}}</p><br>
  				<p>Total rating of the game: {{rateResponse.rating}}</p><br>	
  				<p>Rate you give: {{rating}}</p><br>	
-				Current games:<br>
+				Current games:
 				<table class="table table-bordered">					
 			        <tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
 			            <td> 
@@ -18,7 +18,7 @@
 			              <span>{{currentgameplayer.nickname}}</span></td>    
 			        </tr>
 				</table><br>
-				Finished games:<br>
+				Finished games:
 				<table class="table table-bordered">
 			        <tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
 			            <td> 
@@ -35,15 +35,23 @@
       				<table>
 						<tr>
 							<td>
-								<input type="text" ng-model="rating" size="20"><br>(1.0 - 5.0)
+								<span class="glyphicon glyphicon-thumbs-up"></span>
 							</td>
 							<td>
-								&nbsp&nbsp<input class="btn btn-md btn-success" type="submit" value="Rate the game">
+								<input type="text" ng-model="rating" size="15" style="height:35px">
 							</td>	
+							<td>
+								&nbsp&nbsp&nbsp&nbsp<input class="btn btn-md btn-success"  type="submit" value="Rate the game">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td> (1.0 - 5.0) </td>
 						</tr>
 					</table>					
 				</form>
-				<br>		
+				<br>	
+				<hr>	
     			<div class="col col-20 tab-button">
 					<a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-list-alt"></span>Back To Game Detail</a>
 				</div>	
