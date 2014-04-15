@@ -100,8 +100,8 @@ playerControllers.controller('UserCtrl', ['$scope', '$window', '$routeParams', '
 }]);
 
   
-playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
-  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
+playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore', '$rootElement',
+  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore, $rootElement) {
 
     $scope.params = $routeParams;
 
@@ -114,6 +114,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
         $scope.firstname = data.firstname;
         $scope.lastname = data.lastname;
         $scope.nickname = data.nickname;
+        $scope.imageURL = data.imageURL;
         if (!angular.isUndefined(data.error)) {
           $scope.error = data.error;
         };
@@ -122,6 +123,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
         $cookieStore.put('firstnameTag', data.firstname);
         $cookieStore.put('lastnameTag', data.lastname);
         $cookieStore.put('nicknameTag', data.nickname);
+        $cookieStore.put('imageURLTag', data.imageURL);
         $cookieStore.put('accessSignatureTag', $routeParams.accessSignature);
       })
       .then(function() {
@@ -131,7 +133,56 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
         };
       });
 
-    $scope.delete = function() {
+
+    $scope.playerId = $cookieStore.get('playerIdTag');
+    $scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
+    /*$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + '&targetId='' + $scope.playerId + 
+      '&accessSignature=' + $scope.accessSignature) */
+    $http.get('../historys/histories.json')
+    .success(function(data){
+      $scope.historyTemp = data;
+    })
+    .then(function(){
+      $scope.historySummaryResponse();
+    });
+
+    $scope.historySummaryResponse = function () {
+      if($scope.historyTemp.error) {
+        $window.alert($scope.historyTemp.error);
+        $scope.historyTemp = null;
+        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
+      } else {
+        $scope.historySummary = [];
+        angular.forEach($scope.historyTemp, function(value, key) {
+          var record = {
+            gameId: key,
+            win: value.win,
+            lost: value.lost,
+            draw: value.draw,
+            RANK: value.RANK,
+            score: value.score,
+            token: value.token,
+            total: value.win + value.lost + value.draw,
+            winRate: value.win * 100 / (value.win + value.lost + value.draw)
+          };
+          this.push(record);
+        }, $scope.historySummary);
+      };
+      $scope.orderWin = 'win';
+      $scope.orderTotal = 'total';
+      $scope.orderWinRate = 'winRate';
+    };
+
+    $scope.sort = function (key) {
+      if ($scope.orderProp != key) {
+        $scope.orderProp = key;
+        $scope.reverse = false
+      } else {
+        $scope.orderProp = key;
+        $scope.reverse = !$scope.reverse
+      }
+    };
+    /*$scope.delete = function() {
       $http.delete('http://4.smg-server.appspot.com/players/' + $scope.playerId + '?accessSignature=' + $cookieStore.get('accessSignatureTag'))
           .success(function(data) {
               $scope.deleteResponse = data;
@@ -152,7 +203,7 @@ playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', 
         $window.alert("Failed. Wrong player ID.");
         $scope.deleteResponse.error = ""
       }   
-    };
+    }; */
 
 }]);
 
@@ -512,14 +563,19 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
         };
         this.push(record);
       }, $scope.historySummary);
-    }
+    };
+    $scope.orderWin = 'win';
+    $scope.orderTotal = 'total';
+    $scope.orderWinRate = 'winRate';
   };
 
   $scope.sort = function (key) {
-    if ($scope.orderProp == key) {
-      $scope.orderProp = -key 
+    if ($scope.orderProp != key) {
+      $scope.orderProp = key;
+      $scope.reverse = false
     } else {
-      $scope.orderProp = key
+      $scope.orderProp = key;
+      $scope.reverse = !$scope.reverse
     }
   };
 }]);

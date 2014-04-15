@@ -299,10 +299,6 @@ body {
   font-family: Glyphicons Halflings;
 }*/
 
-.profile-img {
-  max-width: 25%;
-}
-
 .history-detail-page .head {
   padding-bottom: 15px;
 }
@@ -455,10 +451,10 @@ select {
   margin-right: 20px;
 }
 
-.game-recommend-img img {
+/*.game-recommend-img img {
   max-width: 100px;
   max-height: 100px;
-}
+}*/
 
 .game-recommend-row {
   width: 640px;
@@ -485,4 +481,37 @@ button.clear-button {
   text-shadow: none;
   max-width: 30px;
   margin-left: 5px;
+}
+
+.glyphicon-sort {
+  color: #428bca;
+}
+
+.profile-info {
+  padding-left: 40px;
+}
+
+.profile-btn {
+  padding-left: 25px;
+}
+
+.profile-img {
+  margin-top: 40px;
+  padding-right: 0px;
+}
+
+.profile-img img {
+  margin: 20px 0px 20px 20px; 
+  height: 180px;
+}
+
+.history-head-icon {
+  position: relative;
+  top: 4px;
+  margin-left: 20px;
+}
+
+.history-list-page {
+  padding-left: 0px;
+  padding-right: 0px;
 }
