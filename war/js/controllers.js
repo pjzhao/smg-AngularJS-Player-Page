@@ -4,8 +4,30 @@
 
 var playerControllers = angular.module('playerControllers', []);
 
-playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore',
-  function ($scope, $rootScope, $window, $location, $http, $cookieStore) {
+playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore', '$rootElement', 
+  function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement) {
+
+    //facebook init - Pinji
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '234746240060785',
+      status     : true,
+      xfbml      : true
+    });
+    };
+
+    (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    var metaDesc = angular.element($rootElement.find('meta[name=fbtitle]')[0]);
+    metaDesc.attr('content', 'SMG Player Achivements2');
+    //end of facebook init
+
     $scope.currentGameId  = $cookieStore.get('currentGameIdTag');
     $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
     $scope.profile = $cookieStore.get('profileTag'); 
@@ -453,5 +475,35 @@ playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$
         $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
       }
     };
+}]);
 
+playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', '$filter', '$location',
+    function ($scope, $rootScope, $window, $routeParams, $http, $cookieStore, $filter, $location){  
+  $scope.playerId = $cookieStore.get('playerIdTag');
+  $scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
+  /*$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + '&targetId='' + $scope.playerId + 
+    '&accessSignature=' + $scope.accessSignature) */
+  $http.get('../historys/histories.json')
+  .success(function(data){
+    $scope.historySummary = data;
+  })
+  .then(function(){
+    $scope.historySummaryResponse();
+  });
+
+  $scope.historySummaryResponse = function () {
+    if($scope.historySummary.error) {
+      $window.alert($scope.historySummary.error);
+      $scope.historySummary = null;
+      $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
+    }
+  };
+
+  $scope.sort = function (key) {
+    if ($scope.orderProp == key) {
+      $scope.orderProp = -key 
+    } else {
+      $scope.orderProp = key
+    }
+  };
 }]);
