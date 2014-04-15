@@ -1,0 +1,3 @@
+<div class="col col-15 tab-button">
+    <a href="#/help"><span class="glyphicon glyphicon-question-sign"></span>Help info</a>
+</div>
