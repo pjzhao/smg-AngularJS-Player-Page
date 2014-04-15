@@ -515,3 +515,12 @@ button.clear-button {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+#help-page h2 {
+  border: 0px;
+}
+
+#help-page input[type="checkbox"] {
+  position: absolute;
+  left: 200px;
+}

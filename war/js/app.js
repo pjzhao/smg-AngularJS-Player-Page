@@ -49,10 +49,10 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/edit-profile.html",
         controller: "EditCtrl"
       }).
-      when("/history", {
+      /*when("/history", {
         templateUrl: "/partials/history-list.html",
         controller: "HistoryListCtrl"
-      }).
+      }).*/
       when("/history/:gameId", {
         title: "Play History",
         templateUrl: "/partials/history-detail.html",
@@ -77,6 +77,10 @@ playerApp.config(["$routeProvider", "$httpProvider",
         title: "My Performance",
         templateUrl: "/partials/history-analysis.html",
         controller: "AnalysisCtrl"
+      }).
+      when("/help",{
+        title: "Help",
+        templateUrl: "/partials/help.html"
       }).
       otherwise({
         redirectTo: "/choosegame"
