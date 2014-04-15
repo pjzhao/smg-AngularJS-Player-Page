@@ -65,6 +65,9 @@ playerApp.config(["$routeProvider", "$httpProvider",
         templateUrl: "/partials/history-analysis.html",
         controller: "AnalysisCtrl"
       }).
+      when("/help",{
+	templateUrl: "/partials/help.html"
+      }).
       otherwise({
         redirectTo: "/choosegame"
       });
