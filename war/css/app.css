@@ -299,15 +299,11 @@ body {
   font-family: Glyphicons Halflings;
 }*/
 
-.profile-img {
-  max-width: 25%;
-}
-
 .history-detail-page .head {
   padding-bottom: 15px;
 }
 
-.history-detail-page .head h1 {
+.head h1 {
   border-bottom: 0px;
   margin-top: 5px;
   margin-left: 20px;
@@ -359,6 +355,11 @@ body {
 }
 
 .table-bordered > tbody > tr > th{
+  border: 0px;
+  font-size: 14px;
+}
+
+.table-bordered > thead > tr > th{
   border: 0px;
   font-size: 14px;
 }
@@ -450,10 +451,10 @@ select {
   margin-right: 20px;
 }
 
-.game-recommend-img img {
+/*.game-recommend-img img {
   max-width: 100px;
   max-height: 100px;
-}
+}*/
 
 .game-recommend-row {
   width: 640px;
@@ -472,4 +473,54 @@ center {
 .history-list-tb th, .history-list-tb td {
   text-align: center;
   margin-left: 0px;
+}
+
+button.clear-button {
+  background-color: transparent;
+  border: none;
+  text-shadow: none;
+  max-width: 30px;
+  margin-left: 5px;
+}
+
+.glyphicon-sort {
+  color: #428bca;
+}
+
+.profile-info {
+  padding-left: 40px;
+}
+
+.profile-btn {
+  padding-left: 25px;
+}
+
+.profile-img {
+  margin-top: 40px;
+  padding-right: 0px;
+}
+
+.profile-img img {
+  margin: 20px 0px 20px 20px; 
+  height: 180px;
+}
+
+.history-head-icon {
+  position: relative;
+  top: 4px;
+  margin-left: 20px;
+}
+
+.history-list-page {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#help-page h2 {
+  border: 0px;
+}
+
+#help-page input[type="checkbox"] {
+  position: absolute;
+  left: 200px;
 }

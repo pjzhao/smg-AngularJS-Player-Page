@@ -14,3 +14,8 @@ Version 3 URL (Log In via Server's Main Page):
 http://3-dot-smg-server.appspot.com/login-page/login.html
 http://3.smg-angularjs-player.appspot.com/index.html#/{{userId}}?accessSignature={{accessSignature}}
 
+Version 4 URL (Log In via Server's Main Page):
+http://4-dot-smg-server.appspot.com/login-page/login.html
+test player account: player@nyu.edu
+test player password: password
+http://4.smg-angularjs-player.appspot.com/index.html#/{{userId}}?accessSignature={{accessSignature}}
