@@ -432,13 +432,13 @@ playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$
 }]);
 
 //Hisroty & Recommendation
-playerControllers.controller('HisoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', 
-    function ($scope, $rootScope, $window, $location, $http, $routeParams, $cookieStore){	
+playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', '$filter',
+    function ($scope, $rootScope, $window, $location, $http, $routeParams, $cookieStore, $filter){	
     // '/playerAllGame?playerId=...&targetId=...&accessSignature=...'
-    $scope.playerId = $cookieStore.get('playerIdTag');
-	$scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
-	$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + "&targetId=" + $scope.playerId + '&accessSignature=' + $scope.accessSignature)
-	//$http.get('../historys/histories.json')
+	//$scope.playerId = $cookieStore.get('playerIdTag');
+	//$scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
+	//$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + "&targetId=" + $scope.playerId + '&accessSignature=' + $scope.accessSignature)
+	$http.get('../historys/histories.json')
 	.success(function(data){
 		$scope.historySummary = data;
 	})
@@ -449,7 +449,7 @@ playerControllers.controller('HisoryListCtrl', ['$scope', '$rootScope', '$window
 	$scope.historySummaryResponse = function(){
 		if($scope.historySummary.error){
 			$window.alert($scope.historySummary.error);
-			$scope.historySummary.error = ''
+			$scope.historySummary = null
 		}
 	};
 }]);
