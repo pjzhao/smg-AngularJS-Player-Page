@@ -307,7 +307,7 @@ body {
   padding-bottom: 15px;
 }
 
-.history-detail-page .head h1 {
+.head h1 {
   border-bottom: 0px;
   margin-top: 5px;
   margin-left: 20px;
@@ -359,6 +359,11 @@ body {
 }
 
 .table-bordered > tbody > tr > th{
+  border: 0px;
+  font-size: 14px;
+}
+
+.table-bordered > thead > tr > th{
   border: 0px;
   font-size: 14px;
 }
@@ -472,4 +477,12 @@ center {
 .history-list-tb th, .history-list-tb td {
   text-align: center;
   margin-left: 0px;
+}
+
+button.clear-button {
+  background-color: transparent;
+  border: none;
+  text-shadow: none;
+  max-width: 30px;
+  margin-left: 5px;
 }

@@ -1,10 +1,9 @@
 <div class="container-fluid">
-    <div class="row-fluid">
-        <h4 ng-hide="{{readOnly}}">My Gaming Information </h4>
-        <hr>
-        <div  class="row">
-        <div style="width:85%">
-        <table  align="center" class="table" style="margin:20px;">
+    <div class="row-fluid head">
+        <h1 ng-hide="{{readOnly}}">My Profile</h1>
+        <div class="row">
+        <div class="col">
+        <table class="table table-bordered">
           <tr>
               <th><span>Player Id</span></th>
               <td> 
@@ -31,9 +30,9 @@
                 <span>{{email}}</span></td>                                                            
           </tr>                                
         </table>
-        </div>
+        <!-- </div>
           <img src="..\img\pic.jpg" style="margin:20px; height:180px" >
-        </div>
+        </div> -->
         
       <hr />
       <div class="row" ng-hide="{{readOnly}}">

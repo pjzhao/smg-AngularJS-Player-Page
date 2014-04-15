@@ -485,17 +485,33 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
     '&accessSignature=' + $scope.accessSignature) */
   $http.get('../historys/histories.json')
   .success(function(data){
-    $scope.historySummary = data;
+    $scope.historyTemp = data;
   })
   .then(function(){
     $scope.historySummaryResponse();
   });
 
   $scope.historySummaryResponse = function () {
-    if($scope.historySummary.error) {
-      $window.alert($scope.historySummary.error);
-      $scope.historySummary = null;
+    if($scope.historyTemp.error) {
+      $window.alert($scope.historyTemp.error);
+      $scope.historyTemp = null;
       $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
+    } else {
+      $scope.historySummary = [];
+      angular.forEach($scope.historyTemp, function(value, key) {
+        var record = {
+          gameId: key,
+          win: value.win,
+          lost: value.lost,
+          draw: value.draw,
+          RANK: value.RANK,
+          score: value.score,
+          token: value.token,
+          total: value.win + value.lost + value.draw,
+          winRate: value.win * 100 / (value.win + value.lost + value.draw)
+        };
+        this.push(record);
+      }, $scope.historySummary);
     }
   };
 
