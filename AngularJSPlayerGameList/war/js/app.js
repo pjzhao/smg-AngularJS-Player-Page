@@ -7,10 +7,8 @@ var playerApp = angular.module("playerApp", [
   "ngAnimate",
   "ngRoute",
   "profileFilters",
-  //"sliceFilters",
   "playerControllers",
-  "profileServices",
-  "rateFilters"
+  "profileServices"
 ]);
 //var server = "http://1.smg-server.appspot.com/";
 

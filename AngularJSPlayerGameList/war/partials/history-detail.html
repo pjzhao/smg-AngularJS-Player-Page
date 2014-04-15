@@ -1,33 +1,45 @@
 
-<div class="container-fluid">
+<div class="container-fluid history-detail-page">
   <div class="row-fluid">
-
-    <h1>{{gamedetail.gameName}} Play History</h1>
-    <div class="row">
-      <div class="col col-offset-10"></div>
-      <div class="col col-10">Tokens: {{infoProfile.token}}</div>    
-      <div class="col col-10">Rank: {{infoProfile.rank}}</div>
-      <div class="col col-10">Win: {{infoProfile.win}}</div>
-      <div class="col col-10">Lose: {{infoProfile.lost}}</div>    
-      <div class="col col-10">Draw: {{infoProfile.draw}} </div>
-      <div class="col col-20">Highest Score: {{infoProfile.score}}</div> 
+    <div class="row head">
+      <div class="col col-60">
+        <h1>{{gamedetail.gameName}} Play History</h1>
+      </div>
+      <div class="col col-40">
+        <div class="row badge-row">
+          <div class="badge-container" data-ng-repeat="item in (infoProfile.token | badgeImages)">
+            <img ng-src="{{item}}" class="badge-img" ng-init="tokenWord = false" ng-mouseenter="tokenWord = true"> 
+            <div ng-show="tokenWord" class="token-word" ng-mouseleave="tokenWord = false">{{$index+1}}00Tokens</div>
+          </div>
+        </div>
+      </div> 
     </div>
 
-    <table class="table table-bordered">
+    <div class="row token-summary">
+      <div class="col col-offset-10"></div>
+      <div class="col col-20"><span class="glyphicon glyphicon-usd"></span><span>Tokens: {{infoProfile.token}}</span></div> 
+      <div class="col col-20"><span class="glyphicon glyphicon-stats"></span><span>Rank: {{infoProfile.rank}}</span></div>
+      <div class="col col-20"><span class="glyphicon glyphicon-star"></span><span>Highest Score: {{infoProfile.score}}</span></div> 
+      <div class="col col-10"><span class="glyphicon glyphicon-thumbs-up"></span><span>Win: {{infoProfile.win}}</span></div>
+      <div class="col col-10"><span class="glyphicon glyphicon-thumbs-down"></span><span>Lose: {{infoProfile.lost}}</span></div>    
+      <div class="col col-10"><span class="glyphicon glyphicon glyphicon-leaf"></span><span>Draw: {{infoProfile.draw}}</span></div>
+    </div>
+
+    <table class="table table-bordered match-table">
         <tr>
-            <th><span>Date</span></th>
-            <th><span>Result</span></th>
-            <th><span>Token</span></th>
-            <th><span>Score</span></th>    
-            <th><span>Opponent Id</span></th>                                          
+            <th><span class="glyphicon glyphicon-calendar"></span><span>Date</span></th>
+            <th><span class="glyphicon glyphicon-flag"></span><span>Result</span></th>
+            <th><span class="glyphicon glyphicon-usd"></span><span>Token</span></th>
+            <th><span class="glyphicon glyphicon-star"></span><span>Score</span></th>    
+            <th><span class="glyphicon glyphicon-fire"></span><span>Opponent(s)</span></th>                                          
         </tr>
-        <tr ng-repeat = "history in histories">
+        <tr ng-repeat = "history in histories" class="match-tr">
             <td> 
               <span>{{history.date}}</span></td> 
             <td> 
-              <span>{{history.result}}</span></td>
+              <span class="{{history.result | resultColor}}">{{history.result}}</span></td>
             <td> 
-              <span>{{history.tokenChange}}</span></td>
+              <span class="{{history.tokenChange | numberColor}}">{{history.tokenChange}}</span></td>
             <td> 
               <span>{{history.score}}</span></td>      
             <td>
@@ -36,8 +48,12 @@
         </tr>
     </table>
     <div class="row">
-      	<a href="#/choosegamedetail/{{currentGameId}}"><button type="button">Play Again</button></a>
-        <a ng-href="#/analysis"><button type="button">How's my performance?</button></a>
+      <div class="col col-20 tab-button">
+        <a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-tower"></span>Play Again</a>
+      </div>
+      <div class="col col-20 tab-button">
+        <a ng-href="#/analysis"><span class="glyphicon glyphicon-floppy-disk"></span>My Performance</a>
+      </div>
     </div>
   </div>
 </div>

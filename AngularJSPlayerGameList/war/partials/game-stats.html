@@ -31,7 +31,6 @@
 			              <span>{{currentgameplayer.tokens}}</span></td>  
 			        </tr>
     			</table>
-    			<hr>
       			<form ng-submit="rate()">
       				<table>
 						<tr>
@@ -40,21 +39,19 @@
 							</td>
 							<td>
 								<input type="text" ng-model="rating" size="15" style="height:35px">
-							</td>
+							</td>	
 							<td>
 								&nbsp&nbsp&nbsp&nbsp<input class="btn btn-md btn-success"  type="submit" value="Rate the game">
-							</td>	
+							</td>
 						</tr>
 						<tr>
 							<td></td>
-							<td>
-							(1.0 - 5.0)
-							</td>
+							<td> (1.0 - 5.0) </td>
 						</tr>
 					</table>					
 				</form>
-				<br>		
-				<hr>
+				<br>	
+				<hr>	
     			<div class="col col-20 tab-button">
 					<a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-list-alt"></span>Back To Game Detail</a>
 				</div>	
