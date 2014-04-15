@@ -358,12 +358,12 @@ body {
   background-color: whitesmoke;
 }
 
-.history-detail-page .table-bordered > tbody > tr > th{
+.table-bordered > tbody > tr > th{
   border: 0px;
   font-size: 14px;
 }
 
-.history-detail-page .table-bordered > tbody > tr > td{
+.table-bordered > tbody > tr > td{
   border: 0px;
 }
 
@@ -467,4 +467,9 @@ center {
 .recommend-img {
   height: 40px;
   margin-right: 15px;
+}
+
+.history-list-tb th, .history-list-tb td {
+  text-align: center;
+  margin-left: 0px;
 }

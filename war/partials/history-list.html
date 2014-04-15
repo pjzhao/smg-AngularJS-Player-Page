@@ -1,37 +1,55 @@
 <div class="container-fluid">
   <div class="row-fluid">
-      <table class="table table-bordered">
-        <tr>
-        	<th><span>Game</span></th>
-        	<th><span>Win</span></th>
-        	<th><span>Lose</span></th>
-        	<th><span>Tie</span></th>                                    
-        	<th><span>Total</span></th>            
-        </tr>
-        <tr ng-repeat = "history in historys">
-            <td> 
-              <span>
-                <a href="/history/{{history.gameId}}">{{history.gameName}}</a>
-              </span>
-            </td> 
-            <td> 
-              <span>{{history.winCount}}</span></td>
-            <td> 
-              <span>{{history.loseCount}}</span></td>
-            <td> 
-              <span>{{history.tieCount}}</span></td>      
-            <td>
-              <span>{{history.winCount + history.loseCount + history.tieCount}}</span></td> 
-        </tr>
+  	<h2>Game History</h2>
+  	<br>
+  	<br>
+      <table class="table table-bordered history-list-tb">
+        <thead>
+          <tr>
+          	<th><span>Game</span></th>
+          	<!-- <th><span>Win</span><button ng-click="orderProp='win'"><span class="glyphicon glyphicon-sort"></span></button></th> -->
+            <th><span>Win</span></th>
+          	<th><span>Lose</span></th>
+          	<th><span>Tie</span></th>                                    
+          	<th><span>Rank</span></th>
+          	<th><span>Score</span></th>
+          	<th><span>Token</span></th>
+          	<th><span>Total</span></th> 
+            <th><span>Win Rate</span></th>        
+          </tr>
+        </thead>     
+        <tbody>
+          <tr ng-repeat = "(key, history) in historySummary" class="match-tr">
+              <td> 
+                <span>{{key}}</span>
+              </td> 
+              <td> 
+                <span>{{history.win}}</span></td>
+              <td> 
+                <span>{{history.lost}}</span></td>
+              <td> 
+                <span>{{history.draw}}</span></td>      
+              <td>
+                <span>{{history.RANK}}</span></td> 
+              <td>
+                <span>{{history.score}}</span></td>
+              <td>
+                <span>{{history.token}}</span></td>
+              <td>
+                <span>{{history.win+history.lost+history.draw}}</span></td>
+              <td>
+                <span>{{(history.win/(history.win+history.lost+history.draw) | number:2) * 100}}%</span></td>
+          </tr>
+        </tbody>
       </table>
+
       <div class="row">
-        <a href="/profile">My Profile</a>
-      </div>
-      <div class="row">
-        <a href="/choosegame">Choose Game</a>
-      </div>
-      <div class="row">
-        <a href="/inquiry">Go to Inquiry Page</a>
+        <div class="col col-20 tab-button">
+          <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
+        </div>
+        <div class="col col-20 tab-button">
+          <a ng-href="#/choosegame"><span class="glyphicon glyphicon-play"></span>Choose Game</a>
+        </div>
       </div>
   </div>
 </div>

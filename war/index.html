@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en" ng-app="playerApp">
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en" ng-app="playerApp">
 <head>
     <meta Content-Type="text/csv" charset="utf-8" />
-    <title>Player</title>
+    <meta name="fbtitle" property="og:title" content="SMG Player Achivements" /> 
+    <meta name="fbimage" property="og:image" content="img/superman.png" /> 
+    <title ng-bind="'SMG ' + title">SMG Player</title>
     <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css"></link>
     <link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap.css"></link>
     <link rel="stylesheet" href="css/sidebar.css">
@@ -17,10 +19,11 @@
     <script src="js/filters.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
 </head>
 <body>
-
-  <div ng-view></div>
+    <div id="fb-root"></div>
+    <div ng-view></div>
 
 </body>
 </html>
