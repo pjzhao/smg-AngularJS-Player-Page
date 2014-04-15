@@ -1,37 +1,89 @@
-<div class="container-fluid">
+<div class="container-fluid history-list-page">
   <div class="row-fluid">
-      <table class="table table-bordered">
+    <h2>My Play History</h2>
+    <br>
+    <br>
+    <table class="table table-bordered history-list-tb">
+      <thead>
         <tr>
-        	<th><span>Game</span></th>
-        	<th><span>Win</span></th>
-        	<th><span>Lose</span></th>
-        	<th><span>Tie</span></th>                                    
-        	<th><span>Total</span></th>            
+          <th><span>Game</span><button ng-click="sort('gameId')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Win</span><button ng-click="sort('win')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
+          <th><span>Lose</span><button ng-click="sort('lost')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Tie</span><button ng-click="sort('draw')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Rank</span><button ng-click="sort('RANK')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Score</span><button ng-click="sort('score')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Token</span><button ng-click="sort('token')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
+          <th><span>Total</span><button ng-click="sort('total')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
+          <th><span>Win Rate</span><button ng-click="sort('winRate')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>        
         </tr>
-        <tr ng-repeat = "history in historys">
+      </thead>     
+      <tbody>
+        <tr data-ng-repeat = "history in historySummary | orderBy:orderProp" class="match-tr">
             <td> 
-              <span>
-                <a href="/history/{{history.gameId}}">{{history.gameName}}</a>
-              </span>
+              <span>{{history.gameId}}</span>
             </td> 
             <td> 
-              <span>{{history.winCount}}</span></td>
+              <span>{{history.win}}</span></td>
             <td> 
-              <span>{{history.loseCount}}</span></td>
+              <span>{{history.lost}}</span></td>
             <td> 
-              <span>{{history.tieCount}}</span></td>      
+              <span>{{history.draw}}</span></td>      
             <td>
-              <span>{{history.winCount + history.loseCount + history.tieCount}}</span></td> 
+              <span>{{history.RANK}}</span></td> 
+            <td>
+              <span>{{history.score}}</span></td>
+            <td>
+              <span>{{history.token}}</span></td>
+            <td>
+              <span>{{history.total}}</span></td>
+            <td>
+              <span>{{history.winRate | number:2}}%</span></td>
         </tr>
-      </table>
-      <div class="row">
-        <a href="/profile">My Profile</a>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col col-20 tab-button">
+        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
       </div>
-      <div class="row">
-        <a href="/choosegame">Choose Game</a>
+      <div class="col col-20 tab-button">
+        <a ng-href="#/choosegame"><span class="glyphicon glyphicon-play"></span>Choose Game</a>
       </div>
-      <div class="row">
-        <a href="/inquiry">Go to Inquiry Page</a>
-      </div>
+    </div>
+    <hr>
+
+    <table class="table table-bordered">
+      <tr>
+        <td><font size=2 color = "red">&nbsp&nbsp&nbsp&nbsp&nbspMost Played Game:</font></td>
+        <td><font size=2 color = "green">Most Win Game:</font></td>
+        <td><font size=2 color = "blue">Hightest Win Rate:</font></td>
+      </tr>
+      <tr>
+        <td>
+        <li class="row" width="280px">
+          &nbsp&nbsp&nbsp&nbsp&nbsp<span ng-repeat="history in historySummary | orderBy: orderTotal" ng-show="$index < 2" class="game-recommend-img">
+           <a href="#/choosegamedetail/{{history.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120" ></a>
+           <center><a href="#/choosegamedetail/{{history.gameId}}">{{history.gameId}}</a></center>
+          </span>
+        </li>
+        </td>
+        <td>
+        <li class="row" width="280px">
+          <span ng-repeat="history in historySummary | orderBy: orderWin" ng-show="$index < 2" class="game-recommend-img">
+           <a href="#/choosegamedetail/{{history.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+           <center><a href="#/choosegamedetail/{{history.gameId}}">{{history.gameId}}</a></center>
+          </span>
+        </li>
+        </td>
+        <td>
+        <li class="row" width="280px">
+          <span ng-repeat="history in historySummary | orderBy: orderWinRate" ng-show="$index < 2" class="game-recommend-img">
+           <a href="#/choosegamedetail/{{history.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+           <center><a href="#/choosegamedetail/{{history.gameId}}">{{history.gameId}}</a></center>
+          </span>
+        </li>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
