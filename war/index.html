@@ -1,20 +1,26 @@
 <!doctype html>
-<html xmlns:fb="http://ogp.me/ns/fb#" lang="en" ng-app="playerApp">
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en" ng-app="playerApp" class="slide-left-right-ios7">
 <head>
     <meta Content-Type="text/csv" charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="fbtitle" property="og:title" content="SMG Player Achivements" /> 
     <meta name="fbimage" property="og:image" content="img/superman.png" /> 
     <title ng-bind="'SMG ' + title">SMG Player</title>
+     
+    <!-- <link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="css/sidebar.css">  
+    <link rel="stylesheet" href="css/animations.css" type="text/css"> -->
+    
     <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css"></link>
-    <link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap.css"></link>
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/animations.css" type="text/css">
+    <link rel="stylesheet" href="lib/css/ionic.css">
     <link rel="stylesheet" href="css/app.css">
+
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-resource.js"></script>
     <script src="lib/angular/angular-route.js"></script>
     <script src="lib/angular/angular-cookies.js"></script>
     <script src="lib/angular/angular-animate.js"></script>
+    <script src="lib/js/ionic.bundle.js"></script>
     <script src="js/app.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/controllers.js"></script>
@@ -22,8 +28,12 @@
     <script src="js/directives.js"></script>
 </head>
 <body>
-    <div id="fb-root"></div>
-    <div ng-view></div>
-
+    <div id="fb-root"></div> 
+    <ion-nav-bar class="bar-positive nav-title-slide-ios7">Nav Bar</ion-nav-bar>
+  
+    <!-- where the initial view template will be rendered -->
+    <ion-nav-view class="view-content slide-left-right-ios7">
+      <i class="icon ion-loading-c"></i> -
+    </ion-nav-view>
 </body>
 </html>
