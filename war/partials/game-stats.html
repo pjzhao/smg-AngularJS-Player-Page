@@ -1,0 +1,62 @@
+<div class="container-fluid">
+	<div class="row-fluid">		
+		<h5>{{gamedetail.gameName}}</h5>
+		<hr>
+	    <div>
+			<ul>
+				<p>{{game.description}}</p><br>
+				<p>Highest score achieved by: {{game.highScore.playerId}}</p><br>
+				<p>Highest score is: {{game.highScore.score}}</p><br>
+ 				<p>Total rating of the game: {{rateResponse.rating}}</p><br>	
+ 				<p>Rate you give: {{rating}}</p><br>	
+				Current games:
+				<table class="table table-bordered">					
+			        <tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+			        </tr>
+				</table><br>
+				Finished games:
+				<table class="table table-bordered">
+			        <tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
+			            <td> 
+			              <span>{{currentgameplayer.firstName}}</span></td> 
+			            <td> 
+			              <span>{{currentgameplayer.nickname}}</span></td>    
+						<td> 
+			              <span>{{currentgameplayer.score}}</span></td>  
+						<td> 
+			              <span>{{currentgameplayer.tokens}}</span></td>  
+			        </tr>
+    			</table>
+      			<form ng-submit="rate()">
+      				<table>
+						<tr>
+							<td>
+								<span class="glyphicon glyphicon-thumbs-up"></span>
+							</td>
+							<td>
+								<input type="text" ng-model="rating" size="15" style="height:35px">
+							</td>	
+							<td>
+								&nbsp&nbsp&nbsp&nbsp<input class="btn btn-md btn-success"  type="submit" value="Rate the game">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td> (1.0 - 5.0) </td>
+						</tr>
+					</table>					
+				</form>
+				<br>	
+				<hr>	
+    			<div class="col col-20 tab-button">
+					<a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-list-alt"></span>Back To Game Detail</a>
+				</div>	
+			</ul>
+	    </div>
+	</div>
+</div>
+

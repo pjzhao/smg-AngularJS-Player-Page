@@ -1,0 +1,66 @@
+
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li><span class="glyphicon glyphicon-search"></span>Search<br>
+      <p><input ng-model="query.gameName" class="narrow" placeholder="Search by name..."><br></p></li>
+      <br>
+      <li><span class="glyphicon glyphicon-sort"></span>Sort by<p>
+            <select ng-model="orderProp" class="narrow">
+              <option value="gameName">Name</option>
+              <option value="Developer">Developer</option>
+              <option value="-postDate">Post Date</option>
+              <option value="-rating">Rate</option>
+            </select>
+            </p>
+      </li>
+      <div class="col col-50m tab-button">
+        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
+      </div>
+    </ul>
+  </div>
+
+  <!-- Keep all page content in the page-content inset div-->
+  <div class="col col-67 game-list-container">
+    <img ng-src="..\img\layout\star.gif" class="recommend-img">
+    <font size=3>Newest Games:</font><br>
+    <li class="row game-recommend-row">
+      <span ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 5" class="game-recommend-img">
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
+      </span>
+    </li>
+    <br>
+    <img ng-src="..\img\layout\fire.gif" class="recommend-img">
+    <font size=3>Hottest Games:</font><br>
+    <li class="row game-recommend-row">    
+      <span ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 5" class="game-recommend-img">
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
+      </span>
+    </li>
+    <br>
+    <div id="page-content-wrapper">
+      <ul class="example-animate-container">
+        <br>
+        <li class="animate-repeat" ng-repeat="game in games | filter:query:strict | orderBy:orderProp">
+              <!--<img ng-src="{{game.icon[0]}}">
+                <a href="/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.screenshots[0]}}"></a>
+                <h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
+                <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
+              <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
+          <div class="thumbnail">
+            <p><a href="#/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" vspace="20"></a><br>
+            <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
+            <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Post on: {{game.postDate}}</p>
+            <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p>
+            <p><img ng-src="{{game.rating | ratingFilter}}" height="20"></p>
+            
+          </div>
+            <!--<p><img ng-src="{{game.screenshots[0]}}" class="thumb"></p> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

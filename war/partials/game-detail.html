@@ -1,0 +1,33 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<h5>{{gamedetail.gameName}}</h5>
+		<hr>
+			<ul class="games">
+				<p>Developed by: <a ng-href="#/user/{{gamedetail.developerId[0]}}">{{gamedetail.developerId[0]}}</a></p><br>
+				<p>Height: {{gamedetail.height}}, Width: {{gamedetail.width}}</p><br>
+				<p>Posted on: {{gamedetail.postDate}}</p><br>
+				<p>Description: {{gamedetail.description}}</p><br>
+				<p><a ng-href="{{gamedetail.url}}" target="_blank">Url: {{gamedetail.url}}</a></p><br>
+			</ul>
+			<li class="row">
+			<div class="col col-10 tab-button">
+				<a href=""><span class="glyphicon glyphicon-play"></span>Play AI</a>
+			</div>
+			<div class="col col-15 tab-button">
+				<a href=""><span class="glyphicon glyphicon-play"></span>Pass and Play</a>
+			</div>
+			<div class="col col-15 tab-button">
+				<a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{currentGameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank"><span class="glyphicon glyphicon-play"></span>Auto Matched</a>
+			</div>
+			<div class="col col-10 tab-button">
+				<a href="#/choosegame"><span class="glyphicon glyphicon-remove"></span>Return</a>
+			</div>
+			<div class="col col-10 tab-button">
+				<a href="#/history/{{currentGameId}}"><span class="glyphicon glyphicon-time"></span>History</a>
+			</div>
+			<div class="col col-15 tab-button">
+				<a href="#/choosegamestats/{{currentGameId}}"><span class="glyphicon glyphicon-list-alt"></span>Game Stats</a>
+			</div>
+		</li>
+	</div>
+</div>

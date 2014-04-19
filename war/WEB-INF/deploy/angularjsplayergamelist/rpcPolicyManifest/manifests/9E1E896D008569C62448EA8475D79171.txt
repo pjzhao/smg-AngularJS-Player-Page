@@ -1,0 +1,2 @@
+serviceClass: gameList.client.GreetingService
+path: 1B628806AEA5B7A131CF860263259449.gwt.rpc

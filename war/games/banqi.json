@@ -1,0 +1,10 @@
+{
+	"id": "banqi",
+    "name": "Banqi",
+    "description": "Introduction to Banqi in banqi.json",
+    "images": [
+        "../img/games/banqi-icon.jpg", 
+        "../img/games/banqi-1.jpg",  
+        "../img/games/banqi-2.jpg"
+    ]    
+}

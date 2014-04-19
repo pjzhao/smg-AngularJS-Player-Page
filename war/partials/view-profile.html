@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row-fluid head">
+        <h2 ng-hide="{{readOnly}}">My Profile</h2>
+        <div class="row">
+        <div class="col">
+        <table class="table table-bordered">
+          <tr>
+              <th><span>Player Id</span></th>
+              <td> 
+                <span>{{playerId}}</span></td> 
+          </tr>
+          <tr>
+              <th><span>First Name</span></th>
+              <td> 
+                <span>{{firstname}}</span></td>
+          </tr>
+          <tr>
+              <th><span>Last Name</span></th>
+              <td> 
+                <span>{{lastname}}</span></td>
+          </tr>                        
+          <tr>
+              <th><span>Nickname</span></th>
+              <td> 
+                <span>{{nickname}}</span></td>
+          </tr>
+          <tr>            
+              <th><span>Email</span></th> 
+              <td> 
+                <span>{{email}}</span></td>                                                            
+          </tr>                                
+        </table>
+        <!-- </div>
+          <img src="..\img\pic.jpg" style="margin:20px; height:180px" >
+        </div> -->
+        
+      <hr />
+      <div class="row" ng-hide="{{readOnly}}">
+        <div class="col col-15 tab-button">
+          <a href="#/choosegame"><span class="glyphicon glyphicon-play"></span>Choose Game</a>
+        </div>
+        <div class="col col-15 tab-button">
+          <a href="#/history"><span class="glyphicon glyphicon-time"></span>History List</a>
+        </div>        
+      </div> 
+    </div>     
+  </div>  
