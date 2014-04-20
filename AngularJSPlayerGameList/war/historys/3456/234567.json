@@ -5,11 +5,11 @@
             "isWinner": 1,
             "tokenChange": 113,
             "scoreChange": 214,
-            "opponentId": "2145"
+			"opponentId": "2145"
         }, 
         {
             "date": "2014-1-1", 
-            "isWinner": 0
+			"isWinner": 0
             "tokenChange": 113,
             "scoreChange": 111,
             "opponentId": "9919"
@@ -29,11 +29,11 @@
             "opponentId": "1224"
         }, 
         {
-            "date": "2014-2-10",
+			"date": "2014-2-10",
             "isWinner": 1,
             "tokenChange": 13,
             "scoreChange": 34,
-            "opponentId": "02345"
+			"opponentId": "02345"
         }
     ]
 }

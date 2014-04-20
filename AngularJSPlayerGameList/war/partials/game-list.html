@@ -1,11 +1,22 @@
 
 <ion-view>
 <ion-content>
-<div style="background-color: #E8E8E8 ">
-  
-  <!-- I think we should move these two buttons to sidebar 
-  <div class="row" >
-    <ul>      
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li><span class="glyphicon glyphicon-search"></span>Search<br>
+      <p><input ng-model="query.gameName" class="narrow" placeholder="Search by name..."><br></p></li>
+      <br>
+      <li><span class="glyphicon glyphicon-sort"></span>Sort by<p>
+            <select ng-model="orderProp" class="narrow">
+              <option value="gameName">Name</option>
+              <option value="Developer">Developer</option>
+              <option value="-postDate">Post Date</option>
+              <option value="-rating">Rate</option>
+            </select>
+            </p>
+      </li>
       <br>
       <div class="row col tab-button">
         <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
@@ -16,90 +27,49 @@
       </div>
     </ul>
   </div>
-  -->
+
   <!-- Keep all page content in the page-content inset div-->
-  <ion-list>
-    <div class="newestgame">
-      <h3>Newest Games</h3>
-      <div ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 3">
-        <div class="item item-input item-select" style="background-color: #00CC99;" ng-click="toggleNewGroup(game)" ng-class="{active: isNewGroupShown(game)}">
-          <i class="icon" ng-class="isNewGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
-          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
-          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br></div>
-        </div>
-        <div class="item item-input item-select" style="background-color: #009999;" class="item-accordion" ng-show="isNewGroupShown(game)">
-          <div class="row-one">
-            <a href="">Play AI</a>
-            <a href="">Pass and Play</a>
-            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
+  <div class="col col-67 game-list-container">
+    <img ng-src="..\img\layout\star.gif" class="recommend-img">
+    <font size=3>Newest Games:</font><br>
+    <li class="row game-recommend-row">
+      <span ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 5" class="game-recommend-img">
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
+      </span>
+    </li>
+    <br>
+    <img ng-src="..\img\layout\fire.gif" class="recommend-img">
+    <font size=3>Hottest Games:</font><br>
+    <li class="row game-recommend-row">    
+      <span ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 5" class="game-recommend-img">
+       <a href="#/choosegamedetail/{{game.gameId}}" class="thumbnail"><img ng-src="{{game.icon | gameIcon}}" height="120" width="120"></a>
+       <center><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}}</a></center>
+      </span>
+    </li>
+    <br>
+    <div id="page-content-wrapper">
+      <ul class="example-animate-container">
+        <br>
+        <li class="animate-repeat" ng-repeat="game in games | filter:query:strict | orderBy:orderProp">
+              <!--<img ng-src="{{game.icon[0]}}">
+                <a href="/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.screenshots[0]}}"></a>
+                <h3><a href="/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></h3>
+                <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Description: {{game.description}}</p>
+              <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p> -->
+          <div class="thumbnail">
+            <p><a href="#/choosegamedetail/{{game.gameId}}" class="thumb"><img ng-src="{{game.icon | gameIcon}}" vspace="20"></a><br>
+            <p><a href="#/choosegamedetail/{{game.gameId}}">{{game.gameName}} ({{game.gameId}})</a></p>
+            <p>Developed by: {{game.developer[0].firstName}} {{game.developer[0].nickname}}, Post on: {{game.postDate}}</p>
+            <p>Url: {{game.url}}, Width: {{game.width}}, Height: {{game.height}}</p>
+            <p><img ng-src="{{game.rating | ratingFilter}}" height="20"></p>
+            
           </div>
-          <div class="row-two">
-            <a href="#/history/{{game.gameId}}">History</a>
-            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
-          </div>
-        </div>
-      </div>
+            <!--<p><img ng-src="{{game.screenshots[0]}}" class="thumb"></p> -->
+        </li>
+      </ul>
     </div>
-  </ion-list>
-
-  <ion-list>
-    <div class="hottestgame">
-      <h3>Hottest Games</h3>
-      <div ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 3">
-        <div class="item item-input item-select" style="background-color: #6633FF;" ng-click="toggleHotGroup(game)" ng-class="{active: isHotGroupShown(game)}">
-          <i class="icon" ng-class="isHotGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
-          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
-          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br></div>
-        </div>
-        <div class="item item-input item-select" style="background-color: #6699FF;" class="item-accordion" ng-show="isHotGroupShown(game)">
-          <div class="row-one">
-            <a href="">Play AI</a>
-            <a href="">Pass and Play</a>
-            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
-          </div>
-          <div class="row-two">
-            <a href="#/history/{{game.gameId}}">History</a>
-            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ion-list>
-
-  <div>
-    <input class="col-100" ng-model="query.gameName" placeholder="Search by name..."><br>
-    <select class="col-100" ng-model="orderProp" class="narrow">
-      <option value="gameName">Sort by Name</option>
-      <option value="Developer">Sort by Developer</option>
-      <option value="-postDate">Sort by Post Date</option>
-      <option value="-rating">Sort by Rate</option>
-    </select>
   </div>
-
-  <ion-list>
-    <div class="gamelist">
-      <h3>All Games</h3>
-      <div ng-repeat="game in games | filter:query:strict | orderBy:orderProp">
-        <div class="item item-input item-select" style="background-color: #339966;" ng-click="toggleAllGroup(game)" ng-class="{active: isAllGroupShown(game)}">
-          <i class="icon" ng-class="isAllGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
-          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
-          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br>
-          <b><img ng-src="{{game.rating | ratingFilter}}" height="20"></b></div>
-        </div>
-        <div class="item item-input item-select" style="background-color: #66CC33;" class="item-accordion" ng-show="isAllGroupShown(game)">
-          <div class="row-one">
-            <a href="">Play AI</a>
-            <a href="">Pass and Play</a>
-            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
-          </div>
-          <div class="row-two">
-            <a href="#/history/{{game.gameId}}">History</a>
-            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ion-list>
 </div>
 
 </ion-content>

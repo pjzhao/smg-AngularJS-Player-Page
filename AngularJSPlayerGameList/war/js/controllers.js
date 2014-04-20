@@ -274,52 +274,6 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
     $scope.orderProp = 'gameName';
     $scope.orderNew = '-postDate';
     $scope.orderHot = '-rating';
-    $scope.groups = [];
-    for (var i=0; i<10; i++) {
-      $scope.groups[i] = {
-        name: i,
-        items: []
-      };
-      for (var j=0; j<3; j++) {
-        $scope.groups[i].items.push(i + '-' + j);
-      }
-    }
-    
-    /*
-     * if given group is the selected group, deselect it
-     * else, select the given group
-     */
-    $scope.toggleNewGroup = function(group) {
-      if ($scope.isNewGroupShown(group)) {
-        $scope.shownNewGroup = null;
-      } else {
-        $scope.shownNewGroup = group;
-      }
-    };
-    $scope.isNewGroupShown = function(group) {
-      return $scope.shownNewGroup === group;
-    };
-    $scope.toggleHotGroup = function(group) {
-      if ($scope.isHotGroupShown(group)) {
-        $scope.shownHotGroup = null;
-      } else {
-        $scope.shownHotGroup = group;
-      }
-    };
-    $scope.isHotGroupShown = function(group) {
-      return $scope.shownHotGroup === group;
-    };
-
-    $scope.toggleAllGroup = function(group) {
-      if ($scope.isAllGroupShown(group)) {
-        $scope.shownAllGroup = null;
-      } else {
-        $scope.shownAllGroup = group;
-      }
-    };
-    $scope.isAllGroupShown = function(group) {
-      return $scope.shownAllGroup === group;
-    };
 }]);
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', '$cookieStore',
