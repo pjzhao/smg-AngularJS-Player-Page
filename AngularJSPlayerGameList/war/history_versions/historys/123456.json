@@ -1,0 +1,36 @@
+{
+    "gameId": "123456",
+    "gameName": "Mahjong",
+    "matches":[
+        {
+            "matchId": "23232",
+            "playerIds": ["1234", "5678"],
+            "statusId": "1",
+            "winnerIds": ["1234"]
+        }, 
+        {
+            "matchId": "77777", 
+            "playerIds": ["1234", "9999"],
+            "statusId": "2",
+            "winnerIds": ["9999"]
+        }, 
+        {
+            "matchId": "98765", 
+            "playerIds": ["1234", "0002"],
+            "statusId": "2",
+            "winnerIds": ["0002"]
+        },
+        {
+            "matchId": "23237",
+            "playerIds": ["1234", "5678"],
+            "statusId": "1",
+            "winnerIds": ["1234"]
+        }, 
+        {
+            "matchId": "23299",
+            "playerIds": ["1234", "0002"],
+            "statusId": "1",
+            "winnerIds": ["1234"]
+        }
+    ]
+}
