@@ -1,58 +1,34 @@
 <ion-view>
-<ion-content>
-<div class="container-fluid history-list-page">
-  <div class="row-fluid">
-  	<h2>My Play History</h2>
-  	<br>
-  	<br>
-    <table class="table table-bordered history-list-tb">
-      <thead>
-        <tr>
-        	<th><span>Game</span><button ng-click="sort('gameId')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Win</span><button ng-click="sort('win')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
-        	<th><span>Lose</span><button ng-click="sort('lost')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Tie</span><button ng-click="sort('draw')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Rank</span><button ng-click="sort('RANK')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Score</span><button ng-click="sort('score')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Token</span><button ng-click="sort('token')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Total</span><button ng-click="sort('total')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
-          <th><span>Win Rate</span><button ng-click="sort('winRate')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>        
-        </tr>
-      </thead>     
-      <tbody>
-        <tr data-ng-repeat = "history in historySummary | orderBy:orderProp" class="match-tr">
-            <td> 
-              <span>{{history.gameId}}</span>
-            </td> 
-            <td> 
-              <span>{{history.win}}</span></td>
-            <td> 
-              <span>{{history.lost}}</span></td>
-            <td> 
-              <span>{{history.draw}}</span></td>      
-            <td>
-              <span>{{history.RANK}}</span></td> 
-            <td>
-              <span>{{history.score}}</span></td>
-            <td>
-              <span>{{history.token}}</span></td>
-            <td>
-              <span>{{history.total}}</span></td>
-            <td>
-              <span>{{history.winRate | number:2}}%</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="row">
-      <div class="col col-20 tab-button">
-        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
-      </div>
-      <div class="col col-20 tab-button">
-        <a ng-href="#/choosegame"><span class="glyphicon glyphicon-play"></span>Choose Game</a>
-      </div>
-    </div>
-  </div>
-</div>
-</ion-content>
-</ion-view>
+    <ion-content>
+        <ion-list>
+            <div ng-repeat="history in historySummary">
+                <ion-item class="item-stable"
+                          style="text-align:center"
+                          item="history"
+                          ng-click="toggleGroup(history)"
+                          ng-class="{active: isGroupShown(history)}">
+                    <i class="icon" ng-class="isGroupShown(history) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    Game - {{history.gameId}}
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(history)">
+                    <div class="row">
+                        <div class="col">Token</div>
+                        <div class="col">Score</div>
+                        <div class="col">Rank</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Win</div>
+                        <div class="col">Lose</div>
+                        <div class="col">Draw</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Highest Score</div>
+                        <div class="col">Latest Match</div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+    </ion-vie

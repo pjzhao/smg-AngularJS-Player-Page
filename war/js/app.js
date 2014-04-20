@@ -24,6 +24,12 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
     templateUrl: '/partials/game-list.html',
     controller: "GameListCtrl"
   })
+  .state('historylist', {
+      title: "History List",
+      url: '/historylist',
+      templateUrl: '/partials/history-list.html',
+      controller: "HistoryListCtrl"
+  })
   .state('login', {
     title: "Log In",
     url: '/login',
