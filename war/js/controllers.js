@@ -578,4 +578,17 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
       $scope.reverse = !$scope.reverse
     }
   };
+
+  $scope.toggleGroup = function (group) {
+      if ($scope.isGroupShown(group)) {
+          $scope.shownGroup = null;
+      } else {
+          $scope.shownGroup = group;
+      }
+  };
+
+  $scope.isGroupShown = function (group) {
+      return $scope.shownGroup === group;
+  };
+
 }]);
