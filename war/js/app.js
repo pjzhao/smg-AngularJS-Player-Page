@@ -10,80 +10,83 @@ var playerApp = angular.module("playerApp", [
   "profileFilters",
   "playerControllers",
   "profileServices",
-  "playerDirectives"
+  "playerDirectives",
+  "ionic"
 ]);
 
-playerApp.config(["$routeProvider", "$httpProvider",
-  function($routeProvider, $httpProvider) {
-   //$locationProvider.html5Mode(true);
-    
-    $routeProvider.
-      //Login and Signup are only for test and debug -- Pinji
-      when("/login", {
-        title: "Log In",
-        templateUrl: "/partials/login.html",
-        controller: "LoginCtrl"
-      }).        
-      when("/signup", {
-        title: "Sign Up",
-        templateUrl: "/partials/signup.html",
-        controller: "SignUpCtrl"
-      }).       
-      when("/profile/:userId", {
-        title: "My Profile",
-        templateUrl: "/partials/view-profile.html",
-        controller: "ProfileCtrl"
-      }).    
-      when("/user/:userId", {
-        title: "Profile",
-        templateUrl: "/partials/view-profile.html",
-        controller: "UserCtrl"
-      }).  
-      when("/opponent/:opponentId", {
-        title: "Know About Your Opponent",
-        templateUrl: "/partials/opponent.html",
-        controller: "OpponentCtrl"
-     }).
-      when("/editprofile", {
-        title: "Edit Profile",
-        templateUrl: "/partials/edit-profile.html",
-        controller: "EditCtrl"
-      }).
-      when("/history", {
-        templateUrl: "/partials/history-list.html",
-        controller: "HistoryListCtrl"
-      }).
-      when("/history/:gameId", {
-        title: "Play History",
-        templateUrl: "/partials/history-detail.html",
-        controller: "HistoryDetailCtrl"
-      }).
-      when("/choosegame", {
-        title: "Choose Your Game",
-        templateUrl: "/partials/game-list.html",
-        controller: "GameListCtrl"
-      }).
-      when("/choosegamestats/:gameId", {
-        title: "Leaderboard",
-        templateUrl: "/partials/game-stats.html",
-        controller: "GameStatsCtrl"
-      }).
-      when("/choosegamedetail/:gameId", {
-        title: "Game Detail",
-        templateUrl: "/partials/game-detail.html",
-        controller: "GameDetailCtrl"
-      }).
-      when("/analysis", {
-        title: "My Performance",
-        templateUrl: "/partials/history-analysis.html",
-        controller: "AnalysisCtrl"
-      }).
-      otherwise({
-        redirectTo: "/login"
-      });
-      $httpProvider.defaults.useXDomain = true;
-      delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  }]);
+playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
+  function($stateProvider, $urlRouterProvider, $httpProvider) {
+  $urlRouterProvider.otherwise('/choosegame');
+  $stateProvider
+  .state('choosegame', {
+    title: "Choose Game",
+    url: '/choosegame',
+    templateUrl: '/partials/game-list.html',
+    controller: "GameListCtrl"
+  })
+  .state('login', {
+    title: "Log In",
+    url: '/login',
+    templateUrl: '/partials/login.html',
+    controller: "LoginCtrl"
+  })
+  .state('signup', {
+    title: "Sign Up",
+    url: '/signup',
+    templateUrl: '/partials/signup.html',
+    controller: "SignUpCtrl"        
+  })
+  .state("profile", {
+    title: "My Profile",
+    url: "/profile/:userId",
+    templateUrl: "/partials/view-profile.html",
+    controller: "ProfileCtrl" 
+  })
+  .state("userprofile", {
+    title: "Profile",
+    url: "/user/:userId",
+    templateUrl: "/partials/view-profile.html",
+    controller: "UserCtrl"
+  }) 
+  .state("opponent", {
+    title: "Know About Your Opponent",
+    url: "/opponent/:opponentId",
+    templateUrl: "/partials/opponent.html",
+    controller: "OpponentCtrl"
+  })
+  .state("historydetail", {
+    title: "Play History",
+    url: "/history/:gameId",
+    templateUrl: "/partials/history-detail.html",
+    controller: "HistoryDetailCtrl"
+  })
+  .state("gamestats", {
+    title: "Leaderboard",
+    url: "/choosegamestats/:gameId",
+    templateUrl: "/partials/game-stats.html",
+    controller: "GameStatsCtrl"
+  })
+  .state("gamedetail", {
+    title: "Game Detail",
+    url: "/choosegamedetail/:gameId",
+    templateUrl: "/partials/game-detail.html",
+    controller: "GameDetailCtrl"
+  })  
+  .state("analysis", {
+    title: "My Performance",
+    url: "/analysis",
+    templateUrl: "/partials/history-analysis.html",
+    controller: "AnalysisCtrl"
+  })
+  .state("help", {
+    title: "Help",
+    url: "/help",
+    templateUrl: "/partials/help.html"  
+  });
+
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
 
 playerApp.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

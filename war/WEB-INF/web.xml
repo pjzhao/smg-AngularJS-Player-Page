@@ -8,17 +8,17 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>gameList.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>playerPage.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/angularjsplayergamelist/greet</url-pattern>
+    <url-pattern>/smg_angularjs_player_page/greet</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>AngularJSPlayerGameList.html</welcome-file>
+    <welcome-file>Smg_AngularJS_Player_Page.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

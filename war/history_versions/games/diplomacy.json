@@ -1,0 +1,10 @@
+{
+	"id": "diplomacy",
+    "name": "Diplomacy",
+    "description": "Introduction to Diplomacy in diplomacy.json",
+    "images": [
+        "../img/games/diplomacy-icon.jpg", 
+        "../img/games/diplomacy-1.jpg",  
+        "../img/games/diplomacy-2.jpg"
+    ]    
+}

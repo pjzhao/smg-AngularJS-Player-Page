@@ -1,8 +1,10 @@
+<ion-view>
+<ion-content>
 <div class="container-fluid history-detail-page">
   <div class="row-fluid">
     <div class="row head">
       <div class="col col-60">
-        <h3>{{gamedetail.gameName}} Play History</h3>
+        <h2>{{gamedetail.gameName}} Play History</h2>
       </div>
       <div class="col col-40">
         <div class="row badge-row">
@@ -47,15 +49,26 @@
         </tr>
     </table>
     <div class="row">
-      <div class="col col-20 tab-button">
+      <div class="col col-15 tab-button">
         <a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-tower"></span>Play Again</a>
       </div>
-      <div class="col col-20 tab-button">
+      <div class="col col-15 tab-button">
         <a ng-href="#/analysis"><span class="glyphicon glyphicon-floppy-disk"></span>My Performance</a>
       </div>
-      <div class="col col-20 tab-button">
+      <div class="col col-15 tab-button">
+        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
+      </div>
+      <div class="col col-15 tab-button">
+        <a href="#/choosegamestats/{{currentGameId}}"><span class="glyphicon glyphicon-stats"></span>Game Stats</a>
+      </div>
+      <div class="col col-15 tab-button">
+        <a href=""><span class="glyphicon glyphicon-usd"></span>Buy Token</a>
+      </div>
+      <div class="col col-15 tab-button">
         <div class="fb-share-button" data-href="http://4.smg-angularjs-player.appspot.com/index.html#/history/0" data-type="button"></div>
       </div>
     </div>
   </div>
 </div>
+</ion-content>
+</ion-view>

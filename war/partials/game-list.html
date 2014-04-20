@@ -1,4 +1,6 @@
 
+<ion-view>
+<ion-content>
 <div id="wrapper">
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
@@ -15,8 +17,13 @@
             </select>
             </p>
       </li>
-      <div class="col col-50m tab-button">
+      <br>
+      <div class="row col tab-button">
         <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
+      </div>
+      <br>
+      <div class="row col tab-button">
+        <a ng-href="#/help" target="_blank"><span class="glyphicon glyphicon glyphicon-question-sign"></span>Newbie Guide</a>
       </div>
     </ul>
   </div>
@@ -64,3 +71,6 @@
     </div>
   </div>
 </div>
+
+</ion-content>
+</ion-view>
