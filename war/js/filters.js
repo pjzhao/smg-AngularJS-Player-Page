@@ -94,6 +94,38 @@ angular.module('profileFilters').filter('ratingFilter', function(){
 	};
 });
 
+angular.module('profileFilters').filter('leaderNameFilter', function() {
+	return function(input) {
+		if (input == null) {
+			return "PlayerName"
+		} else {
+			return input
+		}
+	};
+}); 
+
+angular.module('profileFilters').filter('leaderScoreFilter', function() {
+	return function(input) {
+		if (input == null) {
+			return "PlayerScore"
+		} else {
+			return input
+		}
+	};
+}); 
+
+angular.module('profileFilters').filter('leaderFilter', function() {
+	return function(input) {
+		if (input == null) {
+			return "NULL"
+		} else {
+			return input
+		}
+	};
+}); 
+
+
+
 /*
 angular.module('profileFilters').filter('sliceFilter', function() {
   return function(arr, start, end) {
