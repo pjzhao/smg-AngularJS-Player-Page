@@ -579,16 +579,48 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
     }
   };
 
-  $scope.toggleGroup = function (group) {
-      if ($scope.isGroupShown(group)) {
-          $scope.shownGroup = null;
+  $scope.toggleHistory = function (history) {
+      if ($scope.isHistoryShown(history)) {
+          $scope.shownHistory = null;
+          $scope.tokenFile = null;
       } else {
-          $scope.shownGroup = group;
+          $scope.shownHistory = history;
+          /*$http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.shownHistory.gameId + 
+           '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+          $http.get('../analysis/token.json')
+              .success(function (data) {
+                  $scope.tokenFile = data;
+              })
+              .then(function () {
+                  $scope.tokenFileResponse();
+              })
+          $scope.inquireInfoResponse = function () {
+              if ($scope.tokenFile.error) {
+                  $window.alert($scope.tokenFile.error);
+              }
+          };
+
+          //Use fake JSON data for testing - Pinji
+          /*$http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+          '&gameId=' + $scope.history.gameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+          $http.get('../analysis/history.json')
+          .success(function (data) {
+              $scope.historyDetailProfile = data;
+          })
+          .then(function () {
+              if ($scope.historyDetailProfile.error) {
+                  $window.alert($scope.historyDetailProfile.error);
+                  return null;
+              }
+              else {
+                  $scope.lastmatch = $scope.historyDetailProfile.history[9];
+                  return $scope.lastmatch;
+              }
+          });
       }
   };
 
-  $scope.isGroupShown = function (group) {
-      return $scope.shownGroup === group;
+  $scope.isHistoryShown = function (history) {
+      return $scope.shownHistory === history;
   };
-
 }]);

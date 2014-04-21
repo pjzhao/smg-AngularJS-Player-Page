@@ -1,34 +1,57 @@
 <ion-view>
     <ion-content>
         <ion-list>
-            <div ng-repeat="history in historySummary">
-                <ion-item class="item-stable"
-                          style="text-align:center"
-                          item="history"
-                          ng-click="toggleGroup(history)"
-                          ng-class="{active: isGroupShown(history)}">
-                    <i class="icon" ng-class="isGroupShown(history) ? 'ion-minus' : 'ion-plus'"></i>
-                    &nbsp;
+            <h3 style="text-align:center; margin-top:10px; margin-bottom:0">History</h3>
+            <a ng-repeat="history in historySummary" style="margin-top:5px" class="list card">
+                <div class="item item-stable item-icon-left item-icon-right "
+                     ng-click="toggleHistory(history)"
+                     ng-class="{active: isHistoryShown(history)}">
+                    <i class="ion-game-controller-b"></i>
                     Game - {{history.gameId}}
-                </ion-item>
+                    <i ng-class="isHistoryShown(history) ? 'ion-minus' : 'ion-chevron-down'"></i>
+                </div>
                 <ion-item class="item-accordion"
-                          ng-show="isGroupShown(history)">
-                    <div class="row">
-                        <div class="col">Token</div>
-                        <div class="col">Score</div>
-                        <div class="col">Rank</div>
+                          ng-show="isHistoryShown(history)">
+                    <div class="row" style="text-align:center">
+                        <div class="col">Win: {{tokenFile.draw}}</div>
+                        <div class="col">Lose: {{tokenFile.lost}}</div>
+                        <div class="col">Draw: {{tokenFile.draw}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col">Win</div>
-                        <div class="col">Lose</div>
-                        <div class="col">Draw</div>
-                    </div>
-                    <div class="row">
-                        <div class="col">Highest Score</div>
-                        <div class="col">Latest Match</div>
-                    </div>
+                    <button class="button button-full button-stable"
+                            style="text-align:center"
+                            ng-init="collapsed='false'"
+                            ng-click="collapsed=!collapsed">
+                        Your achievement
+                    </button>
+                    <ion-item class="item-accordion"
+                              ng-show="collapsed">
+                        <div class="row" style="text-align:center">
+                            <div class="col">Token: {{tokenFile.token}}</div>
+                            <div class="col">Rank: {{tokenFile.rank}}</div>
+                        </div>
+                        <div style="text-align:center">Highest Score: {{tokenFile.score}}</div>
+                    </ion-item>
+                    <button class="button button-full button-stable"
+                            style="text-align:center"
+                            ng-init="collapse='false'"
+                            ng-click="collapse=!collapse">
+                        Lastest Match
+                    </button>
+                    <ion-item class="item-accordion"
+                              ng-show="collapse">
+                        <h2>Your opponent(s):</h2>
+                        <div ng-repeat="opp in lastmatch.opponentIds">{{opp}}</div>
+                        <br />
+                        <h2>Game Result:</h2>
+                        <div>{{lastmatch.result}}</div>
+                    </ion-item>
+                    <span href="#/history/{{history.gameId}}">
+                        <button class="button button-full button-stable"
+                                style="text-align:center">
+                            Results
+                        </button>
+                    </span>
                 </ion-item>
-            </div>
         </ion-list>
     </ion-content>
-    </ion-vie
+</ion-view>
