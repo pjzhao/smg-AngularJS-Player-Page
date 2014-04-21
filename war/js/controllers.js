@@ -74,10 +74,44 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           }
           else {
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
-                $scope.histories =  $cookieStore.get('historiesTag');
+                $scope.histories = $cookieStore.get('historiesTag');
+                $scope.lastmatch = $scope.histories[9];
+                if ($scope.lastmatch.result == "DRAW") {
+                    $scope.gameresult = "Draw";
+                } else if ($scope.lastmatch.result == "WIN") {
+                    $scope.gameresult = "You win! Good job.";
+                } else if ($scope.lastmatch.result == "LOST") {
+                    $scope.gameresult = "You lose! Never mind.";
+                }
           }
       };
 
+      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      $http.get('../players/1234.json')
+      .success(function (data) {
+          $scope.userProfile = data;
+      })
+      .then(function () {
+          if ($scope.userProfile.error) {
+              $scope.userProfile = null;
+          } else {
+              $scope.username = $scope.userProfile.firstname + " " + $scope.userProfile.lastname;
+              $scope.usernickname = $scope.userProfile.nickname;
+          };
+      });
+      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
+      $http.get('../players/1234.json')
+      .success(function (data) {
+          $scope.oppuserProfile = data;
+      })
+       .then(function () {
+           if ($scope.error) {
+               $scope.oppuserProfile = null;
+           } else {
+               $scope.oppname = $scope.oppuserProfile.firstname + " " + $scope.oppuserProfile.lastname;
+               $scope.oppnickname = $scope.oppuserProfile.nickname;
+           };
+       });
 }]);
 
 

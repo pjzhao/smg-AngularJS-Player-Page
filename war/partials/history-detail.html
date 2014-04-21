@@ -1,74 +1,32 @@
 <ion-view>
-<ion-content>
-<div class="container-fluid history-detail-page">
-  <div class="row-fluid">
-    <div class="row head">
-      <div class="col col-60">
-        <h2>{{gamedetail.gameName}} Play History</h2>
-      </div>
-      <div class="col col-40">
-        <div class="row badge-row">
-          <div class="badge-container" data-ng-repeat="item in (infoProfile.token | badgeImages)">
-            <img ng-src="{{item}}" class="badge-img" ng-init="tokenWord = false" ng-mouseenter="tokenWord = true"> 
-            <div ng-show="tokenWord" class="token-word" ng-mouseleave="tokenWord = false">{{$index+1}}00Tokens</div>
-          </div>
+    <ion-content style="margin-top: 50px" ">
+        <h1 class=" pagetitle">
+        {{gameresult}}</h1>
+        <div class="row image">
+            <div class="col col-40"><img class="circular" src="../img/VS.png" style="box-shadow: 0 0 20px rgb(253, 2, 2)"></img></div>
+            <div class="col col-20"><img src="../img/VS.png" height="70" align="middle"></img></div>
+            <div class="col col-40"><img class="circular" src="../img/VS.png" style="box-shadow: 0 0 20px rgb(7, 223, 20)"></img></div>
         </div>
-      </div> 
-    </div>
-
-    <div class="row token-summary">
-      <div class="col col-offset-10"></div>
-      <div class="col col-20"><span class="glyphicon glyphicon-usd"></span><span>Tokens: {{infoProfile.token}}</span></div> 
-      <div class="col col-20"><span class="glyphicon glyphicon-stats"></span><span>Rank: {{infoProfile.rank}}</span></div>
-      <div class="col col-20"><span class="glyphicon glyphicon-star"></span><span>Highest Score: {{infoProfile.score}}</span></div> 
-      <div class="col col-10"><span class="glyphicon glyphicon-thumbs-up"></span><span>Win: {{infoProfile.win}}</span></div>
-      <div class="col col-10"><span class="glyphicon glyphicon-thumbs-down"></span><span>Lose: {{infoProfile.lost}}</span></div>    
-      <div class="col col-10"><span class="glyphicon glyphicon glyphicon-leaf"></span><span>Draw: {{infoProfile.draw}}</span></div>
-    </div>
-
-    <table class="table table-bordered match-table">
-        <tr>
-            <th><span class="glyphicon glyphicon-calendar"></span><span>Date</span></th>
-            <th><span class="glyphicon glyphicon-flag"></span><span>Result</span></th>
-            <th><span class="glyphicon glyphicon-usd"></span><span>Token</span></th>
-            <th><span class="glyphicon glyphicon-star"></span><span>Score</span></th>    
-            <th><span class="glyphicon glyphicon-fire"></span><span>Opponent(s)</span></th>                                          
-        </tr>
-        <tr ng-repeat = "history in histories" class="match-tr">
-            <td> 
-              <span>{{history.date}}</span></td> 
-            <td> 
-              <span class="{{history.result | resultColor}}">{{history.result}}</span></td>
-            <td> 
-              <span class="{{history.tokenChange | numberColor}}">{{history.tokenChange}}</span></td>
-            <td> 
-              <span>{{history.score}}</span></td>      
-            <td>
-              <span class="id-group" ng-repeat = "opponentId in history.opponentIds"><a ng-href="#/opponent/{{opponentId}}">{{opponentId}}</a></span>
-            </td>
-        </tr>
-    </table>
-    <div class="row">
-      <div class="col col-15 tab-button">
-        <a href="#/choosegamedetail/{{currentGameId}}"><span class="glyphicon glyphicon-tower"></span>Play Again</a>
-      </div>
-      <div class="col col-15 tab-button">
-        <a ng-href="#/analysis"><span class="glyphicon glyphicon-floppy-disk"></span>My Performance</a>
-      </div>
-      <div class="col col-15 tab-button">
-        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
-      </div>
-      <div class="col col-15 tab-button">
-        <a href="#/choosegamestats/{{currentGameId}}"><span class="glyphicon glyphicon-stats"></span>Game Stats</a>
-      </div>
-      <div class="col col-15 tab-button">
-        <a href=""><span class="glyphicon glyphicon-usd"></span>Buy Token</a>
-      </div>
-      <div class="col col-15 tab-button">
-        <div class="fb-share-button" data-href="http://4.smg-angularjs-player.appspot.com/index.html#/history/0" data-type="button"></div>
-      </div>
-    </div>
-  </div>
-</div>
-</ion-content>
+        <div class="row name">
+            <div class="col col-40" align="right"><font size="3">{{username}}</font></div>
+            <div class="col col-20"></div>
+            <div class="col col-40" align="left"><font size="3">{{oppname}}</font></div>
+        </div>
+        <div class="row name">
+            <div class="col col-40" align="right"><font size="2">{{usernickname}}</font></div>
+            <div class="col col-20"></div>
+            <div class="col col-40" align="left"><font size="2">{{oppnickname}}</font></div>
+        </div>
+        <div class="row title" style="margin-top: 20px">
+            <div class="col col-40">Date</div>
+            <div class="col col-30">Token Change</div>
+            <div class="col col-30">Score Change</div>
+        </div>
+        <div class="row">
+            <div class="col col-40 content" style="border-color: lightblue">{{lastmatch.date}}</div>
+            <div class="col col-30 content" style="border-color: yellow">{{lastmatch.tokenChange}}</div>
+            <div class="col col-30 content" style="border-color: purple">{{lastmatch.score}}</div>
+        </div>
+        <div align="right"><a href="#/historylist" class="button icon-left ion-chevron-left button-clear button-dark">Back</a></div>
+    </ion-content>
 </ion-view>
