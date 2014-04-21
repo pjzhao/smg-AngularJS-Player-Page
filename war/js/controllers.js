@@ -97,6 +97,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           } else {
               $scope.username = $scope.userProfile.firstname + " " + $scope.userProfile.lastname;
               $scope.usernickname = $scope.userProfile.nickname;
+              $scope.userUrl = $scope.userProfile.pictureUrl;
           };
       });
       //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
@@ -110,6 +111,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
            } else {
                $scope.oppname = $scope.oppuserProfile.firstname + " " + $scope.oppuserProfile.lastname;
                $scope.oppnickname = $scope.oppuserProfile.nickname;
+               $scope.oppUrl = $scope.oppuserProfile.pictureUrl;
            };
        });
 }]);
