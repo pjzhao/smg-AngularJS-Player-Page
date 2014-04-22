@@ -1,32 +1,30 @@
-<ion-view>
-    <ion-content style="margin-top: 50px" ">
-        <h1 class=" pagetitle">
-        {{gameresult}}</h1>
-        <div class="row image">
-            <div class="col col-40"><img class="circular" src="{{userUrl}}" style="box-shadow: 0 0 20px rgb(253, 2, 2)"></img></div>
-            <div class="col col-20"><img src="../img/VS.png" height="70" align="middle"></img></div>
-            <div class="col col-40"><img class="circular" src="{{oppUrl}}" style="box-shadow: 0 0 20px rgb(7, 223, 20)"></img></div>
-        </div>
-        <div class="row name">
-            <div class="col col-40" align="right"><font size="3">{{username}}</font></div>
-            <div class="col col-20"></div>
-            <div class="col col-40" align="left"><font size="3">{{oppname}}</font></div>
-        </div>
-        <div class="row name">
-            <div class="col col-40" align="right"><font size="2">{{usernickname}}</font></div>
-            <div class="col col-20"></div>
-            <div class="col col-40" align="left"><font size="2">{{oppnickname}}</font></div>
-        </div>
-        <div class="row title" style="margin-top: 20px">
-            <div class="col col-40">Date</div>
-            <div class="col col-30">Token Change</div>
-            <div class="col col-30">Score Change</div>
+<ion-view title="Last Match">
+    <ion-content class="history-detail-page">
+        <br>
+        <h2 class="pagetitle">{{gameresult}}</h2>
+        <div class="row image no-margin">
+            <div class="col col-40 no-padding left-side"><img class="circular circular-assertive" src="{{imageURL}}"></img></div>
+            <div class="col col-20 no-padding">
+              <i class="icon ion-game-controller-b width-100 icon-30"></i>
+            </div>
+            <div class="col col-40 no-padding right-side"><img class="circular circular-balanced" src="{{oppUrl}}"></img></div>
         </div>
         <div class="row">
-            <div class="col col-40 content" style="border-color: lightblue">{{lastmatch.date}}</div>
-            <div class="col col-30 content" style="border-color: yellow">{{lastmatch.tokenChange}}</div>
-            <div class="col col-30 content" style="border-color: purple">{{lastmatch.score}}</div>
+            <div class="col col-40 no-padding left-side"><font size="3">{{nickname}}</font></div>
+            <div class="col col-20-offset no-padding"></div>
+            <div class="col col-40 no-padding right-side"><font size="3">{{oppnickname}}</font></div>
         </div>
-        <div align="right"><a href="#/historylist" class="button icon-left ion-chevron-left button-clear button-dark">Back</a></div>
+
+        <div class="row title">
+            <div class="col col-33 no-padding">DATE</div>
+            <div class="col col-33 no-padding">TOKEN</div>
+            <div class="col col-33 no-padding">SCORE</div>
+        </div>
+        <div class="row stats">
+            <div class="col col-33 content no-padding" style="border-color: blue">{{lastmatch.date}}</div>
+            <div class="col col-33 content no-padding" style="border-color: yellow">{{lastmatch.tokenChange}}</div>
+            <div class="col col-33 content no-padding" style="border-color: purple">{{lastmatch.score}}</div>
+        </div>
+       
     </ion-content>
 </ion-view>

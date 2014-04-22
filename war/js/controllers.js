@@ -17,7 +17,7 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
 	$cookieStore.put('passwordTag', 'password');
 	$scope.playerId = $cookieStore.get('playerIdTag');
 	$scope.password = $cookieStore.get('passwordTag');
-	$http.get('http://4.smg-server.appspot.com/players/' + $scope.playerId + '?password=' + $scope.password)
+	$http.get('http://5.smg-server.appspot.com/players/' + $scope.playerId + '?password=' + $scope.password)
 	.success(function(data) {
 		$scope.profile = data;
 	})
@@ -41,7 +41,7 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
 	  };
 	  
 	  $scope.getProfile = function () {
-	    $http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + 
+	    $http.get('http://5.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + 
 	    		'&targetId=' + $scope.playerId + '&accessSignature=' + $scope.accessSignature)
 	      .success(function(data) {
 
@@ -83,7 +83,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
       //Use fake JSON data for testing - Pinji
-      /*$http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+      /*$http.get('http://5.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
         '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
           $http.get('../analysis/token.json')
           .success(function (data) {
@@ -103,7 +103,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       };
 
       //Use fake JSON data for testing - Pinji
-      /*$http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+      /*$http.get('http://5.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
         '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
         $http.get('../analysis/history.json')
         .success(function (data) {
@@ -134,23 +134,10 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
                 }
           }
       };
-
-      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
-      $http.get('../players/1234.json')
-      .success(function (data) {
-          $scope.userProfile = data;
-      })
-      .then(function () {
-          if ($scope.userProfile.error) {
-              $scope.userProfile = null;
-          } else {
-              $scope.username = $scope.userProfile.firstname + " " + $scope.userProfile.lastname;
-              $scope.usernickname = $scope.userProfile.nickname;
-              $scope.userUrl = $scope.userProfile.pictureUrl;
-          };
-      });
-      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
-      $http.get('../players/1234.json')
+      $scope.nickname = $cookieStore.get('nicknameTag');
+      $scope.imageURL = $cookieStore.get('imageURLTag');
+      //$http.get('http://5.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
+      $http.get('../players/1235.json')
       .success(function (data) {
           $scope.oppuserProfile = data;
       })
@@ -158,7 +145,6 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
            if ($scope.error) {
                $scope.oppuserProfile = null;
            } else {
-               $scope.oppname = $scope.oppuserProfile.firstname + " " + $scope.oppuserProfile.lastname;
                $scope.oppnickname = $scope.oppuserProfile.nickname;
                $scope.oppUrl = $scope.oppuserProfile.pictureUrl;
            };
@@ -169,7 +155,7 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
   function($scope, $http, $cookieStore, $state) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    /*$http.get('http://4.smg-server.appspot.com/gameinfo/all')
+    /*$http.get('http://5.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
         });*/
@@ -265,7 +251,7 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     $scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag');
     /* to temporarily avoid No Records Error -- Pinji
-     * $http.get('http://4.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
+     * $http.get('http://5.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
     .success(function(data) {
       $scope.game = data;
     }).then(function(game) {
@@ -319,11 +305,11 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     };
 }]);
 
-playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', '$filter', '$location',
-    function ($scope, $rootScope, $window, $routeParams, $http, $cookieStore, $filter, $location){  
+playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$routeParams', '$http', '$cookieStore', '$filter', '$location', '$state',
+    function ($scope, $window, $routeParams, $http, $cookieStore, $filter, $location, $state){  
   $scope.playerId = $cookieStore.get('playerIdTag');
   $scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
-  /*$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + '&targetId='' + $scope.playerId + 
+  /*$http.get('http://5.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + '&targetId='' + $scope.playerId + 
     '&accessSignature=' + $scope.accessSignature) */
   $http.get('../historys/histories.json')
   .success(function(data){
@@ -339,10 +325,9 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
       $scope.historyTemp = null;
       $state.go('choosegame');
     } else {
-      $scope.historySummary = [];
       $scope.gameInfo = [];
       angular.forEach($scope.historyTemp, function(value, key) {
-      	//$http.get('http://4.smg-server.appspot.com/games/' + key)
+      	//$http.get('http://5.smg-server.appspot.com/games/' + key)
       	$http.get('../games/' + key +'.json')
       	.success(function (data) {
       		$scope.gameInfo[$scope.gameInfo.length] = {
@@ -354,24 +339,6 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
       		$scope.addHistory();
       	});
       });
-      /*$scope.count = -1;
-      angular.forEach($scope.historyTemp, function(value, key) {
-    	$scope.count = $scope.count + 1;
-        var record = {
-          gameId: key,
-          win: value.win,
-          lost: value.lost,
-          draw: value.draw,
-          RANK: value.RANK,
-          score: value.score,
-          token: value.token,
-          total: value.win + value.lost + value.draw,
-          winRate: value.win * 100 / (value.win + value.lost + value.draw),
-          gameName: $scope.gameInfo[$scope.count].gameName,
-          gameIcon: $scope.gameInfo[$scope.count].gameIcon
-        };
-        this.push(record);
-      }, $scope.historySummary); */
     };
     $scope.orderWin = 'win';
     $scope.orderTotal = 'total';
@@ -380,6 +347,7 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
   
   $scope.addHistory = function () {
       $scope.count = -1;
+      $scope.historySummary = [];
       angular.forEach($scope.historyTemp, function(value, key) {
     	$scope.count = $scope.count + 1;
         var record = {
@@ -415,7 +383,7 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
           $scope.tokenFile = null;
       } else {
           $scope.shownHistory = history;
-          /*$http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.shownHistory.gameId + 
+          /*$http.get('http://5.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.shownHistory.gameId + 
            '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
           $http.get('../analysis/token.json')
               .success(function (data) {
@@ -431,7 +399,7 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
           };
 
           //Use fake JSON data for testing - Pinji
-          /*$http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+          /*$http.get('http://5.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
           '&gameId=' + $scope.history.gameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
           $http.get('../analysis/history.json')
           .success(function (data) {
@@ -452,5 +420,10 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
 
   $scope.isHistoryShown = function (history) {
       return $scope.shownHistory === history;
+  };
+  
+  $scope.showLastMatch = function (gameId) {
+	  $cookieStore.put('currentGameIdTag', gameId);
+	  $state.go('historydetail');
   };
 }]);

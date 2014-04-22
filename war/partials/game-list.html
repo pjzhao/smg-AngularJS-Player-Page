@@ -52,7 +52,7 @@
 			          </div>
 			          <div class="row">
 			            <div class="col col-50">
-			              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">History</a>
+			              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">Last Match</a>
 			            </div>
 			            <div class="col col-50">
 			              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
@@ -101,7 +101,7 @@
 		          </div>
 		          <div class="row">
 		            <div class="col col-50">
-		              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">History</a>
+		              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">Last Match</a>
 		            </div>
 		            <div class="col col-50">
 		              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
@@ -113,8 +113,8 @@
 		  </div>
 				
 		  <div>
-		    <input class="col-100" ng-model="query.gameName" placeholder="Search by Name..."><br>
-		    <select class="col-100" style="width:400px" ng-model="orderProp" class="narrow">
+		    <input type="search" class="col-100" ng-model="query.gameName" placeholder="Search by Name...">
+		    <select class="col-100 width-100" ng-model="orderProp" class="narrow">
 		      <option value="gameName">Sort by Name</option>
 		      <option value="Developer">Sort by Developer</option>
 		      <option value="-postDate">Sort by Post Date</option>
@@ -125,7 +125,7 @@
 		    <div class="row">
 		      <h4>ALL GAME</h4>
 		    </div>
-		    <div class="allgame" ng-if="recommendType=='new'">
+		    <div class="allgame">
 		      <div class="card" ng-repeat="game in games | orderBy: orderProp">
 		        <div class="item item-input item-select game-basic-info" ng-click="toggleAllGroup(game)" ng-class="{active: isAllGroupShown(game)}">
 		          <div class="row no-padding">
@@ -161,7 +161,7 @@
 		            </div>
 		            <div class="row">
 		              <div class="col col-50">
-		                <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">History</a>
+		                <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">Last Match</a>
 		              </div>
 		              <div class="col col-50">
 		                <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
