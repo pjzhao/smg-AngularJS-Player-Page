@@ -1,58 +1,57 @@
 <ion-view>
-<ion-content>
-<div class="container-fluid history-list-page">
-  <div class="row-fluid">
-  	<h2>My Play History</h2>
-  	<br>
-  	<br>
-    <table class="table table-bordered history-list-tb">
-      <thead>
-        <tr>
-        	<th><span>Game</span><button ng-click="sort('gameId')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Win</span><button ng-click="sort('win')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
-        	<th><span>Lose</span><button ng-click="sort('lost')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Tie</span><button ng-click="sort('draw')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Rank</span><button ng-click="sort('RANK')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Score</span><button ng-click="sort('score')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Token</span><button ng-click="sort('token')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>
-        	<th><span>Total</span><button ng-click="sort('total')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th> 
-          <th><span>Win Rate</span><button ng-click="sort('winRate')" class="clear-button"><span class="glyphicon glyphicon-sort"></span></button></th>        
-        </tr>
-      </thead>     
-      <tbody>
-        <tr data-ng-repeat = "history in historySummary | orderBy:orderProp" class="match-tr">
-            <td> 
-              <span>{{history.gameId}}</span>
-            </td> 
-            <td> 
-              <span>{{history.win}}</span></td>
-            <td> 
-              <span>{{history.lost}}</span></td>
-            <td> 
-              <span>{{history.draw}}</span></td>      
-            <td>
-              <span>{{history.RANK}}</span></td> 
-            <td>
-              <span>{{history.score}}</span></td>
-            <td>
-              <span>{{history.token}}</span></td>
-            <td>
-              <span>{{history.total}}</span></td>
-            <td>
-              <span>{{history.winRate | number:2}}%</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="row">
-      <div class="col col-20 tab-button">
-        <a href="#/profile/{{playerId}}?accessSignature={{accessSignature}}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
-      </div>
-      <div class="col col-20 tab-button">
-        <a ng-href="#/choosegame"><span class="glyphicon glyphicon-play"></span>Choose Game</a>
-      </div>
-    </div>
-  </div>
-</div>
-</ion-content>
+    <ion-content>
+        <ion-list>
+            <h3 style="text-align:center; margin-top:10px; margin-bottom:0">History</h3>
+            <a ng-repeat="history in historySummary" style="margin-top:5px" class="list card">
+                <div class="item item-stable item-icon-left item-icon-right "
+                     ng-click="toggleHistory(history)"
+                     ng-class="{active: isHistoryShown(history)}">
+                    <i class="ion-game-controller-b"></i>
+                    Game - {{history.gameId}}
+                    <i ng-class="isHistoryShown(history) ? 'ion-minus' : 'ion-chevron-down'"></i>
+                </div>
+                <ion-item class="item-accordion"
+                          ng-show="isHistoryShown(history)">
+                    <div class="row" style="text-align:center">
+                        <div class="col">Win: {{tokenFile.draw}}</div>
+                        <div class="col">Lose: {{tokenFile.lost}}</div>
+                        <div class="col">Draw: {{tokenFile.draw}}</div>
+                    </div>
+                    <button class="button button-full button-stable"
+                            style="text-align:center"
+                            ng-init="collapsed='false'"
+                            ng-click="collapsed=!collapsed">
+                        Your achievement
+                    </button>
+                    <ion-item class="item-accordion"
+                              ng-show="collapsed">
+                        <div class="row" style="text-align:center">
+                            <div class="col">Token: {{tokenFile.token}}</div>
+                            <div class="col">Rank: {{tokenFile.rank}}</div>
+                        </div>
+                        <div style="text-align:center">Highest Score: {{tokenFile.score}}</div>
+                    </ion-item>
+                    <button class="button button-full button-stable"
+                            style="text-align:center"
+                            ng-init="collapse='false'"
+                            ng-click="collapse=!collapse">
+                        Lastest Match
+                    </button>
+                    <ion-item class="item-accordion"
+                              ng-show="collapse">
+                        <h2>Your opponent(s):</h2>
+                        <div ng-repeat="opp in lastmatch.opponentIds">{{opp}}</div>
+                        <br />
+                        <h2>Game Result:</h2>
+                        <div>{{lastmatch.result}}</div>
+                    </ion-item>
+                    <span href="#/history/{{history.gameId}}">
+                        <button class="button button-full button-stable"
+                                style="text-align:center">
+                            Results
+                        </button>
+                    </span>
+                </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

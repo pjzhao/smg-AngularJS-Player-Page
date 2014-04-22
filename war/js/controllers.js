@@ -74,12 +74,47 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           }
           else {
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
-                $scope.histories =  $cookieStore.get('historiesTag');
+                $scope.histories = $cookieStore.get('historiesTag');
+                $scope.lastmatch = $scope.histories[9];
+                if ($scope.lastmatch.result == "DRAW") {
+                    $scope.gameresult = "Draw";
+                } else if ($scope.lastmatch.result == "WIN") {
+                    $scope.gameresult = "You win! Good job.";
+                } else if ($scope.lastmatch.result == "LOST") {
+                    $scope.gameresult = "You lose! Never mind.";
+                }
           }
       };
 
+      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      $http.get('../players/1234.json')
+      .success(function (data) {
+          $scope.userProfile = data;
+      })
+      .then(function () {
+          if ($scope.userProfile.error) {
+              $scope.userProfile = null;
+          } else {
+              $scope.username = $scope.userProfile.firstname + " " + $scope.userProfile.lastname;
+              $scope.usernickname = $scope.userProfile.nickname;
+              $scope.userUrl = $scope.userProfile.pictureUrl;
+          };
+      });
+      //$http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
+      $http.get('../players/1234.json')
+      .success(function (data) {
+          $scope.oppuserProfile = data;
+      })
+       .then(function () {
+           if ($scope.error) {
+               $scope.oppuserProfile = null;
+           } else {
+               $scope.oppname = $scope.oppuserProfile.firstname + " " + $scope.oppuserProfile.lastname;
+               $scope.oppnickname = $scope.oppuserProfile.nickname;
+               $scope.oppUrl = $scope.oppuserProfile.pictureUrl;
+           };
+       });
 }]);
-
 
 playerControllers.controller('UserCtrl', ['$scope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
   function($scope, $window, $routeParams, $location, $http, $cookieStore) {
@@ -642,5 +677,50 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
       $scope.orderProp = key;
       $scope.reverse = !$scope.reverse
     }
+  };
+
+  $scope.toggleHistory = function (history) {
+      if ($scope.isHistoryShown(history)) {
+          $scope.shownHistory = null;
+          $scope.tokenFile = null;
+      } else {
+          $scope.shownHistory = history;
+          /*$http.get('http://4.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.shownHistory.gameId + 
+           '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+          $http.get('../analysis/token.json')
+              .success(function (data) {
+                  $scope.tokenFile = data;
+              })
+              .then(function () {
+                  $scope.tokenFileResponse();
+              })
+          $scope.inquireInfoResponse = function () {
+              if ($scope.tokenFile.error) {
+                  $window.alert($scope.tokenFile.error);
+              }
+          };
+
+          //Use fake JSON data for testing - Pinji
+          /*$http.get('http://4.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+          '&gameId=' + $scope.history.gameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+          $http.get('../analysis/history.json')
+          .success(function (data) {
+              $scope.historyDetailProfile = data;
+          })
+          .then(function () {
+              if ($scope.historyDetailProfile.error) {
+                  $window.alert($scope.historyDetailProfile.error);
+                  return null;
+              }
+              else {
+                  $scope.lastmatch = $scope.historyDetailProfile.history[9];
+                  return $scope.lastmatch;
+              }
+          });
+      }
+  };
+
+  $scope.isHistoryShown = function (history) {
+      return $scope.shownHistory === history;
   };
 }]);
