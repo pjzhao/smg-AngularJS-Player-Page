@@ -8,7 +8,15 @@ playerControllers.controller('ContentController', ['$scope', '$ionicSideMenuDele
   function ($scope, $ionicSideMenuDelegate) {
 	  $scope.toggleRight = function() {
 	    $ionicSideMenuDelegate.toggleRight();
-	  };
+	  };  
+}]);
+
+playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideMenuDelegate',
+  function ($scope, $state, $ionicSideMenuDelegate) {
+	  $scope.navClick = function(targetState) {
+			$ionicSideMenuDelegate.toggleLeft();
+			$state.go(targetState);
+		  };		
 }]);
 
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore', '$rootElement', 
@@ -387,7 +395,8 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
     $scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag');
-    $http.get('http://4.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
+    /* to temporarily avoid No Records Error -- Pinji
+     * $http.get('http://4.smg-server.appspot.com/gameinfo/stats?gameId=' + $routeParams.gameId)
     .success(function(data) {
       $scope.game = data;
     }).then(function(game) {
@@ -398,7 +407,7 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
         $window.alert("WRONG_GAME_ID, No such game!");
         $scope.game.error = ""
       }
-    });
+    }); */
     $scope.rate = function () {
       $scope.createRate = {
         "gameId" : $scope.currentGameId,

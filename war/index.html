@@ -21,13 +21,17 @@
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
 </head>
-<body>
+<body class="slide-left-right-ios7">
     <div id="fb-root"></div> 
     <ion-side-menus>
 	  <!-- Center content -->
 		  <ion-side-menu-content ng-controller="ContentController">
 		    <ion-nav-bar class="bar-dark nav-title-slide-ios7">
-		      <div class="col col-10"></div>
+		      <div class="col col-10 no-padding">
+		        <ion-nav-back-button class="button-icon">
+    				<i class="ion-ios7-arrow-back"></i>Back
+ 				</ion-nav-back-button>
+		      </div>
 		      <div class="page-title" class="col col-80">Home</div>
 		      <div class="col col-10 no-padding">
 		        <button class="button button-clear" ng-click="toggleRight()"><i class="icon ion-navicon"></i></button>
@@ -41,23 +45,42 @@
 		  </ion-side-menu-content>
 		  
 		  <!-- Right menu -->
-      <ion-side-menu  side="right" width="150">
+      <ion-side-menu  side="right" width="150" ng-controller="MenuController">
 	        <div class="row">
 	          <img ng-src="..\img\superman.png" class="profile-image">
 	          <!-- <img ng-src="{{imageURL}}"/> -->
 	        </div>
-	        <div class="row profile-info">
+	        <br>
+	        <div class="row">
 	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
 	          <h3>Pinji Zhao</h3>
 	        </div>
-	        <div class="row profile-info">
+	        <div class="row">
 	          <!-- <h4>{{nickname}}</h4> -->
 	          <h4>pjzhao</h4>
 	        </div>
-	        <hr>
-	        <div class="row profile-info">
-	          <span class="glyphicon glyphicon-envelope"></span>pz454@nyu.edu<!-- {{email}} -->
+	        <div class="row">
+	          <i class="icon ion-ios7-email-outline"></i>pz454@nyu.edu<!-- {{email}} -->
 	        </div>
+	        <hr>
+	        <a class="button button-clear" ng-click="navClick('choosegame')">
+	          <div class="row">
+	          	<div class="col col-20"><i class="icon ion-home"></i></div>
+	          	<div class="col col-80">Home</div>
+	          </div>
+	        </a>
+	        <a class="button button-clear" ng-click="navClick('historylist')">
+	          <div class="row">
+	          	<div class="col col-20"><i class="icon ion-clock"></i></div>
+	          	<div class="col col-80">History</div>
+	          </div>
+	        </a>	        
+	        <a class="button button-clear" ng-click="">
+	          <div class="row">	          
+	          	<div class="col col-20"><i class="icon ion-gear-b"></i></div>
+	          	<div class="col col-80">Setting</div>
+	          </div>	        
+	        </a>
       </ion-side-menu>
 
     </ion-side-menus>

@@ -178,4 +178,147 @@ ion-nav-bar .page-title {
 .profile-image {
 	width: 50px;
 	height: 50px;
+	width: 150px;
+	height: auto;
+}
+
+.menu.menu-right .icon {
+	padding-right: 10px;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.highscore {
+  background-color: #ef4e3a;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);	
+}
+
+.highscore h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.highscore a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.currentgame {
+  background-color: #f0b840;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.currentgame h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.currentgame a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.finishedgame {
+  background-color: #66cc33;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.finishedgame h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.finishedgame a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.ratecss {
+  background-color: #8a6de9;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.ratecss h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.ratecss a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.ratecss p {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.col-100 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 40px;
+}
+
+.alllist {
+  background-color: #6699FF;
+}
+
+.alllist h4 {
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.alllist .card {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.alllist .card .game-basic-info {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.alllist .card:first-child {
+  margin-top: 20px;
+}
+
+.allgame {
+  padding-bottom: 20px;
+}
+
+.allgame .card * {
+  color: black;
+}
+
+.allgame img {
+  height: 50px;
+  width: 50px;
+}
+
+.allgame .button-group {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: black;
 }
