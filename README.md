@@ -21,3 +21,6 @@ stest player account: player@nyu.edu
 test player password: password
 
 http://4.smg-angularjs-player.appspot.com/index.html#/{{userId}}?accessSignature={{accessSignature}}
+
+Version 5 Mobile URL (Hard coded user for demo):
+http://5.smg-angularjs-player.appspot.com/index.html
