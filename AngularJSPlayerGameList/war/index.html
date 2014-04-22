@@ -8,7 +8,7 @@
     <title ng-bind="'SMG ' + title">SMG Player</title>    
     <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css"></link>
     <link rel="stylesheet" href="lib/css/ionic.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-resource.js"></script>
     <script src="lib/angular/angular-route.js"></script>
@@ -23,11 +23,43 @@
 </head>
 <body>
     <div id="fb-root"></div> 
-    <ion-nav-bar class="bar-positive nav-title-slide-ios7">Nav Bar</ion-nav-bar>
-  
-    <!-- where the initial view template will be rendered -->
-    <ion-nav-view class="view-content slide-left-right-ios7">
-      <i class="icon ion-loading-c"></i> -
-    </ion-nav-view>
+    <ion-side-menus>
+	  <!-- Center content -->
+		  <ion-side-menu-content ng-controller="ContentController">
+		    <ion-nav-bar class="bar-dark nav-title-slide-ios7">
+		      <div class="col col-10"></div>
+		      <div class="page-title" class="col col-80">Home</div>
+		      <div class="col col-10 no-padding">
+		        <button class="button button-clear" ng-click="toggleRight()"><i class="icon ion-navicon"></i></button>
+		      </div>
+		    </ion-nav-bar>
+		  
+		    <!-- where the initial view template will be rendered -->
+		    <ion-nav-view class="view-content slide-left-right-ios7">
+		      <i class="icon ion-loading-c"></i> -
+		    </ion-nav-view>
+		  </ion-side-menu-content>
+		  
+		  <!-- Right menu -->
+      <ion-side-menu  side="right" width="150">
+	        <div class="row">
+	          <img ng-src="..\img\superman.png" class="profile-image">
+	          <!-- <img ng-src="{{imageURL}}"/> -->
+	        </div>
+	        <div class="row profile-info">
+	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
+	          <h3>Pinji Zhao</h3>
+	        </div>
+	        <div class="row profile-info">
+	          <!-- <h4>{{nickname}}</h4> -->
+	          <h4>pjzhao</h4>
+	        </div>
+	        <hr>
+	        <div class="row profile-info">
+	          <span class="glyphicon glyphicon-envelope"></span>pz454@nyu.edu<!-- {{email}} -->
+	        </div>
+      </ion-side-menu>
+
+    </ion-side-menus>
 </body>
 </html>
