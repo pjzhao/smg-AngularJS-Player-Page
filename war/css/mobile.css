@@ -40,6 +40,10 @@
     margin-bottom: 20px;
 }
 
+h1 {
+	display: none;
+}
+
 .ion-chevron-down:before {
   padding-left: 80px;
 }
@@ -321,4 +325,8 @@ ion-nav-bar .page-title {
   margin-left: 10px;
   margin-right: 10px;
   background-color: black;
+}
+
+iframe html {
+	height: 1200px;
 }

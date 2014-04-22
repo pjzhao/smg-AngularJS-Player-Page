@@ -310,8 +310,8 @@ playerControllers.controller('EditCtrl', ['$scope', '$rootScope', '$window', '$r
   };
 }]);
 
-playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
-  function($scope, $http, $cookieStore) {
+playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state',
+  function($scope, $http, $cookieStore, $state) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
     /*$http.get('http://4.smg-server.appspot.com/gameinfo/all')
@@ -388,6 +388,20 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
     $scope.isAllGroupShown = function(group) {
       return $scope.shownAllGroup === group;
     };
+    
+    $scope.startPlay = function (gameId) {
+      $cookieStore.put('currentGameIdTag', gameId);
+      $state.go('playgame');
+    };
+}]);
+
+playerControllers.controller('PlayGameCtrl', ['$scope', '$http', '$cookieStore', '$state',
+  function($scope, $http, $cookieStore, $state) {
+	$scope.playerId = $cookieStore.get('playerIdTag');
+	$scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
+	$scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
+	$scope.link = 'http://smg-angularjs-container.appspot.com/index.html#/lobby/' +
+		$scope.currentGameId+ '?playerId=' + $scope.playerId + '&accessSignature=' + $scope.accessSignature;
 }]);
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http', '$window', '$rootScope', '$cookieStore',
