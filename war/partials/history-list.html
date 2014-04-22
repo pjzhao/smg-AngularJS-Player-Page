@@ -6,7 +6,7 @@
                      ng-click="toggleHistory(history)"
                      ng-class="{active: isHistoryShown(history)}">
                     <i class="ion-game-controller-b"></i>
-                    Game - {{history.gameId}}
+                    {{history.gameName}}
                     <i ng-class="isHistoryShown(history) ? 'ion-minus' : 'ion-chevron-down'"></i>
                 </div>
                 <ion-item class="item-accordion"
@@ -44,8 +44,8 @@
                         <h2>Game Result:</h2>
                         <div>{{lastmatch.result}}</div>
                     </ion-item>
-                    <span href="#/history/{{history.gameId}}">
-                        <button class="button button-full button-stable"
+                    <span>
+                        <button ng-href="#/history/{{history.gameId}}" class="button button-full button-stable"
                                 style="text-align:center">
                             Results
                         </button>

@@ -30,18 +30,6 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
       templateUrl: '/partials/history-list.html',
       controller: "HistoryListCtrl"
   })
-  .state('login', {
-    title: "Log In",
-    url: '/login',
-    templateUrl: '/partials/login.html',
-    controller: "LoginCtrl"
-  })
-  .state('signup', {
-    title: "Sign Up",
-    url: '/signup',
-    templateUrl: '/partials/signup.html',
-    controller: "SignUpCtrl"        
-  })
   .state("historydetail", {
     title: "Play History",
     url: "/history/:gameId",

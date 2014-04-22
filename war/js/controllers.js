@@ -165,91 +165,6 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
        });
 }]);
   
-playerControllers.controller('ProfileCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore', '$rootElement',
-  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore, $rootElement) {
-
-    $scope.params = $routeParams;
-
-    $http.get('http://4.smg-server.appspot.com/playerInfo?playerId=' + $routeParams.userId + '&targetId=' + $routeParams.userId
-      + '&accessSignature=' + $routeParams.accessSignature)
-      .success(function(data) {
-        
-        $scope.playerId = $routeParams.userId;
-        $scope.email = data.email;
-        $scope.firstname = data.firstname;
-        $scope.lastname = data.lastname;
-        $scope.nickname = data.nickname;
-        $scope.imageURL = data.imageURL;
-        if (!angular.isUndefined(data.error)) {
-          $scope.error = data.error;
-        };
-        $cookieStore.put('playerIdTag', $routeParams.userId);
-        $cookieStore.put('emailTag', data.email);
-        $cookieStore.put('firstnameTag', data.firstname);
-        $cookieStore.put('lastnameTag', data.lastname);
-        $cookieStore.put('nicknameTag', data.nickname);
-        $cookieStore.put('imageURLTag', data.imageURL);
-        $cookieStore.put('accessSignatureTag', $routeParams.accessSignature);
-      })
-      .then(function() {
-        if ($scope.error) {
-          $window.alert("Failed." + $scope.error);
-          $scope.error = "";
-        };
-      });
-
-
-    $scope.playerId = $cookieStore.get('playerIdTag');
-    $scope.accessSignature = $cookieStore.get('accessSignatureTag'); 
-    /*$http.get('http://4.smg-server.appspot.com/playerAllGame?playerId=' + $scope.playerId + '&targetId='' + $scope.playerId + 
-      '&accessSignature=' + $scope.accessSignature) */
-    $http.get('../historys/histories.json')
-    .success(function(data){
-      $scope.historyTemp = data;
-    })
-    .then(function(){
-      $scope.historySummaryResponse();
-    });
-
-    $scope.historySummaryResponse = function () {
-      if($scope.historyTemp.error) {
-        $window.alert($scope.historyTemp.error);
-        $scope.historyTemp = null;
-        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
-      } else {
-        $scope.historySummary = [];
-        angular.forEach($scope.historyTemp, function(value, key) {
-          var record = {
-            gameId: key,
-            win: value.win,
-            lost: value.lost,
-            draw: value.draw,
-            RANK: value.RANK,
-            score: value.score,
-            token: value.token,
-            total: value.win + value.lost + value.draw,
-            winRate: value.win * 100 / (value.win + value.lost + value.draw)
-          };
-          this.push(record);
-        }, $scope.historySummary);
-      };
-      $scope.orderWin = 'win';
-      $scope.orderTotal = 'total';
-      $scope.orderWinRate = 'winRate';
-    };
-
-    $scope.sort = function (key) {
-      if ($scope.orderProp != key) {
-        $scope.orderProp = key;
-        $scope.reverse = false
-      } else {
-        $scope.orderProp = key;
-        $scope.reverse = !$scope.reverse
-      }
-    };
-
-}]);
-
 playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state',
   function($scope, $http, $cookieStore, $state) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
@@ -404,86 +319,6 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$routeParams', '$http'
     };
 }]);
 
-//Only for test and debug -- Pinji
-playerControllers.controller('SignUpCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$window', '$location', '$cookieStore',
-  function($scope, $rootScope, $routeParams, $http, $window, $location, $cookieStore) {
-  $scope.signup = function () {
-    $scope.createProfile = {
-      "email" : $scope.suEmail,
-      "password" : $scope.suPassword,
-      "firstname" : $scope.suFirstname,
-      "lastname" : $scope.suLastname,
-      "nickname" : $scope.suNickname
-    };
-    $scope.createProfileStr = angular.toJson($scope.createProfile);
-
-    $http({
-        method: 'POST',
-        url: 'http://4.smg-server.appspot.com/players',
-        data: $scope.createProfileStr,
-        headers: {'Content-Type': 'application/json'}
-    })
-    .success(function(data) {
-      $scope.signupResponse = data;
-    })
-    .then(function() {
-      $scope.suResponse(); 
-    });
-    };
-
-    $scope.suResponse = function () {
-      if ($scope.signupResponse.error == "EMAIL_EXISTS") {
-        $window.alert("Failed. The email already exists.");
-        $scope.signupResponse.error = ""
-      } else if ($scope.signupResponse.error == "PASSWORD_TOO_SHORT") {
-        $window.alert("Failed. The password is too short. Please use at least 6 characters.")
-        $scope.signupResponse.error = ""
-      } else if ($scope.signupResponse.accessSignature != null) {
-        $window.alert("Welcome, new player! Please remember your player ID:" + $scope.signupResponse.playerId);
-        $cookieStore.put('accessSignatureTag', $scope.signupResponse.accessSignature);
-        $scope.accessSignature = $cookieStore.get('accessSignatureTag');
-        $cookieStore.put('playerIdTag', $scope.signupResponse.playerId);
-        $scope.playerId = $cookieStore.get('playerIdTag');
-        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature) 
-      };
-    };
-}]); 
-
-//Only for test and debug -- Pinji
-playerControllers.controller('LoginCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', '$http', '$cookieStore',
-  function($scope, $rootScope, $window, $routeParams, $location, $http, $cookieStore) {
-    $scope.login = function() {
-      $cookieStore.put('playerIdTag', $scope.logPlayerId);
-      $cookieStore.put('passwordTag', $scope.logPassword);
-      $http.get('http://4.smg-server.appspot.com/players/' + $scope.logPlayerId + '?password=' + $scope.logPassword)
-      .success(function(data) {
-        $scope.profile = data;
-        //$rootScope.profile = data;
-      })
-      .then(function() {
-        $scope.loginResponse();
-      });
-    };
-
-    $scope.loginResponse = function () {
-      if ($scope.profile.error == "WRONG_PASSWORD") {
-        $window.alert("Failed. Wrong password.");
-        $scope.profile.error = "";
-        //$rootScope.profile.error = "";
-      } else if ($scope.profile.error == "WRONG_PLAYER_ID") {
-        $window.alert("Failed. Wrong player ID.");
-        $scope.profile.error = "";
-        //$rootScope.profile.error = ""
-      } else if ($scope.profile.accessSignature != null) {
-        //$rootScope.profile.playerId = $routeParams.userId;
-        $cookieStore.put('accessSignatureTag', $scope.profile.accessSignature);
-        $scope.accessSignature = $cookieStore.get('accessSignatureTag');
-        $scope.playerId = $cookieStore.get('playerIdTag');
-        $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
-      }
-    };
-}]);
-
 playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$http', '$cookieStore', '$filter', '$location',
     function ($scope, $rootScope, $window, $routeParams, $http, $cookieStore, $filter, $location){  
   $scope.playerId = $cookieStore.get('playerIdTag');
@@ -502,10 +337,26 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
     if($scope.historyTemp.error) {
       $window.alert($scope.historyTemp.error);
       $scope.historyTemp = null;
-      $location.url("/profile/" + $scope.playerId + '?accessSignature=' + $scope.accessSignature);
+      $state.go('choosegame');
     } else {
       $scope.historySummary = [];
+      $scope.gameInfo = [];
       angular.forEach($scope.historyTemp, function(value, key) {
+      	//$http.get('http://4.smg-server.appspot.com/games/' + key)
+      	$http.get('../games/' + key +'.json')
+      	.success(function (data) {
+      		$scope.gameInfo[$scope.gameInfo.length] = {
+      		  gameName: data.name,
+      		  gameIcon: data.images[0]
+      		};
+      	})
+      	.then(function () {
+      		$scope.addHistory();
+      	});
+      });
+      /*$scope.count = -1;
+      angular.forEach($scope.historyTemp, function(value, key) {
+    	$scope.count = $scope.count + 1;
         var record = {
           gameId: key,
           win: value.win,
@@ -515,14 +366,37 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$rootScope', '$windo
           score: value.score,
           token: value.token,
           total: value.win + value.lost + value.draw,
-          winRate: value.win * 100 / (value.win + value.lost + value.draw)
+          winRate: value.win * 100 / (value.win + value.lost + value.draw),
+          gameName: $scope.gameInfo[$scope.count].gameName,
+          gameIcon: $scope.gameInfo[$scope.count].gameIcon
         };
         this.push(record);
-      }, $scope.historySummary);
+      }, $scope.historySummary); */
     };
     $scope.orderWin = 'win';
     $scope.orderTotal = 'total';
     $scope.orderWinRate = 'winRate';
+  };
+  
+  $scope.addHistory = function () {
+      $scope.count = -1;
+      angular.forEach($scope.historyTemp, function(value, key) {
+    	$scope.count = $scope.count + 1;
+        var record = {
+          gameId: key,
+          win: value.win,
+          lost: value.lost,
+          draw: value.draw,
+          RANK: value.RANK,
+          score: value.score,
+          token: value.token,
+          total: value.win + value.lost + value.draw,
+          winRate: value.win * 100 / (value.win + value.lost + value.draw),
+          gameName: $scope.gameInfo[$scope.count].gameName,
+          gameIcon: $scope.gameInfo[$scope.count].gameIcon
+        };
+        this.push(record);
+      }, $scope.historySummary);  
   };
 
   $scope.sort = function (key) {
