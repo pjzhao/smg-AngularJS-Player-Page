@@ -161,3 +161,7 @@ ion-nav-bar .page-title {
 	padding-top: 14px;
 	padding-bottom: 14px;
 }
+
+.menu.menu-right {
+	background-color: black;
+}

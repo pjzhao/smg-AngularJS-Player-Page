@@ -4,6 +4,13 @@
 
 var playerControllers = angular.module('playerControllers', []);
 
+playerControllers.controller('ContentController', ['$scope', '$ionicSideMenuDelegate',
+  function ($scope, $ionicSideMenuDelegate) {
+	  $scope.toggleRight = function() {
+	    $ionicSideMenuDelegate.toggleRight();
+	  };
+}]);
+
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore', '$rootElement', 
   function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement) {
 
@@ -323,7 +330,6 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
     /* 
      * Show recommended games based on the button bar operation
      */
-    
     $scope.newStyle = 'button-light light-assertive';
     $scope.hotStyle = 'button-assertive white-border';
     $scope.recommendType = 'new';
