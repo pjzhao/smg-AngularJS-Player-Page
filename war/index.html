@@ -47,20 +47,20 @@
 		  <!-- Right menu -->
       <ion-side-menu  side="right" width="150" ng-controller="MenuController">
 	        <div class="row">
-	          <img ng-src="..\img\superman.png" class="profile-image">
-	          <!-- <img ng-src="{{imageURL}}"/> -->
+	          <!-- <img ng-src="..\img\superman.png" class="profile-image"> -->
+	          <img ng-src="{{imageURL}}" class="profile-image">
 	        </div>
 	        <br>
 	        <div class="row">
 	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
-	          <h3>Pinji Zhao</h3>
+	          <h3>{{firstname}} {{lastname}}</h3>
 	        </div>
 	        <div class="row">
 	          <!-- <h4>{{nickname}}</h4> -->
-	          <h4>pjzhao</h4>
+	          <h4>{{nickname}}</h4>
 	        </div>
 	        <div class="row">
-	          <i class="icon ion-ios7-email-outline"></i>pz454@nyu.edu<!-- {{email}} -->
+	          <i class="icon ion-ios7-email-outline"></i>{{email}}
 	        </div>
 	        <hr>
 	        <a class="button button-clear" ng-click="navClick('choosegame')">
