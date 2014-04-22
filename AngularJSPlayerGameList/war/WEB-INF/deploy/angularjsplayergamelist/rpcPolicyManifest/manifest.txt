@@ -1,2 +1,3 @@
 # Module angularjsplayergamelist
 # RPC service class, partial path of RPC policy file
+gameList.client.GreetingService, 1B628806AEA5B7A131CF860263259449.gwt.rpc
