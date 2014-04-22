@@ -1,0 +1,119 @@
+.no-padding {
+	padding: 0px;
+}
+
+.no-vertical-padding {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.no-horizon-padding {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.no-vertical-margin {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+ion-nav-bar .page-title {
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  padding-top: 7px;
+}
+
+.recommend {
+	background-color: #ef4e3a;
+}
+
+.recommend h4 {
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.recommend .button-bar {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.recommend .narrow-row .button {
+  line-height: 30px;
+  height: 30px;
+  min-height: 0px;
+  font-size: 14px;
+}
+
+.recommend .card {
+	margin-bottom: 0px;
+	margin-top: 10px;
+	border: none;
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.recommend .card .game-basic-info {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.recommend .card:first-child {
+	margin-top: 20px;
+}
+
+.newestgame {
+	padding-bottom: 20px;
+}
+
+.newestgame .card * {
+	color: black;
+}
+
+.newestgame img, .hottestgame img {
+	height: 50px;
+	width: 50px;
+}
+
+.button.button-light.light-assertive {
+	color: #ef4e3a;
+}
+
+.button.button-assertive.white-border {
+	border-color: white;
+}
+
+.recommend .button-group {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: black;
+}
+
+.button-group .button.button-light {
+	width: 105px;
+	font-size: 14px;
+}
+
+.game-basic-info .icon {
+	padding-right: 5px;
+}
+
+.game-more-info .icon {
+	color: gray;
+}
+
+.item p.game-more-info {
+	color: gray;
+	font-size: 12px;
+}
+
+.expand {
+	padding-top: 14px;
+	padding-bottom: 14px;
+}

@@ -1,7 +1,7 @@
 
 <ion-view>
 <ion-content>
-<div style="background-color: #E8E8E8 ">
+<div>
   
   <!-- I think we should move these two buttons to sidebar 
   <div class="row" >
@@ -18,54 +18,110 @@
   </div>
   -->
   <!-- Keep all page content in the page-content inset div-->
-  <ion-list>
-    <div class="newestgame">
-      <h3>Newest Games</h3>
-      <div ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 3">
-        <div class="item item-input item-select" style="background-color: #00CC99;" ng-click="toggleNewGroup(game)" ng-class="{active: isNewGroupShown(game)}">
-          <i class="icon" ng-class="isNewGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
-          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
-          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br></div>
-        </div>
-        <div class="item item-input item-select" style="background-color: #009999;" class="item-accordion" ng-show="isNewGroupShown(game)">
-          <div class="row-one">
-            <a href="">Play AI</a>
-            <a href="">Pass and Play</a>
-            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
+    <div class="recommend">
+      <div class="row">
+        <h4>RECOMMEND</h4>
+      </div>
+	    <div class="row narrow-row">
+		    <div class="button-bar">
+				  <a class="button {{newStyle}}" ng-click="recommendNew()">Newest</a>
+				  <a class="button {{hotStyle}}" ng-click="recommendHot()">Hottest</a>
+				</div>
+			</div>
+			
+			<div class="newestgame" ng-if="recommendType=='new'">
+	      <div class="card" ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 3">
+	        <div class="item item-input item-select game-basic-info" ng-click="toggleNewGroup(game)" 
+	        ng-class="{active: isNewGroupShown(game)}">
+	          <div class="row no-padding">
+	            <div class="col col-20 no-padding">
+			          <img ng-src="{{game.icon | gameIcon}}">
+			        </div>
+			        <div class="col col-70 no-vertical-padding">
+			          <div>
+			             <p>{{game.gameName}}</p>
+			             <p class="game-more-info">
+			               <i class="icon ion-android-lightbulb"></i>Developer:
+			               {{game.developer[0].firstName}}
+			             </p>
+			          </div>
+			        </div>
+			        <div class="col col-10 no-padding expand">
+			          <i class="icon" ng-class="isNewGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+			        </div>
+	          </div>
+	        </div>
+	        <!-- end of one newest game basic info -->
+	        <div ng-show="isNewGroupShown(game)" class="button-group">
+	          <div class="row">
+	            <div class="col col-50">
+	              <a class="button button-small button-light icon-right ion-android-add-contact" href="">Invite</a>
+	            </div>
+	            <div class="col col-50"> 
+	              <a class="button button-small button-light icon-right ion-play" 
+	              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Play Now</a>
+	            </div>
+	          </div>
+	          <div class="row">
+	            <div class="col col-50">
+	              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">History</a>
+	            </div>
+	            <div class="col col-50">
+	              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
+	            </div>
+	          </div>
+	        </div>
+	        <!-- end of info/play buttons -->
+	      </div>
+	      <!-- end of one newest game card -->
+	    </div>
+			<!-- end of newest game section -->
+		
+		<div class="newestgame" ng-if="recommendType=='hot'">
+      <div class="card" ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 3">
+        <div class="item item-input item-select" ng-click="toggleHotGroup(game)" 
+        ng-class="{active: isHotGroupShown(game)}">
+          <div class="row no-padding">
+            <div class="col col-20 no-padding">
+              <img ng-src="{{game.icon | gameIcon}}">
+            </div>
+            <div class="col col-70 no-vertical-padding">
+              <div>
+                 <p>{{game.gameName}}</p>
+                 <p class="game-more-info">
+                   <i class="icon ion-android-lightbulb"></i>Developer:
+                   {{game.developer[0].firstName}}
+                 </p>
+              </div>
+            </div>
+            <div class="col col-10 no-padding expand">
+              <i class="icon" ng-class="isHotGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+            </div>
           </div>
-          <div class="row-two">
-            <a href="#/history/{{game.gameId}}">History</a>
-            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
+        </div>
+        <div ng-show="isHotGroupShown(game)" class="button-group">
+          <div class="row">
+            <div class="col col-50">
+              <a class="button button-small button-light icon-right ion-android-add-contact" href="">Invite</a>
+            </div>
+            <div class="col col-50"> 
+              <a class="button button-small button-light icon-right ion-play" 
+              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Play Now</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-50">
+              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">History</a>
+            </div>
+            <div class="col col-50">
+              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </ion-list>
-
-  <ion-list>
-    <div class="hottestgame">
-      <h3>Hottest Games</h3>
-      <div ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 3">
-        <div class="item item-input item-select" style="background-color: #6633FF;" ng-click="toggleHotGroup(game)" ng-class="{active: isHotGroupShown(game)}">
-          <i class="icon" ng-class="isHotGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
-          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
-          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br></div>
-        </div>
-        <div class="item item-input item-select" style="background-color: #6699FF;" class="item-accordion" ng-show="isHotGroupShown(game)">
-          <div class="row-one">
-            <a href="">Play AI</a>
-            <a href="">Pass and Play</a>
-            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
-          </div>
-          <div class="row-two">
-            <a href="#/history/{{game.gameId}}">History</a>
-            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ion-list>
-
+  </div>
+		
   <div>
     <input class="col-100" ng-model="query.gameName" placeholder="Search by name..."><br>
     <select class="col-100" ng-model="orderProp" class="narrow">

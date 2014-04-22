@@ -285,6 +285,25 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
       }
     }
     
+    /* 
+     * Show recommended games based on the button bar operation
+     */
+    
+    $scope.newStyle = 'button-light light-assertive';
+    $scope.hotStyle = 'button-assertive white-border';
+    $scope.recommendType = 'new';
+    $scope.recommendNew = function () {
+    	$scope.newStyle = 'button-light light-assertive';
+    	$scope.hotStyle = 'button-assertive white-border';
+    	$scope.recommendType = 'new';
+    };
+    $scope.recommendHot = function () {
+    	$scope.hotStyle = 'button-light light-assertive';
+    	$scope.newStyle = 'button-assertive white-border';
+    	$scope.recommendType = 'hot';
+    };    
+    
+    
     /*
      * if given group is the selected group, deselect it
      * else, select the given group
