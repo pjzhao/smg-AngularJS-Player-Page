@@ -40,6 +40,10 @@
     margin-bottom: 20px;
 }
 
+.ion-chevron-down:before {
+  padding-left: 80px;
+}
+
 /* end of history detail CSS */
 
 .no-padding {
@@ -164,4 +168,14 @@ ion-nav-bar .page-title {
 
 .menu.menu-right {
 	background-color: black;
+	color: white;
+}
+
+.menu.menu-right * {
+	color: white;
+}
+
+.profile-image {
+	width: 50px;
+	height: 50px;
 }
