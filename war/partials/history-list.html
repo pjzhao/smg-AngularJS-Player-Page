@@ -22,9 +22,9 @@
                 <ion-item class="item-accordion button-group"
                           ng-show="isHistoryShown(history)">
                     <div class="row result-summary-bar no-padding">
-                        <div class="col col-33">Win: {{tokenFile.draw}}</div>
-                        <div class="col col-33">Lose: {{tokenFile.lost}}</div>
-                        <div class="col col-33">Draw: {{tokenFile.draw}}</div>
+                        <div class="col col-33">Win: {{tokenFile.draw | currency}}</div>
+                        <div class="col col-33">Lose: {{tokenFile.lost | currency}}</div>
+                        <div class="col col-33">Draw: {{tokenFile.draw | currency}}</div>
                     </div>
                     <button class="button button-full button-light icon-right ion-ios7-star-outline"
                             ng-init="collapsed='false'"
@@ -33,29 +33,15 @@
                     </button>
                     <ion-item class="item-accordion achievement-bar" ng-show="collapsed">
                         <div class="row achievement" style="text-align:center">
-                            <div class="col col-33">Token: {{tokenFile.token}}</div>
-                            <div class="col col-33">Rank: {{tokenFile.rank}}</div>
-                            <div class="col col-33">Score: {{tokenFile.score}}</div>
+                            <div class="col col-33">Token: {{tokenFile.token | currency}}</div>
+                            <div class="col col-33">Rank: {{tokenFile.rank | currency}}</div>
+                            <div class="col col-33">Score: {{tokenFile.score | currency}}</div>
                         </div>
                     </ion-item>
                     <button class="button button-full button-light icon-right ion-game-controller-b"
                             style="text-align:center" ng-init="collapse='false'" ng-click="showLastMatch({{history.gameId}})">
                         Last Match
                     </button>
-                    <!-- <ion-item class="item-accordion"
-                              ng-show="collapse">
-                        <h2>Your opponent(s):</h2>
-                        <div ng-repeat="opp in lastmatch.opponentIds">{{opp}}</div>
-                        <br />
-                        <h2>Game Result:</h2>
-                        <div>{{lastmatch.result}}</div>
-                    </ion-item> -->
-                    <!-- <span>
-                        <button ng-href="#/history/{{history.gameId}}" class="button button-full button-light"
-                                style="text-align:center">
-                            Results
-                        </button>
-                    </span>  -->
                 </ion-item>
               </div>
             </div>

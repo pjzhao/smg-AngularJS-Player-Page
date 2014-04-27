@@ -16,14 +16,14 @@
         </div>
 
         <div class="row title">
-            <div class="col col-33 no-padding">DATE</div>
-            <div class="col col-33 no-padding">TOKEN</div>
-            <div class="col col-33 no-padding">SCORE</div>
+            <div class="col col-33 no-padding">{{DATE}}</div>
+            <div class="col col-33 no-padding">{{TOKEN}}</div>
+            <div class="col col-33 no-padding">{{SCORE}}</div>
         </div>
         <div class="row stats">
-            <div class="col col-33 content no-padding" style="border-color: blue">{{lastmatch.date}}</div>
-            <div class="col col-33 content no-padding" style="border-color: yellow">{{lastmatch.tokenChange}}</div>
-            <div class="col col-33 content no-padding" style="border-color: purple">{{lastmatch.score}}</div>
+            <div class="col col-33 content no-padding" style="border-color: blue">{{lastmatch.date | currency}}</div>
+            <div class="col col-33 content no-padding" style="border-color: yellow">{{lastmatch.tokenChange | currency}}</div>
+            <div class="col col-33 content no-padding" style="border-color: purple">{{lastmatch.score | currency}}</div>
         </div>
        
     </ion-content>
