@@ -5,13 +5,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="fbtitle" property="og:title" content="SMG Player Achivements" /> 
     <meta name="fbimage" property="og:image" content="img/superman.png" /> 
-    <title ng-bind="'SMG ' + title">SMG Player</title>
-    
+    <title ng-bind="'SMG ' + title">SMG Player</title>    
     <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css"></link>
     <link rel="stylesheet" href="lib/css/ionic.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/historydetail.css">
-
+    <link rel="stylesheet" href="css/mobile.css">
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-resource.js"></script>
     <script src="lib/angular/angular-route.js"></script>
@@ -24,13 +21,68 @@
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
 </head>
-<body>
+<body class="slide-left-right-ios7">
     <div id="fb-root"></div> 
-    <ion-nav-bar class="bar-positive nav-title-slide-ios7">Nav Bar</ion-nav-bar>
-  
-    <!-- where the initial view template will be rendered -->
-    <ion-nav-view class="view-content slide-left-right-ios7">
-      <i class="icon ion-loading-c"></i> -
-    </ion-nav-view>
+    <ion-side-menus>
+	  <!-- Center content -->
+		  <ion-side-menu-content ng-controller="ContentController">
+		    <ion-nav-bar class="bar-dark nav-title-slide-ios7">
+		      <div class="col col-10 no-padding">
+		        <ion-nav-back-button class="button-icon">
+    				<i class="ion-ios7-arrow-back"></i>
+ 				</ion-nav-back-button>
+		      </div>
+		      <div class="page-title" class="col col-80" ng-bind="title"></div>
+		      <div class="col col-10 no-padding">
+		        <button class="button button-clear" ng-click="toggleRight()"><i class="icon ion-navicon"></i></button>
+		      </div>
+		    </ion-nav-bar>
+		  
+		    <!-- where the initial view template will be rendered -->
+		    <ion-nav-view class="view-content slide-left-right-ios7">
+		      <i class="icon ion-loading-c"></i> -
+		    </ion-nav-view>
+		  </ion-side-menu-content>
+		  
+		  <!-- Right menu -->
+      <ion-side-menu  side="right" width="150" ng-controller="MenuController">
+	        <div class="row">
+	          <!-- <img ng-src="..\img\superman.png" class="profile-image"> -->
+	          <img ng-src="{{imageURL}}" class="profile-image">
+	        </div>
+	        <br>
+	        <div class="row">
+	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
+	          <h3>{{firstname}} {{lastname}}</h3>
+	        </div>
+	        <div class="row">
+	          <!-- <h4>{{nickname}}</h4> -->
+	          <h4>{{nickname}}</h4>
+	        </div>
+	        <div class="row">
+	          <i class="icon ion-ios7-email-outline"></i>{{email}}
+	        </div>
+	        <hr>
+	        <a class="button button-clear" ng-click="navClick('choosegame')">
+	          <div class="row">
+	          	<div class="col col-20"><i class="icon ion-home"></i></div>
+	          	<div class="col col-80">Home</div>
+	          </div>
+	        </a>
+	        <a class="button button-clear" ng-click="navClick('historylist')">
+	          <div class="row">
+	          	<div class="col col-20"><i class="icon ion-clock"></i></div>
+	          	<div class="col col-80">History</div>
+	          </div>
+	        </a>	        
+	        <a class="button button-clear" ng-click="">
+	          <div class="row">	          
+	          	<div class="col col-20"><i class="icon ion-gear-b"></i></div>
+	          	<div class="col col-80">Setting</div>
+	          </div>	        
+	        </a>
+      </ion-side-menu>
+
+    </ion-side-menus>
 </body>
 </html>

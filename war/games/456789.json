@@ -1,0 +1,10 @@
+{
+	"id": "456789",
+    "name": "Mahjong",
+    "description": "Introduction to Mahjong in mahjong.json",
+    "images": [
+        "../img/games/mahjong-icon.jpg", 
+        "../img/games/mahjong-1.jpg",  
+        "../img/games/mahjong-2.jpg"
+    ]    
+}

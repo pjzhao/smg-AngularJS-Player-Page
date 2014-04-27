@@ -14,8 +14,8 @@ var playerApp = angular.module("playerApp", [
   "ionic"
 ]);
 
-playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
-  function($stateProvider, $urlRouterProvider, $httpProvider) {
+playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sceDelegateProvider',
+  function($stateProvider, $urlRouterProvider, $httpProvider, $sceDelegateProvider) {
   $urlRouterProvider.otherwise('/choosegame');
   $stateProvider
   .state('choosegame', {
@@ -30,36 +30,6 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
       templateUrl: '/partials/history-list.html',
       controller: "HistoryListCtrl"
   })
-  .state('login', {
-    title: "Log In",
-    url: '/login',
-    templateUrl: '/partials/login.html',
-    controller: "LoginCtrl"
-  })
-  .state('signup', {
-    title: "Sign Up",
-    url: '/signup',
-    templateUrl: '/partials/signup.html',
-    controller: "SignUpCtrl"        
-  })
-  .state("profile", {
-    title: "My Profile",
-    url: "/profile/:userId",
-    templateUrl: "/partials/view-profile.html",
-    controller: "ProfileCtrl" 
-  })
-  .state("userprofile", {
-    title: "Profile",
-    url: "/user/:userId",
-    templateUrl: "/partials/view-profile.html",
-    controller: "UserCtrl"
-  }) 
-  .state("opponent", {
-    title: "Know About Your Opponent",
-    url: "/opponent/:opponentId",
-    templateUrl: "/partials/opponent.html",
-    controller: "OpponentCtrl"
-  })
   .state("historydetail", {
     title: "Play History",
     url: "/history/:gameId",
@@ -72,26 +42,21 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
     templateUrl: "/partials/game-stats.html",
     controller: "GameStatsCtrl"
   })
-  .state("gamedetail", {
-    title: "Game Detail",
-    url: "/choosegamedetail/:gameId",
-    templateUrl: "/partials/game-detail.html",
-    controller: "GameDetailCtrl"
-  })  
-  .state("analysis", {
-    title: "My Performance",
-    url: "/analysis",
-    templateUrl: "/partials/history-analysis.html",
-    controller: "AnalysisCtrl"
-  })
-  .state("help", {
-    title: "Help",
-    url: "/help",
-    templateUrl: "/partials/help.html"  
-  });
+  .state("playgame", {
+    title: "Play Game",
+    url: "/playgame",
+    templateUrl: "/partials/play-game.html",
+    controller: "PlayGameCtrl"
+  })  ;
 
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  
+  $sceDelegateProvider.resourceUrlWhitelist([
+     // Allow same origin resource loads.
+     'self',
+     // Allow loading from our assets domain.  Notice the difference between * and **.
+     'http://smg-angularjs-container.appspot.com/index.html#/lobby/**']);
 }]);
 
 playerApp.run(['$location', '$rootScope', function($location, $rootScope) {
