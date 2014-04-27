@@ -33,14 +33,16 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'gamelistSortbyrating': 'Sort By Rate',
     'gamelistSearchbyName': ' Search By Name ...',
     'gamelistAllGame': 'ALL GAME',
-    'gamestatLeaderboard': 'LEADERBOARD',
+    'gamestatLeaderboardTitle': 'LEADERBOARD',
     'gamestatHIGHESTSCORE': 'HIGHEST SCORE',
     'gamestatCURRENTMATCHES': 'CURRENT MATCHES',
     'gamestatFINISHEDMATCHES': 'FINISHED MATCHES',
     'gamestatRATE': 'RATE',
     'gamestatRateyougive': 'Rate you give',
     'gamestatAverageratingofthegame': 'Average rating of the game',
-    'gamestatraterate': 'Rate'
+    'gamestatraterate': 'Rate',
+    BUTTON_TEXT_EN: 'English',
+    BUTTON_TEXT_ZH: 'Chinese'
   });
  
   $translateProvider.translations('zh', {
@@ -59,14 +61,16 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'gamelistSortbyrating': '按评分',
     'gamelistSearchbyName': ' 搜索游戏 ...',
     'gamelistAllGame': '游戏列表',
-    'gamestatLeaderboard': '排行榜',
+    'gamestatLeaderboardTitle': '排行榜',
     'gamestatHIGHESTSCORE': '最高分',
     'gamestatCURRENTMATCHES': '当前游戏',
     'gamestatFINISHEDMATCHES': '结束游戏',
     'gamestatRATE': '评分',
     'gamestatRateyougive': '你的评分',
     'gamestatAverageratingofthegame': '平均得分',
-    'gamestatraterate': '打分'
+    'gamestatraterate': '打分',
+    BUTTON_TEXT_EN: '英文',
+    BUTTON_TEXT_ZH: '中文'
   }); 
   $translateProvider.preferredLanguage('zh');
   $urlRouterProvider.otherwise('/choosegame');

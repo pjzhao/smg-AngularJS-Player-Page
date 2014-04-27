@@ -54,11 +54,11 @@
 	        <br>
 	        <div class="row">
 	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
-	          <h3>{{firstname}} {{lastname}}</h3>
+	          <h4>{{firstname}} {{lastname}}</h4>
 	        </div>
 	        <div class="row">
 	          <!-- <h4>{{nickname}}</h4> -->
-	          <h4>{{nickname}}</h4>
+	          <!--<h4>{{nickname}}</h4>-->
 	        </div>
 	        <div class="row">
 	          <i class="icon ion-ios7-email-outline"></i>{{email}}
@@ -82,6 +82,10 @@
 	          	<div class="col col-80">Setting</div>
 	          </div>	        
 	        </a>
+	        <hr>
+	        <button class="button button-clear" ng-click="changeLanguage('zh')" translate="BUTTON_TEXT_ZH"></button>
+	        <button class="button button-clear" ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>
+	        
       </ion-side-menu>
 
     </ion-side-menus>
