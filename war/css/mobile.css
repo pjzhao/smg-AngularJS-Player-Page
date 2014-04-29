@@ -417,3 +417,13 @@ input[type="search"] {
 .nickname-row + .nickname-row {
 	margin-top: -10px;
 }
+
+.language-choose button.button.button-clear.disable-user-behavior {
+	font-size: 10px;
+}
+
+.language-choose img {
+	max-height: 100%;
+	max-width: 100%;
+	vertical-align: middle;
+}

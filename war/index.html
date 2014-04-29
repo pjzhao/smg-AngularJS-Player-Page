@@ -33,7 +33,22 @@
     				<i class="ion-ios7-arrow-back"></i>
  				</ion-nav-back-button>
 		      </div>
-		      <div class="page-title" class="col col-80" ng-bind="title"></div>
+		      <div class="col col-20 language-choose no-padding">
+		        <div class="row no-padding">
+		      		<div class="col col-40 no-padding">
+		      			<button class="button button-clear" ng-click="changeLanguage('zh')">
+		      				<img src="img/chinese.jpg">
+		      			</button>
+	        		</div>
+	        		<div class="col col-40 no-padding">
+	        			<button class="button button-clear" ng-click="changeLanguage('en')">
+	        				<img src="img/english.jpg">
+	        			</button>
+	        		</div>
+	        	</div>
+		      </div>
+		      <div class="page-title col col-40 no-padding" ng-bind="title|translate"></div>
+			  <div class="col col-20 no-padding"></div>
 		      <div class="col col-10 no-padding">
 		        <button class="button button-clear" ng-click="toggleRight()"><i class="icon ion-navicon"></i></button>
 		      </div>
@@ -80,6 +95,7 @@
 	          	<div class="col col-80">{{'indexSetting'|translate}}</div>
 	          </div>	        
 	        </a> -->
+	        <br><br>
 	        <hr>
 	        <button class="button button-clear" ng-click="changeLanguage('zh')" translate="BUTTON_TEXT_ZH"></button>
 	        <button class="button button-clear" ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>

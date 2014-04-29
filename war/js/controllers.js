@@ -17,7 +17,7 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
 
     $scope.navClick = function(targetState) {
 		$ionicSideMenuDelegate.toggleLeft();
-		$state.go(targetState);
+		$state.go(targetState, {"userId":$cookieStore.get('playerIdTag'),"accessSignature":$cookieStore.get('accessSignatureTag')});
     };		
 
     $scope.changeLanguage = function (langKey) {
@@ -105,11 +105,12 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
 playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state', '$stateParams', '$window', 
   function($scope, $http, $cookieStore, $state, $stateParams, $window) {
 	$scope.params = $stateParams;
+	$scope.playerId = $stateParams.userId;
+	$cookieStore.put('playerIdTag', $stateParams.userId);
 	$http.get('http://6.smg-server.appspot.com/playerInfo?playerId=' + $stateParams.userId + '&targetId=' + $stateParams.userId
 		      + '&accessSignature=' + $stateParams.accessSignature)
 	      .success(function(data) {
 	        
-	        $scope.playerId = $stateParams.userId;
 	        $scope.email = data.email;
 	        $scope.firstname = data.firstname;
 	        $scope.lastname = data.lastname;
@@ -118,7 +119,6 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
 	        if (!angular.isUndefined(data.error)) {
 	          $scope.error = data.error;
 	        };
-	        $cookieStore.put('playerIdTag', $stateParams.userId);
 	        $cookieStore.put('emailTag', data.email);
 	        $cookieStore.put('firstnameTag', data.firstname);
 	        $cookieStore.put('lastnameTag', data.lastname);

@@ -58,7 +58,7 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHistory': 'History',
     'indexSetting': 'Setting',
     BUTTON_TEXT_EN: 'English',
-    BUTTON_TEXT_ZH: 'Chinese'
+    BUTTON_TEXT_ZH: '中文'
   });
  
   $translateProvider.translations('zh', {
@@ -101,7 +101,7 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHome': '主页',
     'indexHistory': '历史',
     'indexSetting': '设置',
-    BUTTON_TEXT_EN: '英文',
+    BUTTON_TEXT_EN: 'English',
     BUTTON_TEXT_ZH: '中文'
   }); 
   $translateProvider.preferredLanguage('zh');
