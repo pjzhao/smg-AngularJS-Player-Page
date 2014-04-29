@@ -105,11 +105,11 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     BUTTON_TEXT_ZH: '中文'
   }); 
   $translateProvider.preferredLanguage('zh');
-  $urlRouterProvider.otherwise('/choosegame');
+  $urlRouterProvider.otherwise('/profile/0');
   $stateProvider
   .state('choosegame', {
     title: "Choose Game",
-    url: '/choosegame',
+    url: '/profile/:userId',
     templateUrl: '/partials/game-list.html',
     controller: "GameListCtrl"
   })

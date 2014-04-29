@@ -1,9 +1,28 @@
+
+# Package Files #
+*.war
+
+# gwt caches and compiled units #
+war/gwt_bree/
+gwt-unitCache/
+
+# boilerplate generated classes #
+.apt_generated/
+
+# more caches and things from deploy #
+war/WEB-INF/deploy/
+war/WEB-INF/classes/
+
+
 /test-classes
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/smg_angularjs_player_page.nocache.js
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/compilation-mappings.txt
-war/smg_angularjs_player_page/smg_angularjs_player_page.nocache.js
+
+war/smg_angularjs_player_page/
+
+*.cache.js
+
+# more caches and things from deploy #
+war/WEB-INF/deploy/smg_angularjs_player_page/
+war/WEB-INF/classes/
+war/WEB-INF/deploy/smg_angularjs_player_page/rpcPolicyManifest/manifest.txt
+war/WEB-INF/deploy/smg_angularjs_player_page/rpcPolicyManifest/manifest.txt
+*.symbolMap
