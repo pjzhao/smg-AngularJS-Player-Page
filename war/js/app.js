@@ -109,7 +109,7 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
   $stateProvider
   .state('choosegame', {
     title: "Choose Game",
-    url: '/profile/:userId',
+    url: '/profile/:userId?accessSignature',
     templateUrl: '/partials/game-list.html',
     controller: "GameListCtrl"
   })
