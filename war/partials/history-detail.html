@@ -1,4 +1,4 @@
-<ion-view title="Last Match">
+<ion-view title={{'hisDetailTitle'|translate}}>
     <ion-content class="history-detail-page">
         <br>
         <h2 class="pagetitle">{{gameresult}}</h2>
@@ -16,9 +16,9 @@
         </div>
 
         <div class="row title">
-            <div class="col col-33 no-padding">DATE</div>
-            <div class="col col-33 no-padding">TOKEN</div>
-            <div class="col col-33 no-padding">SCORE</div>
+            <div class="col col-33 no-padding">{{'hisDetailDATE'|translate}}</div>
+            <div class="col col-33 no-padding">{{'hisDetailTOKEN'|translate}}</div>
+            <div class="col col-33 no-padding">{{'hisDetailSCORE'|translate}}</div>
         </div>
         <div class="row stats">
             <div class="col col-33 content no-padding" style="border-color: blue">{{lastmatch.date}}</div>

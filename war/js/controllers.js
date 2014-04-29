@@ -11,8 +11,8 @@ playerControllers.controller('ContentController', ['$scope', '$ionicSideMenuDele
 	  };  
 }]);
 
-playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideMenuDelegate', '$cookieStore', '$http',
-  function ($scope, $state, $ionicSideMenuDelegate, $cookieStore, $http) {   
+playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideMenuDelegate', '$cookieStore', '$http', '$translate',
+  function ($scope, $state, $ionicSideMenuDelegate, $cookieStore, $http, $translate) {   
 	$cookieStore.put('playerIdTag', '5634985281191936');
 	$cookieStore.put('passwordTag', 'password');
 	$scope.playerId = $cookieStore.get('playerIdTag');
@@ -72,6 +72,11 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
 			$ionicSideMenuDelegate.toggleLeft();
 			$state.go(targetState);
 	  };		
+
+
+    $scope.changeLanguage = function (langKey) {
+      $translate.use(langKey);
+    };
 }]);
 
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore', '$rootElement', 
@@ -151,7 +156,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
        });
 }]);
   
-playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state',
+playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state', 
   function($scope, $http, $cookieStore, $state) {
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
@@ -234,6 +239,7 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
       $cookieStore.put('currentGameIdTag', gameId);
       $state.go('playgame');
     };
+    
 }]);
 
 playerControllers.controller('PlayGameCtrl', ['$scope', '$http', '$cookieStore', '$state',

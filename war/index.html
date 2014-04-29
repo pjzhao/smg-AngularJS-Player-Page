@@ -14,6 +14,7 @@
     <script src="lib/angular/angular-route.js"></script>
     <script src="lib/angular/angular-cookies.js"></script>
     <script src="lib/angular/angular-animate.js"></script>
+    <script src="lib/angular/angular-translate.js"></script>
     <script src="lib/js/ionic.bundle.js"></script>
     <script src="js/app.js"></script>
     <script src="js/filters.js"></script>
@@ -53,11 +54,11 @@
 	        <br>
 	        <div class="row">
 	          <!-- <h3>{{firstname}} {{lastname}}</h3> -->
-	          <h3>{{firstname}} {{lastname}}</h3>
+	          <h4>{{firstname}} {{lastname}}</h4>
 	        </div>
 	        <div class="row">
 	          <!-- <h4>{{nickname}}</h4> -->
-	          <h4>{{nickname}}</h4>
+	          <!--<h4>{{nickname}}</h4>-->
 	        </div>
 	        <div class="row">
 	          <i class="icon ion-ios7-email-outline"></i>{{email}}
@@ -66,21 +67,25 @@
 	        <a class="button button-clear" ng-click="navClick('choosegame')">
 	          <div class="row">
 	          	<div class="col col-20"><i class="icon ion-home"></i></div>
-	          	<div class="col col-80">Home</div>
+	          	<div class="col col-80">{{'indexHome'|translate}}</div>
 	          </div>
 	        </a>
 	        <a class="button button-clear" ng-click="navClick('historylist')">
 	          <div class="row">
 	          	<div class="col col-20"><i class="icon ion-clock"></i></div>
-	          	<div class="col col-80">History</div>
+	          	<div class="col col-80">{{'indexHistory'|translate}}</div>
 	          </div>
 	        </a>	        
 	        <a class="button button-clear" ng-click="">
 	          <div class="row">	          
 	          	<div class="col col-20"><i class="icon ion-gear-b"></i></div>
-	          	<div class="col col-80">Setting</div>
+	          	<div class="col col-80">{{'indexSetting'|translate}}</div>
 	          </div>	        
 	        </a>
+	        <hr>
+	        <button class="button button-clear" ng-click="changeLanguage('zh')" translate="BUTTON_TEXT_ZH"></button>
+	        <button class="button button-clear" ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>
+	        
       </ion-side-menu>
 
     </ion-side-menus>
