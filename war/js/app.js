@@ -57,6 +57,10 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHome': 'Home',
     'indexHistory': 'History',
     'indexSetting': 'Setting',
+    'playGameHead': 'Play Game',
+    'DRAW': 'Draw',
+    'WIN': 'Win',
+    'LOST': 'Lose',
     BUTTON_TEXT_EN: 'English',
     BUTTON_TEXT_ZH: '中文'
   });
@@ -101,6 +105,10 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHome': '主页',
     'indexHistory': '历史',
     'indexSetting': '设置',
+    'playGameHead': '开始游戏',
+    'DRAW': '平',
+    'WIN': '胜',
+    'LOST': '败',
     BUTTON_TEXT_EN: 'English',
     BUTTON_TEXT_ZH: '中文'
   }); 

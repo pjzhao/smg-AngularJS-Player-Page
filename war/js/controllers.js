@@ -76,19 +76,13 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
                 $scope.histories = $cookieStore.get('historiesTag');
                 $scope.lastmatch = $scope.histories[9];
-                if ($scope.lastmatch.result == "DRAW") {
-                    $scope.gameresult = "Draw";
-                } else if ($scope.lastmatch.result == "WIN") {
-                    $scope.gameresult = "You win! Good job.";
-                } else if ($scope.lastmatch.result == "LOST") {
-                    $scope.gameresult = "You lose! Never mind.";
-                }
+                $scope.gameresult = $scope.lastmatch.result;
           }
       };
       $scope.nickname = $cookieStore.get('nicknameTag');
       $scope.imageURL = $cookieStore.get('imageURLTag');
       //$http.get('http://6.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
-      $http.get('../players/1236.json')
+      $http.get('../players/1235.json')
       .success(function (data) {
           $scope.oppuserProfile = data;
       })
