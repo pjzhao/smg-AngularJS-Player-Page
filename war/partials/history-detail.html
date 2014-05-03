@@ -1,0 +1,30 @@
+<ion-view title="ion-star">
+    <ion-content class="history-detail-page">
+        <br>
+        <h2 class="pagetitle">{{gameresult | translate}}</h2>
+        <div class="row image no-margin">
+            <div class="col col-40 no-padding left-side"><img class="circular circular-assertive" src="{{imageURL}}"></img></div>
+            <div class="col col-20 no-padding">
+              <i class="icon ion-game-controller-b width-100 icon-30"></i>
+            </div>
+            <div class="col col-40 no-padding right-side"><img class="circular circular-balanced" src="{{oppUrl}}"></img></div>
+        </div>
+        <div class="row">
+            <div class="col col-40 no-padding left-side"><font size="3">{{nickname}}</font></div>
+            <div class="col col-20-offset no-padding"></div>
+            <div class="col col-40 no-padding right-side"><font size="3">{{oppnickname}}</font></div>
+        </div>
+
+        <div class="row title">
+            <div class="col col-33 no-padding">{{'hisDetailDATE'|translate}}</div>
+            <div class="col col-33 no-padding">{{'hisDetailTOKEN'|translate}}</div>
+            <div class="col col-33 no-padding">{{'hisDetailSCORE'|translate}}</div>
+        </div>
+        <div class="row stats">
+            <div class="col col-33 content no-padding" style="border-color: blue">{{lastmatch.date}}</div>
+            <div class="col col-33 content no-padding" style="border-color: yellow">{{lastmatch.tokenChange}}</div>
+            <div class="col col-33 content no-padding" style="border-color: purple">{{lastmatch.score}}</div>
+        </div>
+       
+    </ion-content>
+</ion-view>

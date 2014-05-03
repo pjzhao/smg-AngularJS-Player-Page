@@ -1,0 +1,429 @@
+/* history detail CSS */
+.pagetitle {
+    font-style: oblique;
+    text-align: center;
+    margin: 10px;
+    border: hidden;
+}
+
+.image {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom:20px;
+}
+
+.circular {
+    overflow: hidden;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    width: 90px;
+    height: 90px;
+    border: 4px solid;
+}
+
+.circular-assertive {
+	border-color: #ef4e3a;
+}
+
+.circular-balanced {
+  border-color: #66cc33;
+}
+
+.history-detail-page {
+  background-color: black;	
+}
+
+.history-detail-page * {
+	color: white;
+}
+
+.row.title {
+  margin-top: 20px;
+  text-align:center;
+  font-size: 10px; 
+}
+
+.content {
+    margin: 0;
+    text-align:center;
+    font-size:15px;
+    border:4px solid;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    line-height: 50px;
+}
+
+.icon-30 {
+  font-size: 30px;
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;	
+}
+
+.left-side {
+	text-align: right;
+}
+
+.right-side {
+	text-align: left;
+}
+
+
+/* end of history detail CSS */
+
+h1 {
+  display: none;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.no-vertical-padding {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.no-horizon-padding {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.no-vertical-margin {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+ion-nav-bar .page-title {
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  padding-top: 7px;
+}
+
+.recommend {
+	background-color: #ef4e3a;
+}
+
+.recommend h4 {
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.recommend .button-bar {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.recommend .narrow-row .button {
+  line-height: 30px;
+  height: 30px;
+  min-height: 0px;
+  font-size: 14px;
+}
+
+.recommend .card {
+	margin-bottom: 0px;
+	margin-top: 10px;
+	border: none;
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.recommend .card .game-basic-info {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.recommend .card:first-child {
+	margin-top: 20px;
+}
+
+.newestgame {
+	padding-bottom: 20px;
+}
+
+.newestgame .card * {
+	color: black;
+}
+
+.newestgame img, .hottestgame img {
+	height: 50px;
+	width: 50px;
+}
+
+.button.button-light.light-assertive {
+	color: #ef4e3a;
+}
+
+.button.button-assertive.white-border {
+	border-color: white;
+}
+
+.recommend .button-group {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: black;
+}
+
+.button-group .button.button-light {
+	width: 105px;
+	font-size: 14px;
+}
+
+.game-basic-info .icon {
+	padding-right: 5px;
+}
+
+.game-more-info .icon {
+	color: gray;
+}
+
+.item p.game-more-info {
+	color: gray;
+	font-size: 12px;
+}
+
+.expand {
+	padding-top: 14px;
+	padding-bottom: 14px;
+}
+
+.menu.menu-right {
+	background-color: black;
+	color: white;
+}
+
+.menu.menu-right * {
+	color: white;
+}
+
+.profile-image {
+	width: 50px;
+	height: 50px;
+	width: 150px;
+	height: auto;
+}
+
+.menu.menu-right .icon {
+	padding-right: 10px;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.highscore {
+  background-color: #ef4e3a;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);	
+}
+
+.highscore h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.highscore a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.currentgame {
+  background-color: #f0b840;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.currentgame h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.currentgame a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.finishedgame {
+  background-color: #66cc33;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.finishedgame h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.finishedgame a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.ratecss {
+  background-color: #8a6de9;
+  max-width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.ratecss h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.ratecss a {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.ratecss p {
+  padding-left: 5px;
+  color: #FFFFFF;
+}
+
+.col-100 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 40px;
+}
+
+.alllist {
+  background-color: #6699FF;
+}
+
+.alllist h4 {
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.alllist .card {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.alllist .card .game-basic-info {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.alllist h4 {
+  margin-bottom: 0px;	
+}
+
+.allgame {
+  padding-bottom: 20px;
+}
+
+.allgame .card * {
+  color: black;
+}
+
+.allgame img {
+  height: 50px;
+  width: 50px;
+}
+
+.allgame .button-group {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: black;
+}
+
+iframe html {
+	height: 1200px;
+}
+
+input[type="search"] {
+	height: 35px;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+.history-list {
+	padding-top: 10px;
+}
+
+.history-list .card p {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.history-list .button-group {
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: black;
+}
+
+.history-list .button-group .item-content {
+	background-color: transparent;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+
+.history-list .button-group .result-summary-bar, .history-list .button-group .button-full {
+	width: 100%
+}
+
+.history-list .button-group .result-summary-bar * {
+	color: white;
+	font-size: 12px;
+	text-align: center;
+}
+
+.achievement {
+	font-size: 12px;
+}
+
+.history-list .button-group .achievement-bar .item-content {
+	padding: 0px;
+}
+
+.row + .row.nickname-row {
+	margin-top: -15px;
+}
+
+.button.nickname-row {
+	margin-top: -15px;
+}
+
+.nickname-row + .nickname-row {
+	margin-top: -10px;
+}
+
+.language-choose button.button.button-clear.disable-user-behavior {
+	font-size: 10px;
+}
+
+.language-choose img {
+	max-height: 100%;
+	max-width: 100%;
+	vertical-align: middle;
+}

@@ -1,0 +1,208 @@
+
+<ion-view title="ion-home">
+	
+	<ion-content>
+		<div>		
+		
+		  <!-- Keep all page content in the page-content inset div-->
+		    <div class="recommend">
+		      <div class="row">
+		        <h4>{{'gamelistRECOMMEND'|translate}}</h4> 
+		      </div>
+			    <div class="row narrow-row">
+				    <div class="button-bar">
+						  <a class="button {{newStyle}}" ng-click="recommendNew()">{{'gamelistNewest'|translate}}</a>
+						  <a class="button {{hotStyle}}" ng-click="recommendHot()">{{'gamelistHottest'|translate}}</a>
+						</div>
+					</div>
+					
+					<div class="newestgame" ng-if="recommendType=='new'">
+			      <div class="card" ng-repeat="game in games | orderBy: orderNew" ng-show="$index < 3">
+			        <div class="item item-input item-select game-basic-info" ng-click="toggleNewGroup(game)" 
+			        ng-class="{active: isNewGroupShown(game)}">
+			          <div class="row no-padding">
+			            <div class="col col-20 no-padding">
+					          <img ng-src="{{game.icon | gameIcon}}">
+					        </div>
+					        <div class="col col-70 no-vertical-padding">
+					          <div>
+								<p>{{game.gameName}}</p>
+								<p class="game-more-info">								
+					               <i class="icon ion-android-lightbulb"></i>{{'gamelistDeveloper'|translate}}:
+					               {{game.developer[0].firstName}}
+					               <!--
+									<i class="icon ion-android-lightbulb"></i>上传时间:
+					               	{{game.postDate | date:'fullDate'}}-->
+					             </p>
+					          </div>
+					        </div>
+					        <div class="col col-10 no-padding expand">
+					          <i class="icon" ng-class="isNewGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+					        </div>
+			          </div>
+			        </div>
+			        <!-- end of one newest game basic info -->
+			        <div ng-show="isNewGroupShown(game)" class="button-group">
+			          <div class="row">
+			            <div class="col col-50">
+			              <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
+			            </div>
+			            <div class="col col-50"> 
+			              <!-- <a class="button button-small button-light icon-right ion-play" 
+			              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_self">
+			              Play Now</a> -->
+			              <a class="button button-small button-light icon-right ion-play" ng-click="startPlay({{game.gameId}})">{{'gamelistPlayNow'|translate}}</a>
+			            </div>
+			          </div>
+			          <div class="row">
+			            <div class="col col-50">
+			              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">{{'gamelistLastMatch'|translate}}</a>
+			            </div>
+			            <div class="col col-50">
+			              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">{{'gamelistLeaderboard'|translate}}</a>
+			            </div>
+			          </div>
+			        </div>
+			        <!-- end of info/play buttons -->
+			      </div>
+			      <!-- end of one newest game card -->
+			    </div>
+					<!-- end of newest game section -->
+				
+				<div class="newestgame" ng-if="recommendType=='hot'">
+		      <div class="card" ng-repeat="game in games | orderBy: orderHot" ng-show="$index < 3">
+		        <div class="item item-input item-select" ng-click="toggleHotGroup(game)" 
+		        ng-class="{active: isHotGroupShown(game)}">
+		          <div class="row no-padding">
+		            <div class="col col-20 no-padding">
+		              <img ng-src="{{game.icon | gameIcon}}">
+		            </div>
+		            <div class="col col-70 no-vertical-padding">
+		              <div>
+		                 <p>{{game.gameName}}</p>
+		                 <p class="game-more-info">
+		                   <i class="icon ion-android-lightbulb"></i>{{'gamelistDeveloper'|translate}}:
+		                   {{game.developer[0].firstName}}
+		                 </p>
+		              </div>
+		            </div>
+		            <div class="col col-10 no-padding expand">
+		              <i class="icon" ng-class="isHotGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+		            </div>
+		          </div>
+		        </div>
+		        <div ng-show="isHotGroupShown(game)" class="button-group">
+		          <div class="row">
+		            <div class="col col-50">
+		              <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
+		            </div>
+		            <div class="col col-50"> 
+		              <!-- <a class="button button-small button-light icon-right ion-play" 
+		              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">
+		              Play Now</a> -->
+		              <a class="button button-small button-light icon-right ion-play" ng-click="startPlay({{game.gameId}})">{{'gamelistPlayNow'|translate}}</a>
+		            </div>
+		          </div>
+		          <div class="row">
+		            <div class="col col-50">
+		              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">{{'gamelistLastMatch'|translate}}</a>
+		            </div>
+		            <div class="col col-50">
+		              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">{{'gamelistLeaderboard'|translate}}</a>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+				
+		  <div>
+		    <input type="search" class="col-100" ng-model="query.gameName" placeholder={{'gamelistSearchbyName'|translate}}>
+		    <select class="col-100 width-100" ng-model="orderProp" class="narrow">
+		      <option value="gameName">{{'gamelistSortbyName'|translate}}</option>
+		      <option value="Developer">{{'gamelistSortbyDeveloper'|translate}}</option>
+		      <option value="-postDate">{{'gamelistSortbypostDate'|translate}}</option>
+		      <option value="-rating">{{'gamelistSortbyrating'|translate}}</option>
+		    </select>
+		  </div>
+		  <div class="alllist">
+		    <div class="row">
+		      <h4>{{'gamelistAllGame'|translate}}</h4>
+		    </div>
+		    <div class="allgame">
+		      <div class="card" ng-repeat="game in games | orderBy: orderProp">
+		        <div class="item item-input item-select game-basic-info" ng-click="toggleAllGroup(game)" ng-class="{active: isAllGroupShown(game)}">
+		          <div class="row no-padding">
+		            <div class="col col-20 no-padding">
+		              <img ng-src="{{game.icon | gameIcon}}">
+		            </div>
+		            <div class="col col-70 no-vertical-padding">
+		              <div>
+		                <p>{{game.gameName}}</p>
+		                <p class="game-more-info">
+		                  <i class="icon ion-android-lightbulb"></i>{{'gamelistDeveloper'|translate}}:
+		                  {{game.developer[0].firstName}}
+		                </p>
+		              </div>
+		            </div>
+		            <div class="col col-10 no-padding expand">
+		              <i class="icon" ng-class="isAllGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+		            </div>
+		          </div>
+		        </div>
+		          <!-- end of one newest game basic info -->
+		          <div ng-show="isAllGroupShown(game)" class="button-group">
+		            <div class="row">
+		              <div class="col col-50">
+		                <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
+		              </div>
+		              <div class="col col-50"> 
+		                <!-- <a class="button button-small button-light icon-right ion-play" 
+		                ng-href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}} | linky:'_self'">
+		                Play Now</a> -->
+		                <a class="button button-small button-light icon-right ion-play" ng-click="startPlay({{game.gameId}})">{{'gamelistPlayNow'|translate}}</a>
+		              </div>
+		            </div>
+		            <div class="row">
+		              <div class="col col-50">
+		                <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">{{'gamelistLastMatch'|translate}}</a>
+		              </div>
+		              <div class="col col-50">
+		                <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">{{'gamelistLeaderboard'|translate}}</a>
+		              </div>
+		            </div>
+		          </div>
+		          <!-- end of info/play buttons -->
+		        </div>
+		        <!-- end of one newest game card -->
+		      </div>
+		    </div>
+		    <!--
+		  <ion-list>
+		    <div class="gamelist">
+		      <h3>All Games</h3>
+		      <div ng-repeat="game in games | filter:query:strict | orderBy:orderProp">
+		        <div class="item item-input item-select" style="background-color: #339966;" ng-click="toggleAllGroup(game)" ng-class="{active: isAllGroupShown(game)}">
+		          <i class="icon" ng-class="isAllGroupShown(game) ? 'ion-minus' : 'ion-plus'"></i>
+		          &nbsp&nbsp&nbsp<img ng-src="{{game.icon | gameIcon}}" height="50" width="50">&nbsp&nbsp&nbsp
+		          <div style="width: 60%; color: #FFFFFF">{{game.gameName}}</a><br>
+		          <b><img ng-src="{{game.rating | ratingFilter}}" height="20"></b></div>
+		        </div>
+		        <div class="item item-input item-select" style="background-color: #66CC33;" class="item-accordion" ng-show="isAllGroupShown(game)">
+		          <div class="row-one">
+		            <a href="">Play AI</a>
+		            <a href="">Pass and Play</a>
+		            <a href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">Auto Matched</a>
+		          </div>
+		          <div class="row-two">
+		            <a href="#/history/{{game.gameId}}">History</a>
+		            <a href="#/choosegamestats/{{game.gameId}}">Leaderboard</a>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </ion-list>-->
+		</div>
+		
+	</ion-content>
+</ion-view>

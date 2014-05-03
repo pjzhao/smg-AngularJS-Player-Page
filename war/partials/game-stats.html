@@ -1,0 +1,56 @@
+<ion-view title="ion-stats-bars">
+	<ion-content>
+		<ion-list>
+		    <div class="highscore no-margin">
+				<h4 class="no-margin">{{'gamestatHIGHESTSCORE'|translate}}</h4>
+				<!-- <a>{{game.highScore.playerId|leaderNameFilter}}</a>
+				<a>{{game.highScore.score|leaderScoreFilter}}</a><br><br>  -->   
+			</div>
+			<div class="currentgame no-margin">
+				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>
+				<table>					
+					<tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
+						<td> 
+							<span>{{currentgameplayer.firstName}}</span></td> 
+						<td> 
+							<span>{{currentgameplayer.nickname}}</span></td>    
+					</tr>
+				</table>
+			</div>
+			<div class="finishedgame no-margin">
+				<h4 class="no-margin">{{'gamestatFINISHEDMATCHES'|translate}}</h4>
+				<table>
+					<tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
+						<td> 
+							<span>{{currentgameplayer.firstName}}</span></td> 
+						<td> 
+							<span>{{currentgameplayer.nickname}}</span></td>    
+						<td> 
+							<span>{{currentgameplayer.score}}</span></td>  
+						<td> 
+							<span>{{currentgameplayer.tokens}}</span></td>  
+					</tr>
+				</table>
+			</div>
+			<div class="ratecss no-margin">
+				<h4 class="no-margin">{{'gamestatRATE'|translate}}</h4>
+				<p>{{'gamestatRateyougive'|translate}}: {{rating}}</p>
+				<p>{{'gamestatAverageratingofthegame'|translate}}: {{rateResponse.rating}}</p>
+				<form ng-submit="rate()">
+					<table>
+						<tr>
+							<td><input style="margin-left:10px;" type="text" ng-model="rating" ></td>
+							<td><input style="margin-left:15px; margin-top:-20px; width: 100px; height: 36px" 
+							class="button button-small button-dark" type="submit" value={{'gamestatraterate'|translate}}></td>
+						</tr>
+						<tr>
+							<td><a>&nbsp&nbsp(1.0 - 5.0)<br><br></a></td>
+						</tr>
+					</table>					
+				</form>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>
+
+

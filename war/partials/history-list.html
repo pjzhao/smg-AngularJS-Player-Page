@@ -1,0 +1,65 @@
+<ion-view title="ion-clock">
+    <ion-content>
+        <ion-list>
+          <div class="alllist history-list">
+            <div class="newestgame">
+              <div ng-repeat="history in historySummary" class="list card">
+                <div class="item item-input item-select game-basic-info" ng-click="toggleHistory(history)" ng-class="{active: isHistoryShown(history)}">
+                  <div class="row no-padding">
+                    <div class="col col-20 no-padding">
+                      <img ng-src="{{history.gameIcon | gameIcon}}">
+                    </div> 
+                    <!-- <i class="ion-game-controller-b"></i>  -->
+                    <div class="col col-70 no-vertical-padding">
+                      <p>{{history.gameName}}</p>
+                    </div>
+                    <div class="col col-10 no-padding expand">
+                      <i class="icon" ng-class="isHistoryShown(history) ? 'ion-minus' : 'ion-plus'"></i>
+                    </div>
+                  </div>
+                </div>
+                <!-- end of basic history card -->
+                <ion-item class="item-accordion button-group"
+                          ng-show="isHistoryShown(history)">
+                    <div class="row result-summary-bar no-padding">
+                        <div class="col col-33">{{'hislistWin'|translate}}: {{tokenFile.draw}}</div>
+                        <div class="col col-33">{{'hislistLose'|translate}}: {{tokenFile.lost}}</div>
+                        <div class="col col-33">{{'hislistDraw'|translate}}: {{tokenFile.draw}}</div>
+                    </div>
+                    <button class="button button-full button-light icon-right ion-ios7-star-outline"
+                            ng-init="collapsed='false'"
+                            ng-click="collapsed=!collapsed">
+                        {{'hislistAchievement'|translate}}
+                    </button>
+                    <ion-item class="item-accordion achievement-bar" ng-show="collapsed">
+                        <div class="row achievement" style="text-align:center">
+                            <div class="col col-33">{{'hislistToken'|translate}}: {{tokenFile.token}}</div>
+                            <div class="col col-33">{{'hislistRank'|translate}}: {{tokenFile.rank}}</div>
+                            <div class="col col-33">{{'hislistScore'|translate}}: {{tokenFile.score}}</div>
+                        </div>
+                    </ion-item>
+                    <button class="button button-full button-light icon-right ion-game-controller-b"
+                            style="text-align:center" ng-init="collapse='false'" ng-click="showLastMatch({{history.gameId}})">
+                        {{'hislistLastMatch'|translate}}
+                    </button>
+                    <!-- <ion-item class="item-accordion"
+                              ng-show="collapse">
+                        <h2>Your opponent(s):</h2>
+                        <div ng-repeat="opp in lastmatch.opponentIds">{{opp}}</div>
+                        <br />
+                        <h2>Game Result:</h2>
+                        <div>{{lastmatch.result}}</div>
+                    </ion-item> -->
+                    <!-- <span>
+                        <button ng-href="#/history/{{history.gameId}}" class="button button-full button-light"
+                                style="text-align:center">
+                            Results
+                        </button>
+                    </span>  -->
+                </ion-item>
+              </div>
+            </div>
+          </div>
+        </ion-list>
+    </ion-content>
+</ion-view>
