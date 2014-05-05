@@ -1,3 +1,2 @@
 # Module smg_angularjs_player_page
 # RPC service class, partial path of RPC policy file
-playerPage.client.GreetingService, A33A2DE1013A6AE1FF7DCD4B8893C8F5.gwt.rpc
