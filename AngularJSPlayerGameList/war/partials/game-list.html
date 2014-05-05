@@ -1,13 +1,13 @@
 
-<ion-view title={{'gamelistHome'|translate}}>
+<ion-view title="ion-home">
 	
-	<ion-content>
+	<ion-content  style="background-color: #6699FF;">
 		<div>		
 		
 		  <!-- Keep all page content in the page-content inset div-->
 		    <div class="recommend">
 		      <div class="row">
-		        <h4>{{'gamelistRECOMMEND'|translate}}</h4>
+		        <h4>{{'gamelistRECOMMEND'|translate}}</h4> 
 		      </div>
 			    <div class="row narrow-row">
 				    <div class="button-bar">
@@ -105,7 +105,7 @@
 		          </div>
 		          <div class="row">
 		            <div class="col col-50">
-		              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">{{'gamelistLastMatch'|translate}}Last Match</a>
+		              <a class="button button-small button-light icon-right ion-clock" ng-href="#/history/{{game.gameId}}">{{'gamelistLastMatch'|translate}}</a>
 		            </div>
 		            <div class="col col-50">
 		              <a class="button button-small button-light icon-right ion-stats-bars" ng-href="#/choosegamestats/{{game.gameId}}">{{'gamelistLeaderboard'|translate}}</a>
@@ -115,22 +115,29 @@
 		      </div>
 		    </div>
 		  </div>
-				
-		  <div>
-		    <input type="search" class="col-100" ng-model="query.gameName" placeholder={{'gamelistSearchbyName'|translate}}>
-		    <select class="col-100 width-100" ng-model="orderProp" class="narrow">
-		      <option value="gameName">{{'gamelistSortbyName'|translate}}</option>
-		      <option value="Developer">{{'gamelistSortbyDeveloper'|translate}}</option>
-		      <option value="-postDate">{{'gamelistSortbypostDate'|translate}}</option>
-		      <option value="-rating">{{'gamelistSortbyrating'|translate}}</option>
-		    </select>
-		  </div>
+
+			<div class="button button-small button-light icon-right" style="margin-left: 10px;" ng-click="toggleSearch()" ng-class="{active: isSearchShown()}">
+				<div>
+					<i class="icon" ng-class="isSearchShown() ? 'ion-minus' : 'ion-search'"></i>
+				</div>			  
+			</div>
+
+			<div ng-show="isSearchShown()">	
+			    <input type="search" class="col-100" ng-model="query.gameName" placeholder={{'gamelistSearchbyName'|translate}}>
+			    <select class="col-100 width-100" ng-model="orderProp" class="narrow">
+			      <option value="gameName">{{'gamelistSortbyName'|translate}}</option>
+			      <option value="Developer">{{'gamelistSortbyDeveloper'|translate}}</option>
+			      <option value="-postDate">{{'gamelistSortbypostDate'|translate}}</option>
+			      <option value="-rating">{{'gamelistSortbyrating'|translate}}</option>
+				</select>
+			</div>
+
 		  <div class="alllist">
 		    <div class="row">
 		      <h4>{{'gamelistAllGame'|translate}}</h4>
 		    </div>
 		    <div class="allgame">
-		      <div class="card" ng-repeat="game in games | orderBy: orderProp">
+		      <div class="card" ng-repeat="game in games | filter:query:strict | orderBy: orderProp">
 		        <div class="item item-input item-select game-basic-info" ng-click="toggleAllGroup(game)" ng-class="{active: isAllGroupShown(game)}">
 		          <div class="row no-padding">
 		            <div class="col col-20 no-padding">

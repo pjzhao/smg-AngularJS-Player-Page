@@ -57,8 +57,14 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHome': 'Home',
     'indexHistory': 'History',
     'indexSetting': 'Setting',
+    'playGameHead': 'Play Game',
+    'DRAW': 'Draw',
+    'WIN': 'Win',
+    'LOST': 'Lose',
     BUTTON_TEXT_EN: 'English',
-    BUTTON_TEXT_ZH: 'Chinese'
+    BUTTON_TEXT_ZH: '中文',
+    'GameStatsCtrlWRONG_RATING': "Failed. The rating is incorrectly formatted.",
+    'GameStatsCtrINVALID_URL_PATH_ERROR': "Failed. INVALID_URL_PATH_ERROR."
   });
  
   $translateProvider.translations('zh', {
@@ -101,15 +107,21 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'indexHome': '主页',
     'indexHistory': '历史',
     'indexSetting': '设置',
-    BUTTON_TEXT_EN: '英文',
-    BUTTON_TEXT_ZH: '中文'
+    'playGameHead': '开始游戏',
+    'DRAW': '平',
+    'WIN': '胜',
+    'LOST': '败',
+    BUTTON_TEXT_EN: 'English',
+    BUTTON_TEXT_ZH: '中文',
+    'GameStatsCtrlWRONG_RATING': "错误！评分格式不正确",
+    'GameStatsCtrINVALID_URL_PATH_ERROR': "错误！路径错误"
   }); 
   $translateProvider.preferredLanguage('zh');
-  $urlRouterProvider.otherwise('/choosegame');
+  $urlRouterProvider.otherwise('/profile/0');
   $stateProvider
   .state('choosegame', {
     title: "Choose Game",
-    url: '/choosegame',
+    url: '/profile/:userId?accessSignature',
     templateUrl: '/partials/game-list.html',
     controller: "GameListCtrl"
   })

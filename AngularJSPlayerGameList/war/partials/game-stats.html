@@ -1,41 +1,22 @@
-<ion-view title={{'gamestatLeaderboardTitle'|translate}}>
+<ion-view title="ion-stats-bars">
 	<ion-content>
 		<ion-list>
 		    <div class="highscore no-margin">
 				<h4 class="no-margin">{{'gamestatHIGHESTSCORE'|translate}}</h4>
-				<!-- <a>{{game.highScore.playerId|leaderNameFilter}}</a>
-				<a>{{game.highScore.score|leaderScoreFilter}}</a><br><br>  -->   
+				<h5 class="no-margin">{{highScorePlayer | leaderNameFilter}} with score {{highScoreScore | leaderScoreFilter}}</h5>
 			</div>
 			<div class="currentgame no-margin">
 				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>
-				<table>					
-					<tr ng-repeat = "currentgameplayer in game.currentGames[0].players">
-						<td> 
-							<span>{{currentgameplayer.firstName}}</span></td> 
-						<td> 
-							<span>{{currentgameplayer.nickname}}</span></td>    
-					</tr>
-				</table>
+				<h5 class="no-margin">{{currentGamePlayerOneFN | leaderNameFilter}} VS {{currentGamePlayerTwoFN | leaderNameFilter}}</h5>				
 			</div>
 			<div class="finishedgame no-margin">
 				<h4 class="no-margin">{{'gamestatFINISHEDMATCHES'|translate}}</h4>
-				<table>
-					<tr ng-repeat = "currentgameplayer in game.finishedGames[0].players">
-						<td> 
-							<span>{{currentgameplayer.firstName}}</span></td> 
-						<td> 
-							<span>{{currentgameplayer.nickname}}</span></td>    
-						<td> 
-							<span>{{currentgameplayer.score}}</span></td>  
-						<td> 
-							<span>{{currentgameplayer.tokens}}</span></td>  
-					</tr>
-				</table>
+				<h5 class="no-margin">{{finishedGamePlayerOneFN | leaderNameFilter}} VS {{finishedGamePlayerTwoFN | leaderNameFilter}}</h5>
 			</div>
 			<div class="ratecss no-margin">
 				<h4 class="no-margin">{{'gamestatRATE'|translate}}</h4>
 				<p>{{'gamestatRateyougive'|translate}}: {{rating}}</p>
-				<p>{{'gamestatAverageratingofthegame'|translate}}: {{rateResponse.rating}}</p>
+				<p>{{'gamestatAverageratingofthegame'|translate}}: {{aveRating}}</p>
 				<form ng-submit="rate()">
 					<table>
 						<tr>

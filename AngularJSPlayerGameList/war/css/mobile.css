@@ -2,7 +2,7 @@
 .pagetitle {
     font-style: oblique;
     text-align: center;
-    margin: 40px;
+    margin: 10px;
     border: hidden;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .row.title {
-  margin-top: 80px;
+  margin-top: 20px;
   text-align:center;
   font-size: 10px; 
 }
@@ -231,6 +231,13 @@ ion-nav-bar .page-title {
   color: #FFFFFF;
 }
 
+.highscore h5 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
 .highscore a {
   padding-left: 5px;
   color: #FFFFFF;
@@ -249,6 +256,13 @@ ion-nav-bar .page-title {
   color: #FFFFFF;
 }
 
+.currentgame h5 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
 .currentgame a {
   padding-left: 5px;
   color: #FFFFFF;
@@ -261,6 +275,13 @@ ion-nav-bar .page-title {
 }
 
 .finishedgame h4 {  
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.finishedgame h5 {  
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -367,7 +388,6 @@ input[type="search"] {
 
 .history-list {
 	padding-top: 10px;
-	background-color: #ef4e3a;
 }
 
 .history-list .card p {
@@ -405,4 +425,26 @@ input[type="search"] {
 
 .history-list .button-group .achievement-bar .item-content {
 	padding: 0px;
+}
+
+.row + .row.nickname-row {
+	margin-top: -15px;
+}
+
+.button.nickname-row {
+	margin-top: -15px;
+}
+
+.nickname-row + .nickname-row {
+	margin-top: -10px;
+}
+
+.language-choose button.button.button-clear.disable-user-behavior {
+	font-size: 10px;
+}
+
+.language-choose img {
+	max-height: 100%;
+	max-width: 100%;
+	vertical-align: middle;
 }
