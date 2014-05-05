@@ -25,8 +25,9 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
     };
 }]);
 
-playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', '$cookieStore', '$rootElement', 
-  function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement) {
+playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', 
+                                                   '$cookieStore', '$rootElement', '$filter',
+  function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement, $filter) {
 
     $scope.currentGameId  = $cookieStore.get('currentGameIdTag');
     $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
@@ -75,14 +76,15 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           else {
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
                 $scope.histories = $cookieStore.get('historiesTag');
-                $scope.lastmatch = $scope.histories[9];
+                $scope.histories = $filter('orderBy')($scope.histories, 'date', true);
+                $scope.lastmatch = $scope.histories[0];
                 $scope.gameresult = $scope.lastmatch.result;
           }
       };
       $scope.nickname = $cookieStore.get('nicknameTag');
       $scope.imageURL = $cookieStore.get('imageURLTag');
       //$http.get('http://7.smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
-      $http.get('../players/1235.json')
+      $http.get('../players/' + $scope.lastmatch.opponentIds[0] + '.json')
       .success(function (data) {
           $scope.oppuserProfile = data;
       })
@@ -398,7 +400,7 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
           $scope.shownHistory = history;
           /*$http.get('http://7.smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.shownHistory.gameId + 
            '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
-          $http.get('../analysis/token.json')
+          $http.get('../token/token.json')
               .success(function (data) {
                   $scope.tokenFile = data;
               })
@@ -424,7 +426,9 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
                   return null;
               }
               else {
-                  $scope.lastmatch = $scope.historyDetailProfile.history[9];
+            	  $scope.histories = $scope.historyDetailProfile.history;
+            	  $scope.histories = $filter('orderBy')($scope.histories, 'date', true);
+            	  $scope.lastmatch = $scope.historyDetailProfile.history[0];
                   return $scope.lastmatch;
               }
           });
