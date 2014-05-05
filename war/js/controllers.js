@@ -128,13 +128,13 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
 	});
     $scope.accessSignature = $cookieStore.get('accessSignatureTag');
     $scope.playerId = $cookieStore.get('playerIdTag');
-    /*$http.get('http://7.smg-server.appspot.com/gameinfo/all')
+    $http.get('http://7.smg-server.appspot.com/gameinfo/all')
         .success(function (data) {
           $scope.games = data;
-        });*/
-    $http.get('/games/games.json').success(function(data) {
+        });
+    /*$http.get('/games/games.json').success(function(data) {
       $scope.games = data;
-    });
+    });*/
     $scope.orderProp = 'gameName';
     $scope.orderNew = '-postDate';
     $scope.orderHot = '-rating';
@@ -202,6 +202,17 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
     $scope.isAllGroupShown = function(group) {
       return $scope.shownAllGroup === group;
     };
+
+    $scope.toggleSearch = function() {
+      if ($scope.isSearchShown()) {
+        $scope.shownSearch = false;
+      } else {
+        $scope.shownSearch = true;
+      }
+    };
+    $scope.isSearchShown = function() {
+      return $scope.shownSearch;
+    };
     
     $scope.startPlay = function (gameId) {
       $cookieStore.put('currentGameIdTag', gameId);
@@ -237,6 +248,34 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
         $scope.game.error = ""
       }
     }); */
+    $http.get('/leaderboard/leaderboard.json')
+    //$http.get('http://7.smg-server.appspot.com/gameinfo/stats?gameId=' + $stateParams.gameId)
+    .success(function(data) {
+      $scope.statTemp = data;
+    }).then(function(statTemp) {
+      if ($scope.statTemp.error == "WRONG_GAME_ID") {
+        $window.alert("WRONG_GAME_ID, No such game!");
+        $scope.statTemp.error = ""
+      } else {
+        $scope.aveRating = $scope.statTemp.rating;
+        $scope.highScorePlayer = $scope.statTemp.highScore.playerId;
+        $scope.highScoreScore = $scope.statTemp.highScore.score;
+
+        $scope.currentGamePlayerOneFN = $scope.statTemp.currentGames[0].players[0].firstName;
+        $scope.currentGamePlayerOneNN = $scope.statTemp.currentGames[0].players[0].nickname;
+        $scope.currentGamePlayerTwoFN = $scope.statTemp.currentGames[0].players[1].firstName;
+        $scope.currentGamePlayerTwoNN = $scope.statTemp.currentGames[0].players[1].nickname; 
+
+        $scope.finishedGamePlayerOneFN = $scope.statTemp.finishedGames[0].players[0].firstName;
+        $scope.finishedGamePlayerOneNN = $scope.statTemp.finishedGames[0].players[0].nickname;
+        $scope.finishedGamePlayerOneScore = $scope.statTemp.finishedGames[0].players[0].score;
+        $scope.finishedGamePlayerOneToken = $scope.statTemp.finishedGames[0].players[0].tokens;
+        $scope.finishedGamePlayerTwoFN = $scope.statTemp.finishedGames[0].players[1].firstName;
+        $scope.finishedGamePlayerTwoNN = $scope.statTemp.finishedGames[0].players[1].nickname;
+        $scope.finishedGamePlayerTwoScore = $scope.statTemp.finishedGames[0].players[1].score;
+        $scope.finishedGamePlayerTwoToken = $scope.statTemp.finishedGames[0].players[1].tokens;      
+      }
+    });
     $scope.rate = function () {
       $scope.createRate = {
         "gameId" : $scope.currentGameId,

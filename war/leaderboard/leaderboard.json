@@ -1,0 +1,44 @@
+{
+    "rating": "3.5965896",
+    "highScore":
+    { 
+        "playerId": "Jason",
+        "score": "2000"
+    },
+    "currentGames": 
+    [  
+        {
+            "players":
+            [
+                {
+                    "firstName": "Bob",
+                    "nickname": "Ninja"
+                },
+                {
+                    "firstName": "Jane",
+                    "nickname": "Ninja2"
+                }
+            ]
+        }
+    ],
+    "finishedGames": 
+    [  
+        {
+            "players":
+            [
+                {
+                    "firstName": "Akex",
+                    "nickname": "Ninja",
+                    "score": "1500",
+                    "tokens": "239432"
+                },
+                {
+                    "firstName": "Kyo",
+                    "nickname": "Ninja2",
+                    "score": "1000",
+                    "tokens": "1234"
+                }
+            ]
+        }
+    ]
+}
