@@ -29,16 +29,16 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
 playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$window', '$location', '$http', 
                                                    '$cookieStore', '$rootElement', '$filter',
   function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement, $filter) {
-
+    $scope.showDetail = false;
     $scope.currentGameId  = $cookieStore.get('currentGameIdTag');
     //$scope.gamedetail = $cookieStore.get('gamedetailTag'); 
     $scope.profile = $cookieStore.get('profileTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
       //Use fake JSON data for testing - Pinji
-      //$http.get('http://smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
-        //'&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
-       $http.get('../token/token.json')
+      $http.get('http://smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+        '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      //$http.get('../token/token.json')
           .success(function (data) {
               $scope.infoProfile = data;
               $cookieStore.put('infoProfileTag', data);
@@ -49,20 +49,23 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
 
       $scope.inquireInfoResponse = function () {
           if ($cookieStore.get('infoProfileTag').error) {
-                if ($rootScope.langKeyRoot == "zh") {
-                  $window.alert("个人信息错误！");
-                } else {
-                  $window.alert($cookieStore.get('infoProfileTag').error);
-                }
-              //$window.alert($cookieStore.get('infoProfileTag').error);
+        	  if($cookieStore.get('infoProfileTag').error=="WRONG_PLAYER_ID"){
+          		  $window.alert("Your player ID does not match, try it again.")
+          	  }
+          	  if($cookieStore.get('infoProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
+          		  $window.alert("Your signature does not match, try it again.")
+          	  }
+          	  if($cookieStore.get('infoProfileTag').error=="WRONG_TARGET_ID"){
+          		  $window.alert("No matching player record exists in our record.")
+          	  }
               $cookieStore.put('infoProfileTag', "");
           }
       };
 
       //Use fake JSON data for testing - Pinji
-      //$http.get('http://smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
-        //'&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
-      $http.get('../analysis/history.json')
+      $http.get('http://smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      //$http.get('../analysis/history.json')
         .success(function (data) {
             $scope.historyDetailProfile = data;
             $cookieStore.put('historyDetailProfileTag', data);
@@ -74,15 +77,26 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireHistoryDetailResponse = function () {
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
-            if ($rootScope.langKeyRoot == "zh") {
-                  $window.alert("历史详情错误！");
-                } else {
-                  $window.alert($cookieStore.get('historyDetailProfileTag').error);
-                }
-              //$window.alert($cookieStore.get('historyDetailProfileTag').error);
+        	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_PLAYER_ID"){
+          		  $window.alert("Your player ID does not match, try it again.")
+          	  }
+          	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
+          		  $window.alert("Your signature does not match, try it again.")
+          	  }
+          	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_TARGET_ID"){
+          		  $window.alert("No matching player record exists in our record.")
+          	  }
+          	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_GAME_ID"){
+          		  $window.alert("No matching game record exists in our record.")
+          	  }
+        	  
               $cookieStore.put('historyDetailProfileTag', "");
           }
-          else {
+          else if ($cookieStore.get('historyDetailProfileTag').history.length == 0) {
+            $window.alert("You have not played this game.");
+            $cookieStore.put('historyDetailProfileTag', "");
+          } else {
+                $scope.showDetail = true;
                 $cookieStore.put('historiesTag', $cookieStore.get('historyDetailProfileTag').history);
                 $scope.histories = $cookieStore.get('historiesTag');
                 $scope.histories = $filter('orderBy')($scope.histories, 'date', true);
@@ -92,20 +106,31 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       };
       $scope.nickname = $cookieStore.get('nicknameTag');
       $scope.imageURL = $cookieStore.get('imageURLTag');
-      //$http.get('http://smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
-      //$http.get('../players/1235.json')
-      $http.get('../players/' + $scope.lastmatch.opponentIds[0] + '.json')
-      .success(function (data) {
-          $scope.oppuserProfile = data;
-      })
-       .then(function () {
-           if ($scope.error) {
-               $scope.oppuserProfile = null;
-           } else {
-               $scope.oppnickname = $scope.oppuserProfile.nickname;
-               $scope.oppUrl = $scope.oppuserProfile.pictureUrl;
-           };
-       });
+      if (!angular.isUndefined($scope.lastmatch)) {
+        $http.get('http://smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
+        //$http.get('../players/1235.json')
+        //$http.get('../players/' + $scope.lastmatch.opponentIds[0] + '.json')
+        .success(function (data) {
+            $scope.oppuserProfile = data;
+        })
+        .then(function () {
+             if ($scope.error) {
+             	  if($scope.error=="WRONG_PLAYER_ID"){
+                 		  $window.alert("Your player ID does not match, try it again.")
+                }
+             	  if($scope.error=="WRONG_ACCESS_SIGNATURE"){
+             		  $window.alert("Your signature does not match, try it again.")
+             	  }
+             	  if($scope.error=="WRONG_TARGET_ID"){
+             		  $window.alert("No matching player record exists in our record.")
+             	  }
+                $scope.oppuserProfile = null;
+             } else {
+                 $scope.oppnickname = $scope.oppuserProfile.nickname;
+                 $scope.oppUrl = $scope.oppuserProfile.pictureUrl;
+             };
+        });
+      }
 }]);
   
 playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore', '$state', '$stateParams', '$window', 
@@ -291,20 +316,23 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
         $scope.statTemp.error = "";
       } else {
         $scope.aveRating = $scope.statTemp.rating;
-        $scope.highScorePlayer = $scope.statTemp.highScore.playerId;
-        $scope.highScoreScore = $scope.statTemp.highScore.score;
+        if ($scope.statTemp.highScore != null) {
+          $scope.highScorePlayer = $scope.statTemp.highScore.playerId;
+          $scope.highScoreScore = $scope.statTemp.highScore.score
+        };
         $scope.currentGames = $scope.statTemp.currentGames;
         $scope.finishedGames = $scope.statTemp.finishedGames;     
       }
     });
-    $scope.rate = function () {
+    $scope.rate = function (ratingInput) {
       $scope.createRate = {
         //"gameId" : $scope.currentGameId,
         "gameId" :$stateParams.gameId,
         "playerId" : $scope.playerId,
         "accessSignature" : $cookieStore.get('accessSignatureTag'),
-        "rating" : $scope.rating
+        "rating" : ratingInput
       };
+      console.log($scope.createRate);
       $scope.createRateStr = angular.toJson($scope.createRate);
 
       $http({
@@ -390,14 +418,20 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
 
   $scope.historySummaryResponse = function () {
     if($scope.historyTemp.error) {
-      if ($rootScope.langKeyRoot == "zh") {
-          $window.alert("历史信息错误！");
-        } else {
-          $window.alert($scope.historyTemp.error);
-        }
-      //$window.alert($scope.historyTemp.error);
-      $scope.historyTemp = null;
-      $state.go('choosegame');
+    	if($scope.historyTemp.error=="WRONG_PLAYER_ID"){
+   		  $window.alert("Your player ID does not match, try it again.")
+	   	}
+	   	if($scope.historyTemp.error=="WRONG_ACCESS_SIGNATURE"){
+   		  $window.alert("Your signature does not match, try it again.")
+   	    }
+	   	if($scope.historyTemp.error=="WRONG_TARGET_ID"){
+   		  $window.alert("No matching player record exists in our record.")
+	   	}
+	   	if($scope.historyTemp.error=="WRONG_GAME_ID"){
+   		  $window.alert("No matching game record exists in our record.")
+	   	}
+        $scope.historyTemp = null;
+        $state.go('choosegame');
     } else {
       $scope.gameInfo = [];
       angular.forEach($scope.historyTemp, function(value, key) {
@@ -468,12 +502,18 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
               })
           $scope.inquireInfoResponse = function () {
               if ($scope.tokenFile.error) {
-                if ($rootScope.langKeyRoot == "zh") {
-                  $window.alert("金币信息错误！");
-                } else {
-                  $window.alert($scope.tokenFile.error);
-                }
-                  //$window.alert($scope.tokenFile.error);
+            	  if($scope.tokenFile.error=="WRONG_PLAYER_ID"){
+            		  $window.alert("Your player ID does not match, try it again.")
+            	  }
+            	  if($scope.tokenFile.error=="WRONG_ACCESS_SIGNATURE"){
+            		  $window.alert("Your signature does not match, try it again.")
+            	  }
+            	  if($scope.tokenFile.error=="WRONG_TARGET_ID"){
+            		  $window.alert("No matching player record exists in our record.")
+            	  }
+            	  if($scope.tokenFile.error=="WRONG_GAME_ID"){
+            		  $window.alert("No matching game record exists in our record.")
+            	  }
               }
           };
 
@@ -486,12 +526,18 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
           })
           .then(function () {
               if ($scope.historyDetailProfile.error) {
-                if ($rootScope.langKeyRoot == "zh") {
-                  $window.alert("个人历史信息错误！");
-                } else {
-                  $window.alert($scope.historyDetailProfile.error);
-                }
-                  //$window.alert($scope.historyDetailProfile.error);
+            	  if($scope.historyDetailProfile.error=="WRONG_PLAYER_ID"){
+            		  $window.alert("Your player ID does not match, try it again.")
+            	  }
+            	  if($scope.historyDetailProfile.error=="WRONG_ACCESS_SIGNATURE"){
+            		  $window.alert("Your signature does not match, try it again.")
+            	  }
+            	  if($scope.historyDetailProfile.error=="WRONG_TARGET_ID"){
+            		  $window.alert("No matching player record exists in our record.")
+            	  }
+            	  if($scope.historyDetailProfile.error=="WRONG_GAME_ID"){
+            		  $window.alert("No matching game record exists in our record.")
+            	  }
                   return null;
               }
               else {
