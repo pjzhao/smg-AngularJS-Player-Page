@@ -56,10 +56,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       //Use fake JSON data for testing - Pinji
       /*$http.get('http://7.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
         '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
-      $http.get('../analysis/history.json')
-      //$http.get('../analysis/history1.json')
-      //$http.get('../analysis/history7.json')
-      //$http.get('../analysis/disorder.json')
+      $http.get('../analysis/'+$scope.currentGameId+'.json')
       .success(function (data) {
           //$rootScope.historyDetailProfile = data;
           $scope.historyDetailProfile = data;
@@ -72,7 +69,7 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireHistoryDetailResponse = function () {
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
-              $window.alert($cookieStore.get("Information does not match, refresh your page.");
+              $window.alert("Information does not match, refresh your page.");
               $cookieStore.put('historyDetailProfileTag', "");
           }
           else {
