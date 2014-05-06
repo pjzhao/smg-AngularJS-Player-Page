@@ -30,3 +30,9 @@ http://smg-server.appspot.com/login.html
 
 test player account: player@nyu.edu
 test player password: password
+
+Version 7 Mobile URL (Log In via Server's Main Page):
+http://smg-server.appspot.com/login.html
+
+test player account: player@nyu.edu
+test player password: password
