@@ -3,7 +3,7 @@
 		<ion-list>
 		    <div class="highscore no-margin">
 				<h4 class="no-margin">{{'gamestatHIGHESTSCORE'|translate}}</h4>
-				<h5 class="no-margin">{{highScorePlayer}} - {{highScoreScore}}</h5>
+				<h5 class="no-margin" ng-if="{{highScorePlayer}}==""">{{highScorePlayer}} - {{highScoreScore}}</h5>
 			</div>
 			<div class="currentgame no-margin">
 				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>				

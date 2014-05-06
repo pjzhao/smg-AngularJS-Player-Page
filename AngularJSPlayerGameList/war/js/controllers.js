@@ -275,9 +275,9 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
         } else {
           $window.alert("NO_MATCH_RECORDS, No body played yet!");
         }     
-        $scope.highScorePlayer = "NULL";
-        $scope.highScoreScore = "NULL";
-        $scope.aveRating = "NULL";
+        $scope.highScorePlayer = "";
+        $scope.highScoreScore = "";
+        $scope.aveRating = "";
         $scope.statTemp.error = "";
       } else if ($scope.statTemp.error == "WRONG_GAME_ID") {
         if ($rootScope.langKeyRoot == "zh") {
@@ -285,9 +285,9 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
         } else {
           $window.alert("WRONG_GAME_ID, No such game!");
         }
-        $scope.highScorePlayer = "NULL";
-        $scope.highScoreScore = "NULL";
-        $scope.aveRating = "NULL";
+        $scope.highScorePlayer = "";
+        $scope.highScoreScore = "";
+        $scope.aveRating = " ";
         $scope.statTemp.error = "";
       } else {
         $scope.aveRating = $scope.statTemp.rating;
