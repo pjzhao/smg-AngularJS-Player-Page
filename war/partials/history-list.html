@@ -2,7 +2,7 @@
     <ion-content>
         <ion-list>
           <div class="alllist history-list">
-          <h2 class="pagetitle">{{'hislistTitle' | translate }}</h2>
+          <h4>{{'hislistTitle' | translate }}</h4>
             <div class="newestgame">
               <div ng-repeat="history in historySummary" class="list card">
                 <div class="item item-input item-select game-basic-info" ng-click="toggleHistory(history)" ng-class="{active: isHistoryShown(history)}">
