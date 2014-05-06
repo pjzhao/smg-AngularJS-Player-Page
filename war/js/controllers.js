@@ -235,9 +235,20 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
     };
     
     $scope.startPlay = function (gameId) {
-      $cookieStore.put('currentGameIdTag', gameId);
-      $state.go('playgame');
-    };
+    	/*$http.get('http://7.smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+		'&gameId=' + gameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))*/
+    	$http.get('../analysis/'+gameId+'.json')
+    	.success(function (data) {
+          $rootScope.tryProfile = data;
+     	})
+     	.then(function () {
+     		if($scope.tryProfile[0]){
+     			$state.go('historydetail');
+     		}else{
+     			$window.alert("You have not played yet!");
+     		}
+     	});
+   	};
     
 }]);
 
@@ -307,6 +318,11 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
       } else if ($scope.rateResponse.rating != null) {
         $window.alert("Thank you for the rate for " + $scope.gamedetail.gameName);
       };
+    };
+    
+    $scope.showLastMatch = function (gameId) {
+  	  $cookieStore.put('currentGameIdTag', gameId);
+  	  $state.go('historydetail');
     };
 }]);
 
