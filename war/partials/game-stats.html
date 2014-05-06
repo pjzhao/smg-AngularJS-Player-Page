@@ -3,31 +3,31 @@
 		<ion-list>
 		    <div class="highscore no-margin">
 				<h4 class="no-margin">{{'gamestatHIGHESTSCORE'|translate}}</h4>
-				<h5 class="no-margin">{{highScorePlayer | leaderNameFilter}} with score {{highScoreScore | leaderScoreFilter}}</h5>
+				<h5 class="no-margin" ng-if="{{highScorePlayer}}">{{highScorePlayer}} - {{highScoreScore}}</h5>
 			</div>
 			<div class="currentgame no-margin">
-				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>
-				<h5 class="no-margin">{{currentGamePlayerOneFN | leaderNameFilter}} VS {{currentGamePlayerTwoFN | leaderNameFilter}}</h5>				
+				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>				
+				<a ng-repeat="cgame in currentGames">
+					<p>{{cgame.players[0].firstName}} VS {{cgame.players[1].firstName}}</p>
+				</a>			
 			</div>
 			<div class="finishedgame no-margin">
 				<h4 class="no-margin">{{'gamestatFINISHEDMATCHES'|translate}}</h4>
-				<h5 class="no-margin">{{finishedGamePlayerOneFN | leaderNameFilter}} VS {{finishedGamePlayerTwoFN | leaderNameFilter}}</h5>
+				<a ng-repeat="fgame in finishedGames">
+					<p>{{fgame.players[0].firstName}} VS {{fgame.players[1].firstName}}</p>
+				</a>
 			</div>
 			<div class="ratecss no-margin">
 				<h4 class="no-margin">{{'gamestatRATE'|translate}}</h4>
 				<p>{{'gamestatRateyougive'|translate}}: {{rating}}</p>
-				<p>{{'gamestatAverageratingofthegame'|translate}}: {{aveRating}}</p>
+				<p>{{'gamestatAverageratingofthegame'|translate}}: {{aveRating}}</p><br>
 				<form ng-submit="rate()">
-					<table>
-						<tr>
-							<td><input style="margin-left:10px;" type="text" ng-model="rating" ></td>
-							<td><input style="margin-left:15px; margin-top:-20px; width: 100px; height: 36px" 
-							class="button button-small button-dark" type="submit" value={{'gamestatraterate'|translate}}></td>
-						</tr>
-						<tr>
-							<td><a>&nbsp&nbsp(1.0 - 5.0)<br><br></a></td>
-						</tr>
-					</table>					
+					<div class="row">
+						<input style="margin-top:-20px; width: 100px; height: 36px" type="text" ng-model="rating" >
+						<input style="margin-left:15px; margin-top:-20px; width: 100px; height: 36px" 
+						class="button button-small button-dark" type="submit" value={{'gamestatraterate'|translate}}>
+					</div>
+					<a>&nbsp&nbsp(1.0 - 5.0)<br><br></a>
 				</form>
 			</div>
 		</ion-list>

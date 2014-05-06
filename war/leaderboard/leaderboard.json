@@ -19,26 +19,23 @@
                     "nickname": "Ninja2"
                 }
             ]
-        }
-    ],
-    "finishedGames": 
-    [  
+        },
         {
             "players":
             [
                 {
-                    "firstName": "Akex",
-                    "nickname": "Ninja",
-                    "score": "1500",
-                    "tokens": "239432"
+                    "firstName": "Bob",
+                    "nickname": "Ninja"
                 },
                 {
-                    "firstName": "Kyo",
-                    "nickname": "Ninja2",
-                    "score": "1000",
-                    "tokens": "1234"
+                    "firstName": "Jane",
+                    "nickname": "Ninja2"
                 }
             ]
         }
+    ],
+    "finishedGames": 
+    [  
+        
     ]
 }
