@@ -48,7 +48,16 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
 
       $scope.inquireInfoResponse = function () {
           if ($cookieStore.get('infoProfileTag').error) {
-              $window.alert($cookieStore.get('infoProfileTag').error);
+        	  
+        	  if($cookieStore.get('infoProfileTag').error=="WRONG_PLAYER_ID"){
+        		  $window.alert("Your player ID does not match, try it again.")
+        	  }
+        	  if($cookieStore.get('infoProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
+        		  $window.alert("Your signature does not match, try it again.")
+        	  }
+        	  if($cookieStore.get('infoProfileTag').error=="WRONG_TARGET_ID"){
+        		  $window.alert("No matching player record exists in our record.")
+        	  }
               $cookieStore.put('infoProfileTag', "");
           }
       };
@@ -69,7 +78,18 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireHistoryDetailResponse = function () {
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
-              $window.alert("Information does not match, refresh your page.");
+        	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_PLAYER_ID"){
+        		  $window.alert("Your player ID does not match, try it again.")
+        	  }
+        	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
+        		  $window.alert("Your signature does not match, try it again.")
+        	  }
+        	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_TARGET_ID"){
+        		  $window.alert("No matching player record exists in our record.")
+        	  }
+        	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_GAME_ID"){
+        		  $window.alert("No matching game record exists in our record.")
+        	  }
               $cookieStore.put('historyDetailProfileTag', "");
           }
           else {
@@ -88,6 +108,15 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
               })
               .then(function () {
                   if ($scope.error) {
+                	  if($scope.error=="WRONG_PLAYER_ID"){
+                		  $window.alert("Your player ID does not match, try it again.")
+                	  }
+                	  if($scope.error=="WRONG_ACCESS_SIGNATURE"){
+                		  $window.alert("Your signature does not match, try it again.")
+                	  }
+                	  if($scope.error=="WRONG_TARGET_ID"){
+                		  $window.alert("No matching player record exists in our record.")
+                	  }
                       $scope.oppuserProfile = null;
                   } else {
                       $scope.oppnickname = $scope.oppuserProfile.nickname;
@@ -297,7 +326,18 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
 
   $scope.historySummaryResponse = function () {
     if($scope.historyTemp.error) {
-      $window.alert($scope.historyTemp.error);
+      if($scope.historyTemp.error=="WRONG_PLAYER_ID"){
+  		  $window.alert("Your player ID does not match, try it again.")
+  	  }
+  	  if($scope.historyTemp.error=="WRONG_ACCESS_SIGNATURE"){
+  		  $window.alert("Your signature does not match, try it again.")
+  	  }
+  	  if($scope.historyTemp.error=="WRONG_TARGET_ID"){
+  		  $window.alert("No matching player record exists in our record.")
+  	  }
+  	  if($scope.historyTemp.error=="WRONG_GAME_ID"){
+  		  $window.alert("No matching game record exists in our record.")
+  	  }
       $scope.historyTemp = null;
       $state.go('choosegame');
     } else {
@@ -372,7 +412,18 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
               })
           $scope.inquireInfoResponse = function () {
               if ($scope.tokenFile.error) {
-                  $window.alert("Information does not match, refresh your page.");
+            	  if($scope.tokenFile.error=="WRONG_PLAYER_ID"){
+              		  $window.alert("Your player ID does not match, try it again.")
+              	  }
+              	  if($scope.tokenFile.error=="WRONG_ACCESS_SIGNATURE"){
+              		  $window.alert("Your signature does not match, try it again.")
+              	  }
+              	  if($scope.tokenFile.error=="WRONG_TARGET_ID"){
+              		  $window.alert("No matching player record exists in our record.")
+              	  }
+              	  if($scope.tokenFile.error=="WRONG_GAME_ID"){
+              		  $window.alert("No matching game record exists in our record.")
+              	  }
               }
           };
 
@@ -385,7 +436,18 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
           })
           .then(function () {
               if ($scope.historyDetailProfile.error) {
-                  $window.alert("Information does not match, refresh your page.");
+            	  if($scope.historyDetailProfile.error=="WRONG_PLAYER_ID"){
+              		  $window.alert("Your player ID does not match, try it again.")
+              	  }
+              	  if($scope.historyDetailProfile.error=="WRONG_ACCESS_SIGNATURE"){
+              		  $window.alert("Your signature does not match, try it again.")
+              	  }
+              	  if($scope.historyDetailProfile.error=="WRONG_TARGET_ID"){
+              		  $window.alert("No matching player record exists in our record.")
+              	  }
+              	  if($scope.historyDetailProfile.error=="WRONG_GAME_ID"){
+              		  $window.alert("No matching game record exists in our record.")
+              	  }
                   return null;
               }
               else {
