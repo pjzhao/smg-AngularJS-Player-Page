@@ -3,7 +3,7 @@
 		<ion-list>
 		    <div class="highscore no-margin">
 				<h4 class="no-margin">{{'gamestatHIGHESTSCORE'|translate}}</h4>
-				<h5 class="no-margin" ng-if="{{highScorePlayer}}">{{highScorePlayer}} - {{highScoreScore}}</h5>
+				<h5 class="no-margin" ng-if="highScorePlayer.length>0">{{highScorePlayer}} - {{highScoreScore}}</h5>
 			</div>
 			<div class="currentgame no-margin">
 				<h4 class="no-margin">{{'gamestatCURRENTMATCHES'|translate}}</h4>				
@@ -21,7 +21,7 @@
 				<h4 class="no-margin">{{'gamestatRATE'|translate}}</h4>
 				<p>{{'gamestatRateyougive'|translate}}: {{rating}}</p>
 				<p>{{'gamestatAverageratingofthegame'|translate}}: {{aveRating}}</p><br>
-				<form ng-submit="rate()">
+				<form ng-submit="rate(rating)">
 					<div class="row">
 						<input style="margin-top:-20px; width: 100px; height: 36px" type="text" ng-model="rating" >
 						<input style="margin-left:15px; margin-top:-20px; width: 100px; height: 36px" 
