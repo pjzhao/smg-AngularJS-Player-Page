@@ -45,15 +45,16 @@
 			        <!-- end of one newest game basic info -->
 			        <div ng-show="isNewGroupShown(game)" class="button-group">
 			          <div class="row">
-			            <div class="col col-50">
+			            <!-- <div class="col col-50">
 			              <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
-			            </div>
-			            <div class="col col-50"> 
+			            </div> -->
+			           
+			            <div class="col col-50" id="temp-expand-col">  
 			              <!-- <a class="button button-small button-light icon-right ion-play" 
 			              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_self">
 			              Play Now</a> -->
-			              <a class="button button-small button-light icon-right ion-play" ng-click="startPlay({{game.gameId}})">{{'gamelistPlayNow'|translate}}</a>
-			            </div>
+			              <a id="temp-expand-button" class="button button-small button-light icon-right ion-play" ng-click="startPlay({{game.gameId}})">{{'gamelistPlayNow'|translate}}</a>
+			            </div> 
 			          </div>
 			          <div class="row">
 			            <div class="col col-50">
@@ -94,10 +95,10 @@
 		        </div>
 		        <div ng-show="isHotGroupShown(game)" class="button-group">
 		          <div class="row">
-		            <div class="col col-50">
+		            <!-- <div class="col col-50">
 		              <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
-		            </div>
-		            <div class="col col-50"> 
+		            </div> -->
+		            <div class="col col-50" id="temp-expand-col"> 
 		              <!-- <a class="button button-small button-light icon-right ion-play" 
 		              href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}}" target="_blank">
 		              Play Now</a> -->
@@ -124,7 +125,7 @@
 			</div>
 
 			<div ng-show="isSearchShown()">	
-			    <input type="search" class="col-100" ng-model="query.gameName" placeholder={{'gamelistSearchbyName'|translate}}>
+			    <input type="search" ng-model="query.gameName" placeholder={{'gamelistSearchbyName'|translate}}>
 			    <select class="col-100 width-100" ng-model="orderProp" class="narrow">
 			      <option value="gameName">{{'gamelistSortbyName'|translate}}</option>
 			      <option value="Developer">{{'gamelistSortbyDeveloper'|translate}}</option>
@@ -161,10 +162,10 @@
 		          <!-- end of one newest game basic info -->
 		          <div ng-show="isAllGroupShown(game)" class="button-group">
 		            <div class="row">
-		              <div class="col col-50">
+		              <!-- <div class="col col-50">
 		                <a class="button button-small button-light icon-right ion-android-add-contact" href="">{{'gamelistInvite'|translate}}</a>
-		              </div>
-		              <div class="col col-50"> 
+		              </div> -->
+		              <div class="col col-50" id="temp-expand-col"> 
 		                <!-- <a class="button button-small button-light icon-right ion-play" 
 		                ng-href="http://smg-angularjs-container.appspot.com/index.html#/lobby/{{game.gameId}}?playerId={{playerId}}&accessSignature={{accessSignature}} | linky:'_self'">
 		                Play Now</a> -->

@@ -50,13 +50,28 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireInfoResponse = function () {
           if ($cookieStore.get('infoProfileTag').error) {
         	  if($cookieStore.get('infoProfileTag').error=="WRONG_PLAYER_ID"){
-          		  $window.alert("Your player ID does not match, try it again.")
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家信息错误！")
+                } else {
+                  $window.alert("Your player ID does not match, try it again.")
+                }
+          		  //$window.alert("Your player ID does not match, try it again.")
           	  }
-          	  if($cookieStore.get('infoProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
-          		  $window.alert("Your signature does not match, try it again.")
+          	  if($cookieStore.get('infoProfileTag').error=="WRONG_ACCESS_SIGNATURE"){          		  
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家登陆错误！")
+                } else {
+                  $window.alert("Your signature does not match, try it again.")
+                }
+                //$window.alert("Your signature does not match, try it again.")
           	  }
           	  if($cookieStore.get('infoProfileTag').error=="WRONG_TARGET_ID"){
-          		  $window.alert("No matching player record exists in our record.")
+          		  if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家游戏记录错误！")
+                } else {
+                  $window.alert("No matching player record exists in our record.")
+                }
+                //$window.alert("No matching player record exists in our record.")
           	  }
               $cookieStore.put('infoProfileTag', "");
           }
@@ -78,22 +93,47 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
         	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_PLAYER_ID"){
-          		  $window.alert("Your player ID does not match, try it again.")
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家信息错误！")
+                } else {
+                  $window.alert("No matching player record exists in our record.")
+                }
+          		  //$window.alert("Your player ID does not match, try it again.")
           	  }
           	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_ACCESS_SIGNATURE"){
-          		  $window.alert("Your signature does not match, try it again.")
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家登陆错误！")
+                } else {
+                  $window.alert("No matching player record exists in our record.")
+                }
+          		  //$window.alert("Your signature does not match, try it again.")
           	  }
           	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_TARGET_ID"){
-          		  $window.alert("No matching player record exists in our record.")
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("玩家记录错误！")
+                } else {
+                  $window.alert("No matching player record exists in our record.")
+                }
+          		  //$window.alert("No matching player record exists in our record.")
           	  }
           	  if($cookieStore.get('historyDetailProfileTag').error=="WRONG_GAME_ID"){
-          		  $window.alert("No matching game record exists in our record.")
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("游戏记录错误！")
+                } else {
+                  $window.alert("No matching player record exists in our record.")
+                }
+          		  //$window.alert("No matching game record exists in our record.")
           	  }
         	  
               $cookieStore.put('historyDetailProfileTag', "");
           }
           else if ($cookieStore.get('historyDetailProfileTag').history.length == 0) {
-            $window.alert("You have not played this game.");
+            if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("您还未玩过该游戏！")
+                } else {
+                  $window.alert("You have not played this game.");
+                }
+            //$window.alert("You have not played this game.");
             $cookieStore.put('historyDetailProfileTag', "");
           } else {
                 $scope.showDetail = true;
@@ -116,13 +156,28 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
         .then(function () {
              if ($scope.error) {
              	  if($scope.error=="WRONG_PLAYER_ID"){
-                 		  $window.alert("Your player ID does not match, try it again.")
+                  if ($rootScope.langKeyRoot == "zh") {
+                    $window.alert("玩家信息错误！")
+                  } else {
+                    $window.alert("Your player ID does not match, try it again.")
+                  }
+                 		  //$window.alert("Your player ID does not match, try it again.")
                 }
              	  if($scope.error=="WRONG_ACCESS_SIGNATURE"){
-             		  $window.alert("Your signature does not match, try it again.")
+             		  if ($rootScope.langKeyRoot == "zh") {
+                    $window.alert("玩家登陆错误！")
+                  } else {
+                    $window.alert("Your signature does not match, try it again.")
+                  }
+                  //$window.alert("Your signature does not match, try it again.")
              	  }
              	  if($scope.error=="WRONG_TARGET_ID"){
-             		  $window.alert("No matching player record exists in our record.")
+                  if ($rootScope.langKeyRoot == "zh") {
+                    $window.alert("玩家记录错误！")
+                  } else {
+                    $window.alert("No matching player record exists in our record.")
+                  }
+             		  //$window.alert("No matching player record exists in our record.")
              	  }
                 $scope.oppuserProfile = null;
              } else {

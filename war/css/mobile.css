@@ -174,8 +174,14 @@ ion-nav-bar .page-title {
 }
 
 .button-group .button.button-light {
-	width: 105px;
+	width: 100%;
 	font-size: 14px;
+}
+
+div#temp-expand-col.col.col-50 {
+	max-width: 100%;
+	width: 100%;
+	-webkit-flex: 0 0 100%;
 }
 
 .game-basic-info .icon {
