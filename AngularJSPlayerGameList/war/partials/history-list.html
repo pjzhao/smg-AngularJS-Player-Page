@@ -2,6 +2,7 @@
     <ion-content>
         <ion-list>
           <div class="alllist history-list">
+          <h4>{{'hislistTitle' | translate }}</h4>
             <div class="newestgame">
               <div ng-repeat="history in historySummary" class="list card">
                 <div class="item item-input item-select game-basic-info" ng-click="toggleHistory(history)" ng-class="{active: isHistoryShown(history)}">
@@ -42,20 +43,6 @@
                             style="text-align:center" ng-init="collapse='false'" ng-click="showLastMatch({{history.gameId}})">
                         {{'hislistLastMatch'|translate}}
                     </button>
-                    <!-- <ion-item class="item-accordion"
-                              ng-show="collapse">
-                        <h2>Your opponent(s):</h2>
-                        <div ng-repeat="opp in lastmatch.opponentIds">{{opp}}</div>
-                        <br />
-                        <h2>Game Result:</h2>
-                        <div>{{lastmatch.result}}</div>
-                    </ion-item> -->
-                    <!-- <span>
-                        <button ng-href="#/history/{{history.gameId}}" class="button button-full button-light"
-                                style="text-align:center">
-                            Results
-                        </button>
-                    </span>  -->
                 </ion-item>
               </div>
             </div>

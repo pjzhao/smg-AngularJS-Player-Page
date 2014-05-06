@@ -1,0 +1,13 @@
+{
+	"history": 
+	[
+	{"date": "2014-01-10", "result": "LOST", "tokenChange": -20, "score": 30, "opponentIds":["1234"]},
+	{"date": "2012-01-31", "result": "LOST", "tokenChange": -40, "score": 10, "opponentIds":["6380012856934400"]},
+	{"date": "2013-01-03", "result": "DRAW", "tokenChange": 20, "score": 120, "opponentIds":["1235"]},
+	{"date": "2014-01-17", "result": "DRAW", "tokenChange": 20, "score": 120, "opponentIds":["6380012856934400"]},
+	{"date": "2014-01-18", "result": "WIN", "tokenChange": 50, "score": 220, "opponentIds":["1234"]},
+	{"date": "2012-01-19", "result": "LOST", "tokenChange": -40, "score": 10, "opponentIds":["6380012856934400"]},
+	{"date": "2014-02-09", "result": "WIN", "tokenChange": 50, "score": 220, "opponentIds":["6380012856934400"]},
+	{"date": "2014-02-01", "result": "DRAW", "tokenChange": 20, "score": 120, "opponentIds":["1235", "6452443185414144"]}
+	]
+}
