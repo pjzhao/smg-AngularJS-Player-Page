@@ -116,7 +116,7 @@ playerApp.config(["$stateProvider", "$urlRouterProvider", "$httpProvider", '$sce
     'GameStatsCtrlWRONG_RATING': "错误！评分格式不正确",
     'GameStatsCtrINVALID_URL_PATH_ERROR': "错误！路径错误"
   }); 
-  $translateProvider.preferredLanguage('zh');
+  $translateProvider.preferredLanguage('en');
   $urlRouterProvider.otherwise('/profile/0');
   $stateProvider
   .state('choosegame', {

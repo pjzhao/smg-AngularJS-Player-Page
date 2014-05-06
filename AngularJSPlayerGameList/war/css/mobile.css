@@ -251,7 +251,7 @@ ion-nav-bar .page-title {
 
 .currentgame h4 {  
   text-align: center;
-  padding-top: 10px;
+  padding-top: 30px;
   padding-bottom: 10px;
   color: #FFFFFF;
 }
@@ -264,6 +264,7 @@ ion-nav-bar .page-title {
 }
 
 .currentgame a {
+  text-align: center;
   padding-left: 5px;
   color: #FFFFFF;
 }
@@ -289,6 +290,7 @@ ion-nav-bar .page-title {
 }
 
 .finishedgame a {
+  text-align: center;
   padding-left: 5px;
   color: #FFFFFF;
 }

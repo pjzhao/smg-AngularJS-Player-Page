@@ -21,6 +21,7 @@ playerControllers.controller('MenuController', ['$scope', '$state', '$ionicSideM
     };		
 
     $scope.changeLanguage = function (langKey) {
+        $rootScope.langKeyRoot = langKey;
         $translate.use(langKey);
     };
 }]);
@@ -30,14 +31,14 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
   function ($scope, $rootScope, $window, $location, $http, $cookieStore, $rootElement, $filter) {
 
     $scope.currentGameId  = $cookieStore.get('currentGameIdTag');
-    $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
+    //$scope.gamedetail = $cookieStore.get('gamedetailTag'); 
     $scope.profile = $cookieStore.get('profileTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag'); 
       // inquire info/token/score
       //Use fake JSON data for testing - Pinji
-      $http.get('http://smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
-        '&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
-       //$http.get('../token/token.json')
+      //$http.get('http://smg-server.appspot.com/playerGame?playerId=' + $scope.playerId + '&gameId=' + $scope.currentGameId + 
+        //'&targetId=' + $scope.playerId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+       $http.get('../token/token.json')
           .success(function (data) {
               $scope.infoProfile = data;
               $cookieStore.put('infoProfileTag', data);
@@ -48,15 +49,20 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
 
       $scope.inquireInfoResponse = function () {
           if ($cookieStore.get('infoProfileTag').error) {
-              $window.alert($cookieStore.get('infoProfileTag').error);
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("个人信息错误！");
+                } else {
+                  $window.alert($cookieStore.get('infoProfileTag').error);
+                }
+              //$window.alert($cookieStore.get('infoProfileTag').error);
               $cookieStore.put('infoProfileTag', "");
           }
       };
 
       //Use fake JSON data for testing - Pinji
-      $http.get('http://smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
-        '&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
-      //$http.get('../analysis/history.json')
+      //$http.get('http://smg-server.appspot.com/history?playerId=' + $scope.playerId + '&targetId=' + $scope.playerId + 
+        //'&gameId=' + $scope.currentGameId + '&accessSignature=' + $cookieStore.get('accessSignatureTag'))
+      $http.get('../analysis/history.json')
         .success(function (data) {
             $scope.historyDetailProfile = data;
             $cookieStore.put('historyDetailProfileTag', data);
@@ -68,7 +74,12 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       $scope.inquireHistoryDetailResponse = function () {
           // if historyDetailProfile.error exists
           if ($cookieStore.get('historyDetailProfileTag').error) {
-              $window.alert($cookieStore.get('historyDetailProfileTag').error);
+            if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("历史详情错误！");
+                } else {
+                  $window.alert($cookieStore.get('historyDetailProfileTag').error);
+                }
+              //$window.alert($cookieStore.get('historyDetailProfileTag').error);
               $cookieStore.put('historyDetailProfileTag', "");
           }
           else {
@@ -81,9 +92,9 @@ playerControllers.controller('HistoryDetailCtrl', ['$scope', '$rootScope', '$win
       };
       $scope.nickname = $cookieStore.get('nicknameTag');
       $scope.imageURL = $cookieStore.get('imageURLTag');
-      $http.get('http://smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
+      //$http.get('http://smg-server.appspot.com/playerInfo?playerId=' + $scope.playerId + '&targetId=' + $scope.lastmatch.opponentIds[0] + '&accessSignature=' + $scope.accessSignature)
       //$http.get('../players/1235.json')
-      //$http.get('../players/' + $scope.lastmatch.opponentIds[0] + '.json')
+      $http.get('../players/' + $scope.lastmatch.opponentIds[0] + '.json')
       .success(function (data) {
           $scope.oppuserProfile = data;
       })
@@ -123,7 +134,12 @@ playerControllers.controller('GameListCtrl', ['$scope', '$http', '$cookieStore',
 	      })
 	      .then(function() {
 	        if ($scope.error) {
-	          $window.alert("Failed." + $scope.error);
+            if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("个人信息错误！");
+                } else {
+                  $window.alert("Failed." + $scope.error);
+                }
+	          //$window.alert("Failed." + $scope.error);
 	          $scope.error = "";
 	        };
 	});
@@ -233,53 +249,58 @@ playerControllers.controller('PlayGameCtrl', ['$scope', '$http', '$cookieStore',
 
 playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http', '$window', '$rootScope', '$cookieStore',
   function($scope, $stateParams, $http, $window, $rootScope, $cookieStore) {
-    $scope.gamedetail = $cookieStore.get('gamedetailTag'); 
-    $scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
+    //$scope.gamedetail = $cookieStore.get('gamedetailTag'); 
+    //$scope.currentGameId = $cookieStore.get('currentGameIdTag'); 
     $scope.playerId = $cookieStore.get('playerIdTag');
     // to temporarily avoid No Records Error -- Pinji
-    $http.get('http://smg-server.appspot.com/gameinfo/stats?gameId=' + $stateParams.gameId)
+    /*$http.get('http://smg-server.appspot.com/gameinfo/stats?gameId=' + $stateParams.gameId)
     .success(function(data) {
+      $cookieStore.put('currentGameIdTag', $stateParams.gameId);
       $scope.game = data;
     }).then(function(game) {
-      if ($scope.game.error == "NO_MATCH_RECORDS") {
-        $window.alert("NO_MATCH_RECORDS, No body played yet!");
-        $scope.game.error = ""
-      } else if ($scope.game.error == "WRONG_GAME_ID") {
+       if ($scope.game.error == "WRONG_GAME_ID") {
         $window.alert("WRONG_GAME_ID, No such game!");
         $scope.game.error = ""
       }
-    }); 
+    }); */
     //$http.get('/leaderboard/leaderboard.json')
     $http.get('http://smg-server.appspot.com/gameinfo/stats?gameId=' + $stateParams.gameId)
     .success(function(data) {
+      $cookieStore.put('currentGameIdTag', $stateParams.gameId);
       $scope.statTemp = data;
     }).then(function(statTemp) {
-      if ($scope.statTemp.error == "WRONG_GAME_ID") {
-        $window.alert("WRONG_GAME_ID, No such game!");
-        $scope.statTemp.error = ""
+      if ($scope.statTemp.error == "NO_MATCH_RECORDS") {
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("NO_MATCH_RECORDS, 无人进行该游戏！");
+        } else {
+          $window.alert("NO_MATCH_RECORDS, No body played yet!");
+        }     
+        $scope.highScorePlayer = "NULL";
+        $scope.highScoreScore = "NULL";
+        $scope.aveRating = "NULL";
+        $scope.statTemp.error = "";
+      } else if ($scope.statTemp.error == "WRONG_GAME_ID") {
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_GAME_ID, 游戏不存在！");
+        } else {
+          $window.alert("WRONG_GAME_ID, No such game!");
+        }
+        $scope.highScorePlayer = "NULL";
+        $scope.highScoreScore = "NULL";
+        $scope.aveRating = "NULL";
+        $scope.statTemp.error = "";
       } else {
         $scope.aveRating = $scope.statTemp.rating;
         $scope.highScorePlayer = $scope.statTemp.highScore.playerId;
         $scope.highScoreScore = $scope.statTemp.highScore.score;
-
-        $scope.currentGamePlayerOneFN = $scope.statTemp.currentGames[0].players[0].firstName;
-        $scope.currentGamePlayerOneNN = $scope.statTemp.currentGames[0].players[0].nickname;
-        $scope.currentGamePlayerTwoFN = $scope.statTemp.currentGames[0].players[1].firstName;
-        $scope.currentGamePlayerTwoNN = $scope.statTemp.currentGames[0].players[1].nickname; 
-
-        $scope.finishedGamePlayerOneFN = $scope.statTemp.finishedGames[0].players[0].firstName;
-        $scope.finishedGamePlayerOneNN = $scope.statTemp.finishedGames[0].players[0].nickname;
-        $scope.finishedGamePlayerOneScore = $scope.statTemp.finishedGames[0].players[0].score;
-        $scope.finishedGamePlayerOneToken = $scope.statTemp.finishedGames[0].players[0].tokens;
-        $scope.finishedGamePlayerTwoFN = $scope.statTemp.finishedGames[0].players[1].firstName;
-        $scope.finishedGamePlayerTwoNN = $scope.statTemp.finishedGames[0].players[1].nickname;
-        $scope.finishedGamePlayerTwoScore = $scope.statTemp.finishedGames[0].players[1].score;
-        $scope.finishedGamePlayerTwoToken = $scope.statTemp.finishedGames[0].players[1].tokens;      
+        $scope.currentGames = $scope.statTemp.currentGames;
+        $scope.finishedGames = $scope.statTemp.finishedGames;     
       }
     });
     $scope.rate = function () {
       $scope.createRate = {
-        "gameId" : $scope.currentGameId,
+        //"gameId" : $scope.currentGameId,
+        "gameId" :$stateParams.gameId,
         "playerId" : $scope.playerId,
         "accessSignature" : $cookieStore.get('accessSignatureTag'),
         "rating" : $scope.rating
@@ -302,19 +323,53 @@ playerControllers.controller('GameStatsCtrl', ['$scope', '$stateParams', '$http'
 
     $scope.rtResponse = function () {
       if ($scope.rateResponse.error == "WRONG_RATING") {
-        $window.alert("Failed. The rating is incorrectly formatted.");
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_RATING, 评分格式不正确！");
+        } else {
+          $window.alert("WRONG_RATING, The rating is incorrectly formatted!");
+        }
         $scope.rateResponse.error = ""
       } else if ($scope.rateResponse.error == "WRONG_GAME_ID") {
-        $window.alert("Failed. The gameId is wrong.");
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_GAME_ID, 游戏不存在！");
+        } else {
+          $window.alert("WRONG_GAME_ID, No such game!");
+        }
         $scope.rateResponse.error = ""
       } else if ($scope.rateResponse.error == "WRONG_ACCESS_INFO") {
-        $window.alert("Failed. The player access info is wrong.");
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_GAME_ID, 玩家登陆错误！");
+        } else {
+          $window.alert("WRONG_GAME_ID, The player access info is wrong!");
+        }        
         $scope.rateResponse.error = ""
       } else if ($scope.rateResponse.error == "INVALID_URL_PATH_ERROR") {
-        $window.alert("Failed. INVALID_URL_PATH_ERROR.");
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("INVALID_URL_PATH_ERROR, 页面信息错误！");
+        } else {
+          $window.alert("INVALID_URL_PATH_ERROR, something wrong with the website info!");
+        }
+        $scope.rateResponse.error = ""
+      } else if ($scope.rateResponse.error == "WRONG_PLAYER_ID") {
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_PLAYER_ID, 玩家信息错误！");
+        } else {
+          $window.alert("WRONG_PLAYER_ID, no such player!");
+        }
+        $scope.rateResponse.error = ""
+      } else if ($scope.rateResponse.error == "WRONG_ACCESS_SIGNATURE") {
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("WRONG_ACCESS_SIGNATURE, 玩家登陆错误！");
+        } else {
+          $window.alert("WRONG_ACCESS_SIGNATURE, The player access info is wrong!");
+        }
         $scope.rateResponse.error = ""
       } else if ($scope.rateResponse.rating != null) {
-        $window.alert("Thank you for the rate for " + $scope.gamedetail.gameName);
+        if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("感谢您的打分！");
+        } else {
+          $window.alert("Thank you for the rating !");
+        }
       };
     };
 }]);
@@ -335,7 +390,12 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
 
   $scope.historySummaryResponse = function () {
     if($scope.historyTemp.error) {
-      $window.alert($scope.historyTemp.error);
+      if ($rootScope.langKeyRoot == "zh") {
+          $window.alert("历史信息错误！");
+        } else {
+          $window.alert($scope.historyTemp.error);
+        }
+      //$window.alert($scope.historyTemp.error);
       $scope.historyTemp = null;
       $state.go('choosegame');
     } else {
@@ -408,7 +468,12 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
               })
           $scope.inquireInfoResponse = function () {
               if ($scope.tokenFile.error) {
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("金币信息错误！");
+                } else {
                   $window.alert($scope.tokenFile.error);
+                }
+                  //$window.alert($scope.tokenFile.error);
               }
           };
 
@@ -421,7 +486,12 @@ playerControllers.controller('HistoryListCtrl', ['$scope', '$window', '$statePar
           })
           .then(function () {
               if ($scope.historyDetailProfile.error) {
+                if ($rootScope.langKeyRoot == "zh") {
+                  $window.alert("个人历史信息错误！");
+                } else {
                   $window.alert($scope.historyDetailProfile.error);
+                }
+                  //$window.alert($scope.historyDetailProfile.error);
                   return null;
               }
               else {
