@@ -24,8 +24,7 @@ function ajaxInsertNewPlayer(expected)
     data: JSON.stringify(jsonObj),
     success: function(data, textStatus, jqXHR) {     
       console.log(data);
-      if(data["error"] != "EMAIL_EXISTS" &&
-         data["error"] != "PASSWORD_TOO_SHORT" &&
+      if(data["error"] != "EMAIL_EXISTS" && data["error"] != "PASSWORD_TOO_SHORT" &&
          expected == ""
          ) {
         accessSignature = data.accessSignature;
@@ -51,7 +50,7 @@ function ajaxInsertNewPlayer(expected)
       console.error("ERROR: " + textStatus + " " + errorThrown);
     }
     });
-}
+};
 
 asyncTest("Insert New User Success", function() {
 	var index = Math.floor(1000 * Math.random());
@@ -60,7 +59,7 @@ asyncTest("Insert New User Success", function() {
     ajaxInsertNewPlayer("");
 });
 
-asyncTest("Insert New User Success With Existed Email", function() {
+asyncTest("Insert New User With Existed Email", function() {
 	newPlayer = goodPlayer;
     ajaxInsertNewPlayer("EMAIL_EXISTS");
 });
